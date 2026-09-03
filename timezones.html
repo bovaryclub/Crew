@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://i.imgur.com https://imgur.com https://i.ytimg.com https://flagcdn.com https://*.ytimg.com https://ik.imagekit.io https://*.imagekit.io; media-src 'self'; connect-src 'self'; frame-src https://www.youtube.com https://youtube.com; upgrade-insecure-requests" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Time Zones · Bovary Club Society</title>
+  <meta name="description" content="Full list of timezones used by the Bovary Club Society community." />
+  <meta name="theme-color" content="#05050a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon logo-icon-img"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/teste.png" alt="Bovary" width="36" height="36" /></div>
+        <span>BOVARY CLUB SOCIETY</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">HOME</a>
+        <a href="timezones.html" class="nav-active">TIMEZONES</a>
+        <a href="index.html#contact">CONTACT</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="index.html" class="btn-secondary" style="padding:8px 14px;font-size:11px">← HOME</a>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">HOME</a>
+    <a href="timezones.html">TIMEZONES</a>
+    <a href="index.html#contact">CONTACT</a>
+  </div>
+
+  <section class="hero hero-page" style="min-height: 32vh; padding-top: 120px;">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="pulse"></span> WORLD CLOCK</div>
+      <h1><span class="line1">TIME</span> <span class="line2">ZONES</span></h1>
+      <p class="hero-tagline">Full list of community timezones</p>
+      <p class="hero-sub">Meet times are announced in BRT (Brasília) on Discord.</p>
+    </div>
+  </section>
+
+  <section class="section timezones">
+    <div class="tz-grid">
+      <div class="tz-card tz-main">
+        <div class="tz-flag" aria-label="Brazil"><img src="https://flagcdn.com/w80/br.png" alt="Brazil" width="48" height="36" loading="lazy"></div>
+        <h4>Brasília</h4>
+        <p class="tz-code">BRT / UTC−3</p>
+        <p class="tz-desc">Main crew timezone</p>
+      </div>
+      <div class="tz-card tz-main">
+        <div class="tz-flag" aria-label="Argentina"><img src="https://flagcdn.com/w80/ar.png" alt="Argentina" width="48" height="36" loading="lazy"></div>
+        <h4>Buenos Aires</h4>
+        <p class="tz-code">ART / UTC−3</p>
+        <p class="tz-desc">Main crew timezone</p>
+      </div>
+      <div class="tz-card tz-main">
+        <div class="tz-flag" aria-label="Morocco"><img src="https://flagcdn.com/w80/ma.png" alt="Morocco" width="48" height="36" loading="lazy"></div>
+        <h4>Casablanca</h4>
+        <p class="tz-code">WET / UTC+0</p>
+        <p class="tz-desc">Main crew timezone</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Egypt"><img src="https://flagcdn.com/w80/eg.png" alt="Egypt" width="48" height="36" loading="lazy"></div>
+        <h4>Cairo</h4>
+        <p class="tz-code">EET / UTC+2</p>
+        <p class="tz-desc">+5h from BRT · North Africa</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Chile"><img src="https://flagcdn.com/w80/cl.png" alt="Chile" width="48" height="36" loading="lazy"></div>
+        <h4>Santiago</h4>
+        <p class="tz-code">CLT / UTC−4</p>
+        <p class="tz-desc">−1h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Colombia"><img src="https://flagcdn.com/w80/co.png" alt="Colombia" width="48" height="36" loading="lazy"></div>
+        <h4>Bogotá</h4>
+        <p class="tz-code">COT / UTC−5</p>
+        <p class="tz-desc">−2h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Mexico"><img src="https://flagcdn.com/w80/mx.png" alt="Mexico" width="48" height="36" loading="lazy"></div>
+        <h4>Mexico City</h4>
+        <p class="tz-code">CST / UTC−6</p>
+        <p class="tz-desc">−3h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="United States"><img src="https://flagcdn.com/w80/us.png" alt="United States" width="48" height="36" loading="lazy"></div>
+        <h4>New York</h4>
+        <p class="tz-code">EST / UTC−5</p>
+        <p class="tz-desc">−2h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="United States"><img src="https://flagcdn.com/w80/us.png" alt="United States" width="48" height="36" loading="lazy"></div>
+        <h4>Chicago</h4>
+        <p class="tz-code">CST / UTC−6</p>
+        <p class="tz-desc">−3h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="United States"><img src="https://flagcdn.com/w80/us.png" alt="United States" width="48" height="36" loading="lazy"></div>
+        <h4>Los Angeles</h4>
+        <p class="tz-code">PST / UTC−8</p>
+        <p class="tz-desc">−5h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Canada"><img src="https://flagcdn.com/w80/ca.png" alt="Canada" width="48" height="36" loading="lazy"></div>
+        <h4>Toronto</h4>
+        <p class="tz-code">EST / UTC−5</p>
+        <p class="tz-desc">−2h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="United Kingdom"><img src="https://flagcdn.com/w80/gb.png" alt="United Kingdom" width="48" height="36" loading="lazy"></div>
+        <h4>London</h4>
+        <p class="tz-code">GMT / UTC+0</p>
+        <p class="tz-desc">+3h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Germany"><img src="https://flagcdn.com/w80/de.png" alt="Germany" width="48" height="36" loading="lazy"></div>
+        <h4>Berlin</h4>
+        <p class="tz-code">CET / UTC+1</p>
+        <p class="tz-desc">+4h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Portugal"><img src="https://flagcdn.com/w80/pt.png" alt="Portugal" width="48" height="36" loading="lazy"></div>
+        <h4>Lisbon</h4>
+        <p class="tz-code">WET / UTC+0</p>
+        <p class="tz-desc">+3h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Spain"><img src="https://flagcdn.com/w80/es.png" alt="Spain" width="48" height="36" loading="lazy"></div>
+        <h4>Madrid</h4>
+        <p class="tz-code">CET / UTC+1</p>
+        <p class="tz-desc">+4h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="France"><img src="https://flagcdn.com/w80/fr.png" alt="France" width="48" height="36" loading="lazy"></div>
+        <h4>Paris</h4>
+        <p class="tz-code">CET / UTC+1</p>
+        <p class="tz-desc">+4h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Italy"><img src="https://flagcdn.com/w80/it.png" alt="Italy" width="48" height="36" loading="lazy"></div>
+        <h4>Rome</h4>
+        <p class="tz-code">CET / UTC+1</p>
+        <p class="tz-desc">+4h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Uruguay"><img src="https://flagcdn.com/w80/uy.png" alt="Uruguay" width="48" height="36" loading="lazy"></div>
+        <h4>Montevideo</h4>
+        <p class="tz-code">UYT / UTC−3</p>
+        <p class="tz-desc">Same as BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Peru"><img src="https://flagcdn.com/w80/pe.png" alt="Peru" width="48" height="36" loading="lazy"></div>
+        <h4>Lima</h4>
+        <p class="tz-code">PET / UTC−5</p>
+        <p class="tz-desc">−2h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Venezuela"><img src="https://flagcdn.com/w80/ve.png" alt="Venezuela" width="48" height="36" loading="lazy"></div>
+        <h4>Caracas</h4>
+        <p class="tz-code">VET / UTC−4</p>
+        <p class="tz-desc">−1h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="South Africa"><img src="https://flagcdn.com/w80/za.png" alt="South Africa" width="48" height="36" loading="lazy"></div>
+        <h4>Johannesburg</h4>
+        <p class="tz-code">SAST / UTC+2</p>
+        <p class="tz-desc">+5h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Turkey"><img src="https://flagcdn.com/w80/tr.png" alt="Turkey" width="48" height="36" loading="lazy"></div>
+        <h4>Istanbul</h4>
+        <p class="tz-code">TRT / UTC+3</p>
+        <p class="tz-desc">+6h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Russia"><img src="https://flagcdn.com/w80/ru.png" alt="Russia" width="48" height="36" loading="lazy"></div>
+        <h4>Moscow</h4>
+        <p class="tz-code">MSK / UTC+3</p>
+        <p class="tz-desc">+6h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="United Arab Emirates"><img src="https://flagcdn.com/w80/ae.png" alt="United Arab Emirates" width="48" height="36" loading="lazy"></div>
+        <h4>Dubai</h4>
+        <p class="tz-code">GST / UTC+4</p>
+        <p class="tz-desc">+7h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="India"><img src="https://flagcdn.com/w80/in.png" alt="India" width="48" height="36" loading="lazy"></div>
+        <h4>New Delhi</h4>
+        <p class="tz-code">IST / UTC+5:30</p>
+        <p class="tz-desc">+8.5h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Japan"><img src="https://flagcdn.com/w80/jp.png" alt="Japan" width="48" height="36" loading="lazy"></div>
+        <h4>Tokyo</h4>
+        <p class="tz-code">JST / UTC+9</p>
+        <p class="tz-desc">+12h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Australia"><img src="https://flagcdn.com/w80/au.png" alt="Australia" width="48" height="36" loading="lazy"></div>
+        <h4>Sydney</h4>
+        <p class="tz-code">AEST / UTC+10</p>
+        <p class="tz-desc">+13h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="New Zealand"><img src="https://flagcdn.com/w80/nz.png" alt="New Zealand" width="48" height="36" loading="lazy"></div>
+        <h4>Auckland</h4>
+        <p class="tz-code">NZST / UTC+12</p>
+        <p class="tz-desc">+15h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Algeria"><img src="https://flagcdn.com/w80/dz.png" alt="Algeria" width="48" height="36" loading="lazy"></div>
+        <h4>Algiers</h4>
+        <p class="tz-code">CET / UTC+1</p>
+        <p class="tz-desc">+4h from BRT · North Africa</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Sweden"><img src="https://flagcdn.com/w80/se.png" alt="Sweden" width="48" height="36" loading="lazy"></div>
+        <h4>Stockholm</h4>
+        <p class="tz-code">CET / UTC+1</p>
+        <p class="tz-desc">+4h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Netherlands"><img src="https://flagcdn.com/w80/nl.png" alt="Netherlands" width="48" height="36" loading="lazy"></div>
+        <h4>Amsterdam</h4>
+        <p class="tz-code">CET / UTC+1</p>
+        <p class="tz-desc">+4h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Belgium"><img src="https://flagcdn.com/w80/be.png" alt="Belgium" width="48" height="36" loading="lazy"></div>
+        <h4>Brussels</h4>
+        <p class="tz-code">CET / UTC+1</p>
+        <p class="tz-desc">+4h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Poland"><img src="https://flagcdn.com/w80/pl.png" alt="Poland" width="48" height="36" loading="lazy"></div>
+        <h4>Warsaw</h4>
+        <p class="tz-code">CET / UTC+1</p>
+        <p class="tz-desc">+4h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Romania"><img src="https://flagcdn.com/w80/ro.png" alt="Romania" width="48" height="36" loading="lazy"></div>
+        <h4>Bucharest</h4>
+        <p class="tz-code">EET / UTC+2</p>
+        <p class="tz-desc">+5h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Greece"><img src="https://flagcdn.com/w80/gr.png" alt="Greece" width="48" height="36" loading="lazy"></div>
+        <h4>Athens</h4>
+        <p class="tz-code">EET / UTC+2</p>
+        <p class="tz-desc">+5h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Saudi Arabia"><img src="https://flagcdn.com/w80/sa.png" alt="Saudi Arabia" width="48" height="36" loading="lazy"></div>
+        <h4>Riyadh</h4>
+        <p class="tz-code">AST / UTC+3</p>
+        <p class="tz-desc">+6h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Israel"><img src="https://flagcdn.com/w80/il.png" alt="Israel" width="48" height="36" loading="lazy"></div>
+        <h4>Tel Aviv</h4>
+        <p class="tz-code">IST / UTC+2</p>
+        <p class="tz-desc">+5h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Pakistan"><img src="https://flagcdn.com/w80/pk.png" alt="Pakistan" width="48" height="36" loading="lazy"></div>
+        <h4>Karachi</h4>
+        <p class="tz-code">PKT / UTC+5</p>
+        <p class="tz-desc">+8h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Bangladesh"><img src="https://flagcdn.com/w80/bd.png" alt="Bangladesh" width="48" height="36" loading="lazy"></div>
+        <h4>Dhaka</h4>
+        <p class="tz-code">BST / UTC+6</p>
+        <p class="tz-desc">+9h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Thailand"><img src="https://flagcdn.com/w80/th.png" alt="Thailand" width="48" height="36" loading="lazy"></div>
+        <h4>Bangkok</h4>
+        <p class="tz-code">ICT / UTC+7</p>
+        <p class="tz-desc">+10h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Vietnam"><img src="https://flagcdn.com/w80/vn.png" alt="Vietnam" width="48" height="36" loading="lazy"></div>
+        <h4>Ho Chi Minh</h4>
+        <p class="tz-code">ICT / UTC+7</p>
+        <p class="tz-desc">+10h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Indonesia"><img src="https://flagcdn.com/w80/id.png" alt="Indonesia" width="48" height="36" loading="lazy"></div>
+        <h4>Jakarta</h4>
+        <p class="tz-code">WIB / UTC+7</p>
+        <p class="tz-desc">+10h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Malaysia"><img src="https://flagcdn.com/w80/my.png" alt="Malaysia" width="48" height="36" loading="lazy"></div>
+        <h4>Kuala Lumpur</h4>
+        <p class="tz-code">MYT / UTC+8</p>
+        <p class="tz-desc">+11h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Singapore"><img src="https://flagcdn.com/w80/sg.png" alt="Singapore" width="48" height="36" loading="lazy"></div>
+        <h4>Singapore</h4>
+        <p class="tz-code">SGT / UTC+8</p>
+        <p class="tz-desc">+11h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Philippines"><img src="https://flagcdn.com/w80/ph.png" alt="Philippines" width="48" height="36" loading="lazy"></div>
+        <h4>Manila</h4>
+        <p class="tz-code">PHT / UTC+8</p>
+        <p class="tz-desc">+11h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="South Korea"><img src="https://flagcdn.com/w80/kr.png" alt="South Korea" width="48" height="36" loading="lazy"></div>
+        <h4>Seoul</h4>
+        <p class="tz-code">KST / UTC+9</p>
+        <p class="tz-desc">+12h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="China"><img src="https://flagcdn.com/w80/cn.png" alt="China" width="48" height="36" loading="lazy"></div>
+        <h4>Shanghai</h4>
+        <p class="tz-code">CST / UTC+8</p>
+        <p class="tz-desc">+11h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Taiwan"><img src="https://flagcdn.com/w80/tw.png" alt="Taiwan" width="48" height="36" loading="lazy"></div>
+        <h4>Taipei</h4>
+        <p class="tz-code">CST / UTC+8</p>
+        <p class="tz-desc">+11h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Hong Kong"><img src="https://flagcdn.com/w80/hk.png" alt="Hong Kong" width="48" height="36" loading="lazy"></div>
+        <h4>Hong Kong</h4>
+        <p class="tz-code">HKT / UTC+8</p>
+        <p class="tz-desc">+11h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="New Zealand"><img src="https://flagcdn.com/w80/nz.png" alt="New Zealand" width="48" height="36" loading="lazy"></div>
+        <h4>Wellington</h4>
+        <p class="tz-code">NZST / UTC+12</p>
+        <p class="tz-desc">+15h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Finland"><img src="https://flagcdn.com/w80/fi.png" alt="Finland" width="48" height="36" loading="lazy"></div>
+        <h4>Helsinki</h4>
+        <p class="tz-code">EET / UTC+2</p>
+        <p class="tz-desc">+5h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Norway"><img src="https://flagcdn.com/w80/no.png" alt="Norway" width="48" height="36" loading="lazy"></div>
+        <h4>Oslo</h4>
+        <p class="tz-code">CET / UTC+1</p>
+        <p class="tz-desc">+4h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Denmark"><img src="https://flagcdn.com/w80/dk.png" alt="Denmark" width="48" height="36" loading="lazy"></div>
+        <h4>Copenhagen</h4>
+        <p class="tz-code">CET / UTC+1</p>
+        <p class="tz-desc">+4h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Switzerland"><img src="https://flagcdn.com/w80/ch.png" alt="Switzerland" width="48" height="36" loading="lazy"></div>
+        <h4>Zurich</h4>
+        <p class="tz-code">CET / UTC+1</p>
+        <p class="tz-desc">+4h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Austria"><img src="https://flagcdn.com/w80/at.png" alt="Austria" width="48" height="36" loading="lazy"></div>
+        <h4>Vienna</h4>
+        <p class="tz-code">CET / UTC+1</p>
+        <p class="tz-desc">+4h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Czechia"><img src="https://flagcdn.com/w80/cz.png" alt="Czechia" width="48" height="36" loading="lazy"></div>
+        <h4>Prague</h4>
+        <p class="tz-code">CET / UTC+1</p>
+        <p class="tz-desc">+4h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Hungary"><img src="https://flagcdn.com/w80/hu.png" alt="Hungary" width="48" height="36" loading="lazy"></div>
+        <h4>Budapest</h4>
+        <p class="tz-code">CET / UTC+1</p>
+        <p class="tz-desc">+4h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Ukraine"><img src="https://flagcdn.com/w80/ua.png" alt="Ukraine" width="48" height="36" loading="lazy"></div>
+        <h4>Kyiv</h4>
+        <p class="tz-code">EET / UTC+2</p>
+        <p class="tz-desc">+5h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Nigeria"><img src="https://flagcdn.com/w80/ng.png" alt="Nigeria" width="48" height="36" loading="lazy"></div>
+        <h4>Lagos</h4>
+        <p class="tz-code">WAT / UTC+1</p>
+        <p class="tz-desc">+4h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Kenya"><img src="https://flagcdn.com/w80/ke.png" alt="Kenya" width="48" height="36" loading="lazy"></div>
+        <h4>Nairobi</h4>
+        <p class="tz-code">EAT / UTC+3</p>
+        <p class="tz-desc">+6h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Egypt"><img src="https://flagcdn.com/w80/eg.png" alt="Egypt" width="48" height="36" loading="lazy"></div>
+        <h4>Alexandria</h4>
+        <p class="tz-code">EET / UTC+2</p>
+        <p class="tz-desc">+5h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Tunisia"><img src="https://flagcdn.com/w80/tn.png" alt="Tunisia" width="48" height="36" loading="lazy"></div>
+        <h4>Tunis</h4>
+        <p class="tz-code">CET / UTC+1</p>
+        <p class="tz-desc">+4h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Bolivia"><img src="https://flagcdn.com/w80/bo.png" alt="Bolivia" width="48" height="36" loading="lazy"></div>
+        <h4>La Paz</h4>
+        <p class="tz-code">BOT / UTC−4</p>
+        <p class="tz-desc">−1h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Paraguay"><img src="https://flagcdn.com/w80/py.png" alt="Paraguay" width="48" height="36" loading="lazy"></div>
+        <h4>Asunción</h4>
+        <p class="tz-code">PYT / UTC−4</p>
+        <p class="tz-desc">−1h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Ecuador"><img src="https://flagcdn.com/w80/ec.png" alt="Ecuador" width="48" height="36" loading="lazy"></div>
+        <h4>Quito</h4>
+        <p class="tz-code">ECT / UTC−5</p>
+        <p class="tz-desc">−2h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Costa Rica"><img src="https://flagcdn.com/w80/cr.png" alt="Costa Rica" width="48" height="36" loading="lazy"></div>
+        <h4>San José</h4>
+        <p class="tz-code">CST / UTC−6</p>
+        <p class="tz-desc">−3h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Panama"><img src="https://flagcdn.com/w80/pa.png" alt="Panama" width="48" height="36" loading="lazy"></div>
+        <h4>Panama City</h4>
+        <p class="tz-code">EST / UTC−5</p>
+        <p class="tz-desc">−2h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Dominican Republic"><img src="https://flagcdn.com/w80/do.png" alt="Dominican Republic" width="48" height="36" loading="lazy"></div>
+        <h4>Santo Domingo</h4>
+        <p class="tz-code">AST / UTC−4</p>
+        <p class="tz-desc">−1h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Puerto Rico"><img src="https://flagcdn.com/w80/pr.png" alt="Puerto Rico" width="48" height="36" loading="lazy"></div>
+        <h4>San Juan</h4>
+        <p class="tz-code">AST / UTC−4</p>
+        <p class="tz-desc">−1h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="United States"><img src="https://flagcdn.com/w80/us.png" alt="United States" width="48" height="36" loading="lazy"></div>
+        <h4>Miami</h4>
+        <p class="tz-code">EST / UTC−5</p>
+        <p class="tz-desc">−2h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="United States"><img src="https://flagcdn.com/w80/us.png" alt="United States" width="48" height="36" loading="lazy"></div>
+        <h4>Houston</h4>
+        <p class="tz-code">CST / UTC−6</p>
+        <p class="tz-desc">−3h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="United States"><img src="https://flagcdn.com/w80/us.png" alt="United States" width="48" height="36" loading="lazy"></div>
+        <h4>Denver</h4>
+        <p class="tz-code">MST / UTC−7</p>
+        <p class="tz-desc">−4h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="United States"><img src="https://flagcdn.com/w80/us.png" alt="United States" width="48" height="36" loading="lazy"></div>
+        <h4>Seattle</h4>
+        <p class="tz-code">PST / UTC−8</p>
+        <p class="tz-desc">−5h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Canada"><img src="https://flagcdn.com/w80/ca.png" alt="Canada" width="48" height="36" loading="lazy"></div>
+        <h4>Vancouver</h4>
+        <p class="tz-code">PST / UTC−8</p>
+        <p class="tz-desc">−5h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Canada"><img src="https://flagcdn.com/w80/ca.png" alt="Canada" width="48" height="36" loading="lazy"></div>
+        <h4>Montreal</h4>
+        <p class="tz-code">EST / UTC−5</p>
+        <p class="tz-desc">−2h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Australia"><img src="https://flagcdn.com/w80/au.png" alt="Australia" width="48" height="36" loading="lazy"></div>
+        <h4>Melbourne</h4>
+        <p class="tz-code">AEST / UTC+10</p>
+        <p class="tz-desc">+13h from BRT</p>
+      </div>
+      <div class="tz-card">
+        <div class="tz-flag" aria-label="Australia"><img src="https://flagcdn.com/w80/au.png" alt="Australia" width="48" height="36" loading="lazy"></div>
+        <h4>Perth</h4>
+        <p class="tz-code">AWST / UTC+8</p>
+        <p class="tz-desc">+11h from BRT</p>
+      </div>
+    </div>
+    <p class="tz-note">Meet times are always announced in <strong>BRT (Brasília)</strong> on Discord. Main crew timezones: Brazil, Argentina &amp; North Africa.</p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo-icon logo-icon-img"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/teste.png" alt="Bovary" width="36" height="36" /></div>
+        <span>BOVARY CLUB SOCIETY</span>
+      </div>
+      <p>GTA Online · Legacy &amp; FiveM</p>
+      <p class="footer-copy">© 2026 Bovary Club Society. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
