@@ -547,19 +547,57 @@ function initMusicPlayer() {
   audio.preload = "metadata";
   audio.volume = typeof state.volume === "number" ? state.volume : 0.5;
 
-  // Pause other open tabs when this page claims a different playlist context
+  // Single-instance audio across tabs/windows:
+  // - By default the oldest (initial) window keeps playing; secondary tabs stay silent.
+  // - When the user explicitly presses Play on a gallery (or any other playlist),
+  //   that tab sends a "takeover" and the others pause so only the new music plays.
+  const myOpenTs = Date.now();
   let musicChannel = null;
+  let isSecondary = false;
+  let hasTakenOver = false; // true after this tab explicitly took control via Play
+
+  function pauseAudioUI() {
+    if (!audio.paused) {
+      audio.pause();
+      const btn = document.getElementById("bovaPlayBtn");
+      if (btn) btn.textContent = "▶";
+      savePlayerState({ wasPlaying: false, currentTime: audio.currentTime, playlistId, index, volume: audio.volume });
+    }
+  }
+
+  function pauseAsSecondary() {
+    isSecondary = true;
+    pauseAudioUI();
+  }
+
   try {
     musicChannel = new BroadcastChannel("bova-music");
-    musicChannel.postMessage({ type: "claim", playlistId: playlistId, ts: Date.now() });
+    musicChannel.postMessage({ type: "claim", playlistId: playlistId, ts: myOpenTs });
     musicChannel.onmessage = (ev) => {
       const msg = ev && ev.data;
-      if (!msg || msg.type !== "claim") return;
-      if (msg.playlistId !== playlistId) {
-        audio.pause();
-        const btn = document.getElementById("bovaPlayBtn");
-        if (btn) btn.textContent = "▶";
-        savePlayerState({ wasPlaying: false, currentTime: audio.currentTime, playlistId, index, volume: audio.volume });
+      if (!msg || !msg.type) return;
+
+      if (msg.type === "takeover") {
+        // Another tab (e.g. gallery) explicitly started playing → pause here
+        if (msg.playlistId !== playlistId || msg.ts !== myOpenTs) {
+          hasTakenOver = false;
+          isSecondary = true;
+          pauseAudioUI();
+        }
+        return;
+      }
+
+      if (msg.type !== "claim" || typeof msg.ts !== "number") return;
+
+      if (msg.ts < myOpenTs) {
+        // Older (initial) window exists → this is secondary, stay silent
+        // (unless we already took over via explicit Play)
+        if (!hasTakenOver) pauseAsSecondary();
+      } else if (msg.ts > myOpenTs) {
+        // Newer window opened → re-assert our claim so it can hear us and pause
+        try {
+          musicChannel.postMessage({ type: "claim", playlistId: playlistId, ts: myOpenTs });
+        } catch (_) {}
       }
     };
   } catch (_) {}
@@ -637,7 +675,17 @@ function initMusicPlayer() {
     hidePrompt();
     const notice = document.getElementById("bovaPlayerNotice");
     if (notice) notice.classList.remove("is-visible");
+
     if (audio.paused) {
+      // Explicit Play: take over audio from any other open tab (e.g. main → gallery)
+      hasTakenOver = true;
+      isSecondary = false;
+      try {
+        if (musicChannel) {
+          musicChannel.postMessage({ type: "takeover", playlistId: playlistId, ts: myOpenTs });
+          musicChannel.postMessage({ type: "claim", playlistId: playlistId, ts: myOpenTs });
+        }
+      } catch (_) {}
       audio.play().then(() => {
         playBtn.textContent = "⏸";
         savePlayerState({ wasPlaying: true, userActivated: true, playlistId, index, currentTime: audio.currentTime, volume: audio.volume });
@@ -737,6 +785,11 @@ function initMusicPlayer() {
   savePlayerState({ playlistId, index, currentTime: resumeTime, volume: audio.volume });
 
   function tryAutoplay(showFallbackPrompt) {
+    if (isSecondary) {
+      // Secondary window: never autoplay — only the initial window plays
+      if (showFallbackPrompt) showPrompt();
+      return;
+    }
     audio.play().then(() => {
       playBtn.textContent = "⏸";
       root.classList.add("is-active");
@@ -782,12 +835,14 @@ function initMusicPlayer() {
   }
 
   // Tie to boot finish on pages that have boot screen
+  // Small extra delay lets BroadcastChannel handshake finish so secondary tabs
+  // learn about the initial window before deciding to autoplay.
   const boot = document.getElementById("boot-screen");
   if (boot && !boot.classList.contains("done")) {
     const obs = new MutationObserver(() => {
       if (boot.classList.contains("done") || boot.getAttribute("aria-hidden") === "true") {
         obs.disconnect();
-        setTimeout(revealPlayerUI, 400);
+        setTimeout(revealPlayerUI, 600);
       }
     });
     obs.observe(boot, { attributes: true, attributeFilter: ["class", "aria-hidden", "style"] });
@@ -797,7 +852,7 @@ function initMusicPlayer() {
     }, 4000);
   } else {
     // No boot on this page
-    setTimeout(revealPlayerUI, 300);
+    setTimeout(revealPlayerUI, 500);
   }
 
   // Keep active style while interacting
