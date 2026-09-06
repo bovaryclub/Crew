@@ -428,12 +428,390 @@ function initImageFallbacks() {
   });
 }
 
+
+// ===== FLOATING MUSIC PLAYER =====
+// Fill these arrays with direct ImageKit (or CDN) .mp3 URLs.
+// Example: { title: "Night Drive", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/track1.mp3" }
+
+const PLAYLIST_MAIN = [
+  { title: "Heathens — twenty one pilots", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/twenty%20one%20pilots%20Heathens%20(from%20Suicide%20Squad%20The%20Album)%20_OFFICIAL%20VIDEO_%20-%20Fueled%20By%20Ramen.mp3?updatedAt=1788670416847" },
+  { title: "See You Again — Wiz Khalifa ft. Charlie Puth", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Wiz%20Khalifa%20-%20See%20You%20Again%20ft.%20Charlie%20Puth%20_Official%20Video_%20Furious%207%20Soundtrack.mp3?updatedAt=1788670276822" },
+  { title: "When Worlds Collide — Powerman 5000", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/When%20Worlds%20Collide%20-%20Powerman%205000%20-%20SpenceIsAChef.mp3?updatedAt=1788670451819" },
+  { title: "Voyage, Voyage — Desireless", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Voyage,%20Voyage%20-%20Desireless.mp3?updatedAt=1788671762514" },
+  { title: "You Give Me A Feeling — Vintage Culture, James Hype", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Vintage%20Culture,%20James%20Hype%20-%20You%20Give%20Me%20A%20Feeling%20_Visualizer_%20-%20Vintage%20Culture.mp3?updatedAt=1788670525606" },
+  { title: "Tokyo Drift — Teriyaki Boyz", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Tokyo%20Drift%20(Fast%20&%20Furious).mp3?updatedAt=1788670266859" },
+  { title: "Sweet Disposition — The Temper Trap", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Sweet%20Disposition%20-%20The%20Temper%20Trap.mp3?updatedAt=1788671762286" },
+  { title: "Riders on the Storm — Snoop Dogg feat. The Doors", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Snoop%20Dogg%20feat%20The%20Doors%20%20%20Riders%20on%20the%20Storm%20(Bass%20Boosted).mp3?updatedAt=1788670233432" },
+  { title: "Six Days (Remix)", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Six%20Days%20(Remix).mp3?updatedAt=1788670210314" },
+  { title: "No Place — RÜFÜS DU SOL", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/R%C3%9CF%C3%9CS%20DU%20SOL%20%E2%97%8F%E2%97%8F%20No%20Place%20_Official%20Video_.mp3?updatedAt=1788670199047" },
+  { title: "Can't Stop — Red Hot Chili Peppers", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Red%20Hot%20Chili%20Peppers%20-%20Can't%20Stop%20_Official%20Music%20Video_%20-%20Red%20Hot%20Chili%20Peppers.mp3?updatedAt=1788670441771" },
+  { title: "The Church — Rampa", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Rampa%20-%20The%20Church%20_CLR001_.mp3?updatedAt=1788670187147" },
+  { title: "Black Out Days — Phantogram (Future Islands Remix)", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Phantogram%20-%20Black%20Out%20Days%20(Future%20Islands%20Remix_Audio)%20-%20PhantogramVEVO.mp3?updatedAt=1788670423323" },
+  { title: "You Get What You Give — New Radicals", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/New%20Radicals%20-%20You%20Get%20That%20You%20Give%20(Official%20Music%20Video)%20-%20NewRadicalsVEVO.mp3?updatedAt=1788671764079" },
+  { title: "Blue Monday — New Order", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/New%20Order%20-%20Blue%20Monday%20(Official%20Lyric%20Video)%20-%20New%20Order.mp3?updatedAt=1788671765796" },
+  { title: "Flower — Moby", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Moby%20-%20'Flower'%20(Official%20Audio).mp3?updatedAt=1788669892875" },
+  { title: "Midnight City — M83", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/M83%20'Midnight%20City'%20Official%20video%20-%20M83.mp3?updatedAt=1788670417147" },
+  { title: "SexyBack — Justin Timberlake ft. Timbaland", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Justin%20Timberlake%20-%20SexyBack%20(Lyrics)%20ft.%20Timbaland%20-%207clouds.mp3?updatedAt=1788670495805" },
+  { title: "Intro — The xx", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Intro%20-%20The%20xx.mp3?updatedAt=1788671761580" },
+  { title: "Sahara — Hensonn", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Hensonn-Sahara.mp3?updatedAt=1788670297102" },
+  { title: "Sweet Dreams — Eurythmics", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Eurythmics,%20Annie%20Lennox,%20Dave%20Stewart%20-%20Sweet%20Dreams%20(Are%20Made%20Of%20This)%20(Official%20Video).mp3?updatedAt=1788670315659" },
+  { title: "How Does It Feel — Dubdogz, Fezzo, Zaark", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Dubdogz,%20Fezzo,%20Zaark%20-%20How%20Does%20It%20Feel%20(Official%20Lyric%20Video)%20New%20Order's%20-%20Blue%20Monday%20Remake%20-%20Dubdogz.mp3?updatedAt=1788670524594" },
+  { title: "Crack Rock", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Crack%20Rock.mp3?updatedAt=1788670339529" },
+  { title: "Sleepwalking — Chain Gang Of 1974", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Chain%20Gang%20Of%201974%20-%20%20Sleepwalking%20(Official%20Audio)%20-%20The%20Chain%20Gang%20Of%201974.mp3?updatedAt=1788671762477" },
+  { title: "Safe And Sound — Capital Cities", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Capital%20Cities%20-%20Safe%20And%20Sound.mp3?updatedAt=1788670346757" },
+  { title: "Song 2 — Blur", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Blur%20-%20Song%202%20(Official%20Music%20Video)%20-%20Blur.mp3?updatedAt=1788671761417" },
+  { title: "Starting Again — &ME feat. Atelier", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/&ME%20-%20Starting%20Again%20feat.%20Atelier.mp3?updatedAt=1788670362475" },
+];
+
+const PLAYLIST_GALLERY = [
+  { title: "1979 (Acoustic) — The Smashing Pumpkins", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Chill%20musics/1979%20(Acoustic)%20-%20The%20Smashing%20Pumpkins.mp3?updatedAt=1788671725587" },
+  { title: "Pool Song — Lea Porcelain", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Chill%20musics/Pool%20Song%20-%20Lea%20Porcelain.mp3?updatedAt=1788671725863" },
+  { title: "Cigarette Daydreams — Cage the Elephant", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Chill%20musics/Cigarette%20Daydreams%20-%20Cage%20the%20Elephant%20-%20Shammy.mp3?updatedAt=1788670797738" },
+  { title: "Beautiful Day — U2", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Chill%20musics/Beautiful%20Day%20-%20U2.mp3?updatedAt=1788671725478" },
+];
+
+function shuffleIndices(n) {
+  const arr = Array.from({ length: n }, (_, i) => i);
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+
+const PLAYER_STORAGE_KEY = "bovaMusicPlayerV1";
+
+function isGalleryPage() {
+  try {
+    const path = decodeURIComponent(location.pathname || location.href || "");
+    const file = (path.split("/").pop() || "").split("?")[0].split("#")[0];
+    if (/^gallery[-_]/i.test(file)) return true;
+    if (/gallery[-_]/i.test(path)) return true;
+  } catch (_) {}
+  return false;
+}
+
+function formatTime(sec) {
+  if (!isFinite(sec) || sec < 0) return "0:00";
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60);
+  return m + ":" + String(s).padStart(2, "0");
+}
+
+function loadPlayerState() {
+  try {
+    return JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY) || "null") || {};
+  } catch (_) {
+    return {};
+  }
+}
+
+function savePlayerState(partial) {
+  try {
+    const cur = loadPlayerState();
+    localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify({ ...cur, ...partial }));
+  } catch (_) {}
+}
+
+function initMusicPlayer() {
+  const onGallery = isGalleryPage();
+  const playlist = onGallery
+    ? (PLAYLIST_GALLERY.length ? PLAYLIST_GALLERY : PLAYLIST_MAIN)
+    : PLAYLIST_MAIN;
+
+  if (!playlist.length) {
+    // No tracks configured yet — skip UI
+    console.info("[Bova Player] Playlist empty. Add direct .mp3 URLs to PLAYLIST_MAIN / PLAYLIST_GALLERY in script.js");
+    return;
+  }
+
+  const state = loadPlayerState();
+  const playlistId = onGallery ? "gallery" : "main";
+  const switchedPlaylist = state.playlistId && state.playlistId !== playlistId;
+  let index = 0;
+  // Always shuffle: build random order, start at a random track
+  let order = shuffleIndices(playlist.length);
+  let orderPos = 0;
+  // Only resume track if SAME playlist — never carry main track into gallery (or vice-versa)
+  if (!switchedPlaylist && state.playlistId === playlistId && typeof state.index === "number") {
+    index = Math.max(0, Math.min(state.index, playlist.length - 1));
+    const pos = order.indexOf(index);
+    orderPos = pos >= 0 ? pos : 0;
+  } else {
+    orderPos = Math.floor(Math.random() * order.length);
+    index = order[orderPos];
+  }
+
+  const audio = new Audio();
+  audio.preload = "metadata";
+  audio.volume = typeof state.volume === "number" ? state.volume : 0.5;
+
+  // Pause other open tabs when this page claims a different playlist context
+  let musicChannel = null;
+  try {
+    musicChannel = new BroadcastChannel("bova-music");
+    musicChannel.postMessage({ type: "claim", playlistId: playlistId, ts: Date.now() });
+    musicChannel.onmessage = (ev) => {
+      const msg = ev && ev.data;
+      if (!msg || msg.type !== "claim") return;
+      if (msg.playlistId !== playlistId) {
+        audio.pause();
+        const btn = document.getElementById("bovaPlayBtn");
+        if (btn) btn.textContent = "▶";
+        savePlayerState({ wasPlaying: false, currentTime: audio.currentTime, playlistId, index, volume: audio.volume });
+      }
+    };
+  } catch (_) {}
+
+  // Build UI
+  const root = document.createElement("div");
+  root.className = "bova-player is-hidden";
+  root.id = "bovaPlayer";
+  root.innerHTML = `
+    <div class="bova-player-notice ${onGallery ? "is-visible" : ""}" id="bovaPlayerNotice">
+      <span>🎧 Gallery Chill playlist loaded — press play</span>
+      <button type="button" id="bovaNoticeDismiss" aria-label="Dismiss">✕</button>
+    </div>
+    <div class="bova-player-inner">
+      <button type="button" class="bova-player-play" id="bovaPlayBtn" aria-label="Play/Pause">▶</button>
+      <div class="bova-player-meta">
+        <p class="bova-player-label">${onGallery ? "GALLERY · CHILL · SHUFFLE" : "BOVARY RADIO · SHUFFLE"}</p>
+        <p class="bova-player-title" id="bovaTrackTitle">—</p>
+      </div>
+      <div class="bova-player-controls">
+        <button type="button" id="bovaPrevBtn" aria-label="Previous">⏮</button>
+        <button type="button" id="bovaNextBtn" aria-label="Next">⏭</button>
+        <button type="button" id="bovaMuteBtn" aria-label="Mute">🔊</button>
+      </div>
+      <div class="bova-player-bar-wrap">
+        <span class="bova-player-time" id="bovaTimeCur">0:00</span>
+        <input type="range" class="bova-player-seek" id="bovaSeek" min="0" max="1000" value="0" aria-label="Seek" />
+        <span class="bova-player-time" id="bovaTimeDur">0:00</span>
+        <input type="range" class="bova-player-vol" id="bovaVol" min="0" max="1" step="0.01" value="${audio.volume}" aria-label="Volume" />
+      </div>
+    </div>
+  `;
+  document.body.appendChild(root);
+
+  const playBtn = document.getElementById("bovaPlayBtn");
+  const titleEl = document.getElementById("bovaTrackTitle");
+  const seek = document.getElementById("bovaSeek");
+  const vol = document.getElementById("bovaVol");
+  const timeCur = document.getElementById("bovaTimeCur");
+  const timeDur = document.getElementById("bovaTimeDur");
+  const muteBtn = document.getElementById("bovaMuteBtn");
+
+  let userActivated = !!state.userActivated;
+  let seeking = false;
+
+  function setTrack(i, { autoplay = false, resumeTime = 0 } = {}) {
+    index = ((i % playlist.length) + playlist.length) % playlist.length;
+    const track = playlist[index];
+    titleEl.textContent = track.title || ("Track " + (index + 1));
+    audio.src = track.src;
+    audio.load();
+    const onMeta = () => {
+      timeDur.textContent = formatTime(audio.duration);
+      if (resumeTime > 0 && isFinite(audio.duration)) {
+        try { audio.currentTime = Math.min(resumeTime, audio.duration - 0.25); } catch (_) {}
+      }
+      audio.removeEventListener("loadedmetadata", onMeta);
+    };
+    audio.addEventListener("loadedmetadata", onMeta);
+    savePlayerState({ playlistId, index, volume: audio.volume, userActivated });
+    if (autoplay) {
+      audio.play().then(() => {
+        playBtn.textContent = "⏸";
+        root.classList.add("is-active");
+      }).catch(() => {
+        playBtn.textContent = "▶";
+      });
+    }
+  }
+
+  function togglePlay() {
+    userActivated = true;
+    root.classList.remove("is-hidden");
+    root.classList.add("is-active");
+    hidePrompt();
+    const notice = document.getElementById("bovaPlayerNotice");
+    if (notice) notice.classList.remove("is-visible");
+    if (audio.paused) {
+      audio.play().then(() => {
+        playBtn.textContent = "⏸";
+        savePlayerState({ wasPlaying: true, userActivated: true, playlistId, index, currentTime: audio.currentTime, volume: audio.volume });
+      }).catch(() => {});
+    } else {
+      audio.pause();
+      playBtn.textContent = "▶";
+      savePlayerState({ wasPlaying: false, currentTime: audio.currentTime, volume: audio.volume, playlistId, index });
+    }
+  }
+
+  playBtn.addEventListener("click", togglePlay);
+  document.getElementById("bovaPrevBtn").addEventListener("click", () => {
+    orderPos = (orderPos - 1 + order.length) % order.length;
+    setTrack(order[orderPos], { autoplay: true });
+  });
+  document.getElementById("bovaNextBtn").addEventListener("click", () => {
+    orderPos = (orderPos + 1) % order.length;
+    if (orderPos === 0) order = shuffleIndices(playlist.length); // reshuffle when cycle completes
+    setTrack(order[orderPos], { autoplay: true });
+  });
+  muteBtn.addEventListener("click", () => {
+    audio.muted = !audio.muted;
+    muteBtn.textContent = audio.muted ? "🔇" : "🔊";
+  });
+  vol.addEventListener("input", () => {
+    audio.volume = Number(vol.value);
+    audio.muted = audio.volume === 0;
+    muteBtn.textContent = audio.muted ? "🔇" : "🔊";
+    savePlayerState({ volume: audio.volume });
+  });
+  seek.addEventListener("mousedown", () => { seeking = true; });
+  seek.addEventListener("touchstart", () => { seeking = true; }, { passive: true });
+  seek.addEventListener("input", () => {
+    if (!isFinite(audio.duration)) return;
+    const t = (Number(seek.value) / 1000) * audio.duration;
+    timeCur.textContent = formatTime(t);
+  });
+  const commitSeek = () => {
+    if (!isFinite(audio.duration)) { seeking = false; return; }
+    audio.currentTime = (Number(seek.value) / 1000) * audio.duration;
+    seeking = false;
+  };
+  seek.addEventListener("mouseup", commitSeek);
+  seek.addEventListener("touchend", commitSeek);
+
+  audio.addEventListener("timeupdate", () => {
+    if (seeking || !isFinite(audio.duration)) return;
+    seek.value = String(Math.round((audio.currentTime / audio.duration) * 1000) || 0);
+    timeCur.textContent = formatTime(audio.currentTime);
+    if (Math.floor(audio.currentTime) % 3 === 0) {
+      savePlayerState({ currentTime: audio.currentTime, index, playlistId, wasPlaying: !audio.paused, volume: audio.volume });
+    }
+  });
+  audio.addEventListener("ended", () => {
+    orderPos = (orderPos + 1) % order.length;
+    if (orderPos === 0) order = shuffleIndices(playlist.length);
+    setTrack(order[orderPos], { autoplay: true });
+  });
+
+  // Prompt after boot (home) or show player on other pages
+  const prompt = document.createElement("div");
+  prompt.className = "bova-music-prompt";
+  prompt.id = "bovaMusicPrompt";
+  prompt.innerHTML = `
+    <span>Music ready</span>
+    <button type="button" id="bovaPromptPlay">▶ Play music</button>
+    <button type="button" class="bova-music-dismiss" id="bovaPromptDismiss">Dismiss</button>
+  `;
+  document.body.appendChild(prompt);
+
+  function showPrompt() {
+    if (userActivated) return;
+    prompt.classList.add("is-visible");
+  }
+  function hidePrompt() {
+    prompt.classList.remove("is-visible");
+  }
+
+  document.getElementById("bovaPromptPlay").addEventListener("click", () => {
+    root.classList.remove("is-hidden");
+    togglePlay();
+  });
+  document.getElementById("bovaPromptDismiss").addEventListener("click", () => {
+    hidePrompt();
+    root.classList.remove("is-hidden");
+    userActivated = true;
+    savePlayerState({ userActivated: true });
+  });
+
+  // Never resume time from the other playlist
+  const resumeTime = (!switchedPlaylist && state.playlistId === playlistId && typeof state.currentTime === "number")
+    ? state.currentTime
+    : 0;
+  setTrack(index, { autoplay: false, resumeTime });
+  // Persist that we are now on this playlist (clears "main" context when entering gallery)
+  savePlayerState({ playlistId, index, currentTime: resumeTime, volume: audio.volume });
+
+  function tryAutoplay(showFallbackPrompt) {
+    audio.play().then(() => {
+      playBtn.textContent = "⏸";
+      root.classList.add("is-active");
+      userActivated = true;
+      hidePrompt();
+      const notice = document.getElementById("bovaPlayerNotice");
+      if (notice) notice.classList.remove("is-visible");
+      savePlayerState({ wasPlaying: true, userActivated: true, playlistId, index, currentTime: audio.currentTime, volume: audio.volume });
+    }).catch(() => {
+      if (showFallbackPrompt) showPrompt();
+    });
+  }
+
+  const noticeBtn = document.getElementById("bovaNoticeDismiss");
+  if (noticeBtn) {
+    noticeBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const notice = document.getElementById("bovaPlayerNotice");
+      if (notice) notice.classList.remove("is-visible");
+    });
+  }
+
+  function revealPlayerUI() {
+    root.classList.remove("is-hidden");
+
+    // Gallery: show chill playlist notice on the player (no forced autoplay)
+    if (onGallery) {
+      root.classList.add("is-active");
+      const notice = document.getElementById("bovaPlayerNotice");
+      if (notice) notice.classList.add("is-visible");
+      // Hide the big bottom prompt — notice is enough
+      hidePrompt();
+      return;
+    }
+
+    // Same playlist + was playing → try resume
+    if (!switchedPlaylist && state.wasPlaying && state.playlistId === playlistId) {
+      tryAutoplay(true);
+      return;
+    }
+
+    showPrompt();
+  }
+
+  // Tie to boot finish on pages that have boot screen
+  const boot = document.getElementById("boot-screen");
+  if (boot && !boot.classList.contains("done")) {
+    const obs = new MutationObserver(() => {
+      if (boot.classList.contains("done") || boot.getAttribute("aria-hidden") === "true") {
+        obs.disconnect();
+        setTimeout(revealPlayerUI, 400);
+      }
+    });
+    obs.observe(boot, { attributes: true, attributeFilter: ["class", "aria-hidden", "style"] });
+    // Fallback if boot already finished or finishes via timeout
+    setTimeout(() => {
+      if (bootFinished || boot.classList.contains("done")) revealPlayerUI();
+    }, 4000);
+  } else {
+    // No boot on this page
+    setTimeout(revealPlayerUI, 300);
+  }
+
+  // Keep active style while interacting
+  root.addEventListener("pointerdown", () => root.classList.add("is-active"));
+}
+
+
 // ===== INIT =====
 
 document.addEventListener('DOMContentLoaded', () => {
   initImageFallbacks();
   initCopyButtons();
   runBoot();
+  initMusicPlayer();
   initCursor();
   initButtonGlow();
   animateStats();
