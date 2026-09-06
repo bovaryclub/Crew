@@ -1,0 +1,26 @@
+{
+  "name": "Bovary Club Society",
+  "short_name": "Bovary",
+  "description": "Car meets, friendly sessions, cruises and good vibes — GTA Online Legacy & FiveM.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#05050a",
+  "theme_color": "#05050a",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/teste.png?tr=w-192,h-192",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/teste.png?tr=w-512,h-512",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

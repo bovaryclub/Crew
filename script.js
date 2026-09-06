@@ -447,7 +447,6 @@ const PLAYLIST_MAIN = [
   { title: "Can't Stop — Red Hot Chili Peppers", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Red%20Hot%20Chili%20Peppers%20-%20Can't%20Stop%20_Official%20Music%20Video_%20-%20Red%20Hot%20Chili%20Peppers.mp3?updatedAt=1788670441771" },
   { title: "The Church — Rampa", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Rampa%20-%20The%20Church%20_CLR001_.mp3?updatedAt=1788670187147" },
   { title: "Black Out Days — Phantogram (Future Islands Remix)", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Phantogram%20-%20Black%20Out%20Days%20(Future%20Islands%20Remix_Audio)%20-%20PhantogramVEVO.mp3?updatedAt=1788670423323" },
-  { title: "You Get What You Give — New Radicals", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/New%20Radicals%20-%20You%20Get%20That%20You%20Give%20(Official%20Music%20Video)%20-%20NewRadicalsVEVO.mp3?updatedAt=1788671764079" },
   { title: "Blue Monday — New Order", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/New%20Order%20-%20Blue%20Monday%20(Official%20Lyric%20Video)%20-%20New%20Order.mp3?updatedAt=1788671765796" },
   { title: "Flower — Moby", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Moby%20-%20'Flower'%20(Official%20Audio).mp3?updatedAt=1788669892875" },
   { title: "Midnight City — M83", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/M83%20'Midnight%20City'%20Official%20video%20-%20M83.mp3?updatedAt=1788670417147" },
@@ -468,6 +467,14 @@ const PLAYLIST_GALLERY = [
   { title: "Pool Song — Lea Porcelain", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Chill%20musics/Pool%20Song%20-%20Lea%20Porcelain.mp3?updatedAt=1788671725863" },
   { title: "Cigarette Daydreams — Cage the Elephant", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Chill%20musics/Cigarette%20Daydreams%20-%20Cage%20the%20Elephant%20-%20Shammy.mp3?updatedAt=1788670797738" },
   { title: "Beautiful Day — U2", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Chill%20musics/Beautiful%20Day%20-%20U2.mp3?updatedAt=1788671725478" },
+  { title: "Burn It Down — Daughter", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Chill%20musics/Daughter%20-%20Burn%20It%20Down.mp3" },
+  { title: "Seaside — The Kooks", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Chill%20musics/The%20Kooks%20-%20Seaside%20-%20TheKooksVEVO.mp3" },
+  { title: "Breezy — Nobuo Uematsu", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Chill%20musics/Breezy%20-%20Nobuo%20Uematsu.mp3" },
+  { title: "Obstacles — Syd Matters", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Chill%20musics/Syd%20Matters%20-%20Obstacles%20-%20Syd%20matters.mp3" },
+  { title: "Mountains — Message To Bears", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Chill%20musics/Message%20To%20Bears%20-%20Mountains%20(official%20video)%20-%20Message%20To%20Bears.mp3" },
+  { title: "Flaws — Daughter", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Chill%20musics/Flaws%20-%20Daughter.mp3" },
+  { title: "Through The Cellar Door — Lanterns On The Lake", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Chill%20musics/Lanterns%20On%20The%20Lake%20-%20Through%20The%20Cellar%20Door%20-%20Lanterns%20On%20The%20Lake.mp3" },
+  { title: "BAD — U2", src: "https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/MUSICS/Chill%20musics/BAD%20-%20U2%20-%20DUBBINCLUBBIN.mp3" },
 ];
 
 function shuffleIndices(n) {
@@ -745,6 +752,13 @@ function initMusicPlayer() {
     if (orderPos === 0) order = shuffleIndices(playlist.length);
     setTrack(order[orderPos], { autoplay: true });
   });
+  // Skip broken / non-audio files automatically
+  audio.addEventListener("error", () => {
+    console.warn("[Bova Player] Track failed, skipping:", playlist[index] && playlist[index].title);
+    orderPos = (orderPos + 1) % order.length;
+    if (orderPos === 0) order = shuffleIndices(playlist.length);
+    setTrack(order[orderPos], { autoplay: !audio.paused || playBtn.textContent === "⏸" });
+  });
 
   // Prompt after boot (home) or show player on other pages
   const prompt = document.createElement("div");
@@ -857,8 +871,168 @@ function initMusicPlayer() {
 
   // Keep active style while interacting
   root.addEventListener("pointerdown", () => root.classList.add("is-active"));
+
+  // Mobile: start compact (mini), expand on interaction, collapse after idle
+  const isNarrow = () => window.matchMedia("(max-width: 520px)").matches;
+  let miniTimer = null;
+  function enterMini() {
+    if (!isNarrow()) {
+      root.classList.remove("is-mini");
+      return;
+    }
+    root.classList.add("is-mini");
+  }
+  function expandPlayer() {
+    root.classList.remove("is-mini");
+    root.classList.add("is-active");
+    if (miniTimer) clearTimeout(miniTimer);
+    miniTimer = setTimeout(enterMini, 5000);
+  }
+  if (isNarrow()) {
+    root.classList.add("is-mini");
+  }
+  root.addEventListener("pointerdown", expandPlayer);
+  window.addEventListener("resize", () => {
+    if (!isNarrow()) root.classList.remove("is-mini");
+    else if (!root.matches(":hover, :focus-within")) enterMini();
+  });
 }
 
+
+// ===== LIGHTBOX GALLERY VIEWER =====
+function initLightbox() {
+  const selectors = "a.g-item, a.meeting-card, a.meetup-pic-card";
+  const links = Array.from(document.querySelectorAll(selectors)).filter((a) => {
+    const href = a.getAttribute("href") || "";
+    return /\.(jpe?g|png|webp|gif|avif)(\?|$)/i.test(href) || /imagekit\.io|imgur\.com/i.test(href);
+  });
+  if (!links.length) return;
+
+  const items = links.map((a) => {
+    const thumbImg = a.querySelector("img");
+    return {
+      src: a.getAttribute("href"),
+      thumb: (thumbImg && thumbImg.getAttribute("src")) || a.getAttribute("href"),
+      alt: (thumbImg && thumbImg.alt) || "Photo",
+    };
+  });
+
+  const overlay = document.createElement("div");
+  overlay.className = "bova-lightbox";
+  overlay.id = "bovaLightbox";
+  overlay.innerHTML = `
+    <button type="button" class="bova-lightbox-close" id="lbClose" aria-label="Close">✕</button>
+    <button type="button" class="bova-lightbox-prev" id="lbPrev" aria-label="Previous">‹</button>
+    <div class="bova-lightbox-inner">
+      <img class="bova-lightbox-img" id="lbImg" alt="" />
+    </div>
+    <button type="button" class="bova-lightbox-next" id="lbNext" aria-label="Next">›</button>
+    <div class="bova-lightbox-counter" id="lbCounter"></div>
+    <div class="bova-lightbox-filmstrip" id="lbStrip" role="list"></div>
+  `;
+  document.body.appendChild(overlay);
+
+  const imgEl = document.getElementById("lbImg");
+  const counterEl = document.getElementById("lbCounter");
+  const stripEl = document.getElementById("lbStrip");
+  let current = 0;
+
+  // Build filmstrip thumbnails once
+  items.forEach((item, i) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "bova-lightbox-thumb";
+    btn.setAttribute("role", "listitem");
+    btn.setAttribute("aria-label", "Photo " + (i + 1));
+    btn.innerHTML = `<img src="${item.thumb}" alt="" loading="lazy" />`;
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      show(i);
+    });
+    stripEl.appendChild(btn);
+  });
+
+  function show(i) {
+    current = ((i % items.length) + items.length) % items.length;
+    const item = items[current];
+    imgEl.src = item.src;
+    imgEl.alt = item.alt;
+    counterEl.textContent = (current + 1) + " / " + items.length;
+
+    const thumbs = stripEl.querySelectorAll(".bova-lightbox-thumb");
+    thumbs.forEach((t, idx) => {
+      t.classList.toggle("is-active", idx === current);
+    });
+    const active = thumbs[current];
+    if (active && typeof active.scrollIntoView === "function") {
+      active.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    }
+  }
+
+  function open(i) {
+    show(i);
+    overlay.classList.add("is-open");
+    document.body.classList.add("lightbox-open");
+  }
+
+  function close() {
+    overlay.classList.remove("is-open");
+    document.body.classList.remove("lightbox-open");
+  }
+
+  links.forEach((a, i) => {
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      open(i);
+    });
+  });
+
+  document.getElementById("lbClose").addEventListener("click", close);
+  document.getElementById("lbPrev").addEventListener("click", (e) => {
+    e.stopPropagation();
+    show(current - 1);
+  });
+  document.getElementById("lbNext").addEventListener("click", (e) => {
+    e.stopPropagation();
+    show(current + 1);
+  });
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) close();
+  });
+  stripEl.addEventListener("click", (e) => e.stopPropagation());
+  document.addEventListener("keydown", (e) => {
+    if (!overlay.classList.contains("is-open")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") show(current - 1);
+    if (e.key === "ArrowRight") show(current + 1);
+  });
+}
+
+
+// ===== GALLERY SKELETON LOADERS =====
+function initGallerySkeletons() {
+  const imgs = document.querySelectorAll(
+    ".g-item img, .meeting-card-inner img, .meetup-pic-card img"
+  );
+  if (!imgs.length) return;
+
+  imgs.forEach((img) => {
+    const shell = img.closest(".g-item, .meeting-card-inner, .meetup-pic-card");
+    if (shell) shell.classList.add("is-skeleton");
+
+    const done = () => {
+      img.classList.add("is-loaded");
+      if (shell) shell.classList.remove("is-skeleton");
+    };
+
+    if (img.complete && img.naturalWidth > 0) {
+      done();
+    } else {
+      img.addEventListener("load", done, { once: true });
+      img.addEventListener("error", done, { once: true });
+    }
+  });
+}
 
 // ===== INIT =====
 
@@ -875,4 +1049,13 @@ document.addEventListener('DOMContentLoaded', () => {
   addScanlines();
   initTiltCards();
   initParallax();
+  initLightbox();
+  initGallerySkeletons();
 });
+
+// PWA: register service worker (HTTPS or localhost required)
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(() => {});
+  });
+}
