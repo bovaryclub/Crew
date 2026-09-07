@@ -1,12 +1,17 @@
 /* Bovary Club Society — service worker
    Bump CACHE name on every deploy to force clients onto the new version. */
-const CACHE = "bova-shell-v3";
+const CACHE = "bova-shell-v4";
 const PRECACHE = [
   "./",
   "./index.html",
   "./styles.css",
   "./script.js",
-  "./manifest.webmanifest"
+  "./manifest.webmanifest",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png",
+  "./icons/icon-512-maskable.png",
+  "./icons/apple-touch-icon.png",
+  "./icons/favicon-32.png"
 ];
 
 self.addEventListener("install", (event) => {
