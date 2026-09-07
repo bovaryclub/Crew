@@ -151,7 +151,7 @@ img {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-shrink: 0;
 }
 
@@ -173,6 +173,64 @@ img {
   background: rgba(124, 58, 237, 0.3);
   border-color: var(--border-hover);
   box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);
+}
+
+/* Install App button — compact so nav links stay aligned */
+.btn-install-app {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  border-radius: 999px;
+  font-family: var(--font-display), Orbitron, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #05050a;
+  background: linear-gradient(135deg, #c4b5fd 0%, #22d3ee 100%);
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.22);
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.btn-install-app:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
+}
+
+.btn-install-app:active {
+  transform: translateY(0);
+}
+
+.btn-install-app svg {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+}
+
+.btn-install-app[hidden] {
+  display: none !important;
+}
+
+.btn-install-app-mobile {
+  width: 100%;
+  justify-content: center;
+  margin: 8px 0 4px;
+  padding: 12px 16px;
+  font-size: 12px;
+  gap: 8px;
+}
+
+.btn-install-app-mobile svg {
+  width: 16px;
+  height: 16px;
 }
 
 .menu-toggle {
@@ -1036,6 +1094,17 @@ img {
 
 /* ===== RESPONSIVE ===== */
 
+@media (max-width: 1280px) {
+  /* Keep header links tidy: icon-only install button */
+  .nav-actions .btn-install-app span {
+    display: none;
+  }
+  .nav-actions .btn-install-app {
+    padding: 8px 10px;
+    gap: 0;
+  }
+}
+
 @media (max-width: 1100px) {
   .nav-links {
     gap: 6px 12px;
@@ -1043,9 +1112,10 @@ img {
   .nav-links a {
     font-size: 10px;
     letter-spacing: 0.05em;
+    padding: 6px 3px;
   }
   .logo span {
-    font-size: 11px;
+    font-size: 12px;
   }
   .btn-discord {
     padding: 8px 12px;
@@ -1054,6 +1124,9 @@ img {
   .btn-discord svg {
     width: 16px;
     height: 16px;
+  }
+  .nav-actions {
+    gap: 6px;
   }
 }
 
@@ -1151,6 +1224,15 @@ img {
   }
   .btn-discord {
     font-size: 0;
+  }
+
+  /* Compact install button in top bar on small screens */
+  .nav-actions .btn-install-app span {
+    display: none;
+  }
+  .nav-actions .btn-install-app {
+    padding: 9px 12px;
+    gap: 0;
   }
 
 
@@ -7104,4 +7186,174 @@ body.lightbox-open .cursor-trail {
 .g-item-placeholder:hover {
   transform: none;
   border-color: rgba(126, 200, 255, 0.4);
+}
+
+/* ===== PWA Install Banner ===== */
+.pwa-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99990;
+  padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px));
+  pointer-events: none;
+  transform: translateY(110%);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+  opacity: 0;
+}
+
+.pwa-banner-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pwa-banner-inner {
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: linear-gradient(145deg, rgba(18, 18, 32, 0.97), rgba(10, 10, 20, 0.98));
+  border: 1px solid rgba(124, 58, 237, 0.45);
+  border-radius: 16px;
+  box-shadow:
+    0 0 0 1px rgba(34, 211, 238, 0.08),
+    0 12px 40px rgba(0, 0, 0, 0.55),
+    0 0 28px rgba(124, 58, 237, 0.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.pwa-banner-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  box-shadow: 0 0 12px rgba(124, 58, 237, 0.35);
+}
+
+.pwa-banner-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pwa-banner-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pwa-banner-text strong {
+  font-family: var(--font-display), Orbitron, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #e8edf5;
+}
+
+.pwa-banner-text span {
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--text-muted);
+}
+
+.pwa-banner-text span b {
+  color: var(--purple-bright);
+  font-weight: 600;
+}
+
+.pwa-ios-share {
+  display: inline-block;
+  font-size: 13px;
+}
+
+.pwa-banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.pwa-btn-install {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-display), Orbitron, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: #05050a;
+  background: linear-gradient(135deg, #c4b5fd, #22d3ee);
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.4);
+  transition: transform 0.15s ease, filter 0.15s ease, opacity 0.15s ease;
+}
+
+.pwa-btn-install:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.pwa-btn-install:active {
+  transform: translateY(0);
+}
+
+.pwa-btn-install:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+.pwa-btn-dismiss {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.pwa-btn-dismiss:hover {
+  color: #fff;
+  background: rgba(244, 114, 182, 0.12);
+  border-color: rgba(244, 114, 182, 0.35);
+}
+
+@media (max-width: 420px) {
+  .pwa-banner-inner {
+    padding: 11px 12px;
+    gap: 10px;
+  }
+  .pwa-banner-text strong {
+    font-size: 12px;
+  }
+  .pwa-banner-text span {
+    font-size: 11px;
+  }
+  .pwa-btn-install {
+    padding: 9px 11px;
+    font-size: 10px;
+  }
+}
+
+/* Hide install UI when already running as installed app */
+@media (display-mode: standalone), (display-mode: fullscreen) {
+  .pwa-banner,
+  .btn-install-app {
+    display: none !important;
+  }
 }

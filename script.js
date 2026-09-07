@@ -955,7 +955,7 @@ function initLightbox() {
       if (!item) return;
       const photoId = photoIdFromUrl(item.src);
 
-      // Já reagiu neste navegador → não deixa acumular
+      // Already reacted in this browser — prevent stacking
       if (hasReacted(photoId, r.id)) {
         btn.classList.add("is-already-reacted");
         setTimeout(() => btn.classList.remove("is-already-reacted"), 400);
@@ -1117,12 +1117,282 @@ document.addEventListener('DOMContentLoaded', () => {
   initGallerySkeletons();
 });
 
-// PWA: register service worker (HTTPS or localhost required)
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch(() => {});
+// ===== PWA: Install as App + Service Worker =====
+(function initPWA() {
+  const DISMISS_KEY = "bova_pwa_dismissed_at";
+  const DISMISS_DAYS = 14; // don't nag again for 2 weeks after dismiss
+
+  let deferredPrompt = null;
+
+  function isStandalone() {
+    return (
+      window.matchMedia("(display-mode: standalone)").matches ||
+      window.matchMedia("(display-mode: fullscreen)").matches ||
+      window.navigator.standalone === true
+    );
+  }
+
+  function isIOS() {
+    return /iphone|ipad|ipod/i.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  }
+
+  function wasDismissedRecently() {
+    try {
+      const raw = localStorage.getItem(DISMISS_KEY);
+      if (!raw) return false;
+      const ts = parseInt(raw, 10);
+      if (!ts) return false;
+      return Date.now() - ts < DISMISS_DAYS * 24 * 60 * 60 * 1000;
+    } catch {
+      return false;
+    }
+  }
+
+  function markDismissed() {
+    try {
+      localStorage.setItem(DISMISS_KEY, String(Date.now()));
+    } catch (_) {}
+  }
+
+  function removeBanner() {
+    const el = document.getElementById("pwa-install-banner");
+    if (el) el.remove();
+  }
+
+  function showBanner({ mode }) {
+    if (document.getElementById("pwa-install-banner")) return;
+    if (isStandalone() || wasDismissedRecently()) return;
+
+    const banner = document.createElement("div");
+    banner.id = "pwa-install-banner";
+    banner.className = "pwa-banner";
+    banner.setAttribute("role", "dialog");
+    banner.setAttribute("aria-label", "Install app");
+
+    if (mode === "android" || mode === "chrome") {
+      banner.innerHTML = `
+        <div class="pwa-banner-inner">
+          <div class="pwa-banner-icon" aria-hidden="true">
+            <img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/teste.png?tr=w-72,h-72" alt="" width="40" height="40" />
+          </div>
+          <div class="pwa-banner-text">
+            <strong>Install Bovary App</strong>
+            <span>Add to your home screen and use it like an app</span>
+          </div>
+          <div class="pwa-banner-actions">
+            <button type="button" class="pwa-btn-install" id="pwaInstallBtn">Install</button>
+            <button type="button" class="pwa-btn-dismiss" id="pwaDismissBtn" aria-label="Close">×</button>
+          </div>
+        </div>
+      `;
+    } else if (mode === "ios") {
+      banner.innerHTML = `
+        <div class="pwa-banner-inner pwa-banner-ios">
+          <div class="pwa-banner-icon" aria-hidden="true">
+            <img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/teste.png?tr=w-72,h-72" alt="" width="40" height="40" />
+          </div>
+          <div class="pwa-banner-text">
+            <strong>Install on iPhone / iPad</strong>
+            <span>Tap <b>Share</b> <span class="pwa-ios-share" aria-hidden="true">⬆️</span> then <b>Add to Home Screen</b></span>
+          </div>
+          <div class="pwa-banner-actions">
+            <button type="button" class="pwa-btn-dismiss" id="pwaDismissBtn" aria-label="Close">×</button>
+          </div>
+        </div>
+      `;
+    } else {
+      return;
+    }
+
+    document.body.appendChild(banner);
+    // small delay so CSS transition works
+    requestAnimationFrame(() => banner.classList.add("pwa-banner-visible"));
+
+    const dismiss = () => {
+      banner.classList.remove("pwa-banner-visible");
+      markDismissed();
+      setTimeout(removeBanner, 320);
+    };
+
+    const dismissBtn = document.getElementById("pwaDismissBtn");
+    if (dismissBtn) dismissBtn.addEventListener("click", dismiss);
+
+    const installBtn = document.getElementById("pwaInstallBtn");
+    if (installBtn && deferredPrompt) {
+      installBtn.addEventListener("click", async () => {
+        installBtn.disabled = true;
+        try {
+          deferredPrompt.prompt();
+          const choice = await deferredPrompt.userChoice;
+          deferredPrompt = null;
+          if (choice && choice.outcome === "accepted") {
+            removeBanner();
+          } else {
+            dismiss();
+          }
+        } catch (_) {
+          dismiss();
+        }
+      });
+    }
+  }
+
+  async function triggerInstall() {
+    if (isStandalone()) return;
+
+    // Chrome / Android / Edge: native prompt if available
+    if (deferredPrompt) {
+      try {
+        deferredPrompt.prompt();
+        const choice = await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        if (choice && choice.outcome === "accepted") {
+          removeBanner();
+          hideNavInstallButtons();
+        }
+      } catch (_) {}
+      return;
+    }
+
+    // iOS: show instructions banner (always allow when user taps the button)
+    if (isIOS()) {
+      removeBanner();
+      // temporarily clear dismiss so the banner shows when user asks
+      try { localStorage.removeItem(DISMISS_KEY); } catch (_) {}
+      showBanner({ mode: "ios" });
+      return;
+    }
+
+    // Desktop / other: try to show chrome banner if we ever get the event later,
+    // or explain that install is via browser menu
+    removeBanner();
+    const tip = document.createElement("div");
+    tip.id = "pwa-install-banner";
+    tip.className = "pwa-banner pwa-banner-visible";
+    tip.setAttribute("role", "dialog");
+    tip.innerHTML = `
+      <div class="pwa-banner-inner">
+        <div class="pwa-banner-icon" aria-hidden="true">
+          <img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/teste.png?tr=w-72,h-72" alt="" width="40" height="40" />
+        </div>
+        <div class="pwa-banner-text">
+          <strong>Install Bovary App</strong>
+          <span>Use the browser menu (⋮ or install icon) and choose <b>Install app</b> / <b>Add to Home Screen</b></span>
+        </div>
+        <div class="pwa-banner-actions">
+          <button type="button" class="pwa-btn-dismiss" id="pwaDismissBtn" aria-label="Close">×</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(tip);
+    const d = document.getElementById("pwaDismissBtn");
+    if (d) d.addEventListener("click", () => { tip.remove(); markDismissed(); });
+  }
+
+  function hideNavInstallButtons() {
+    document.querySelectorAll(".btn-install-app").forEach((btn) => {
+      btn.hidden = true;
+      btn.setAttribute("aria-hidden", "true");
+    });
+  }
+
+  function wireNavInstallButtons() {
+    if (isStandalone()) {
+      hideNavInstallButtons();
+      return;
+    }
+    document.querySelectorAll("#pwaInstallNavBtn, #pwaInstallNavBtnMobile, .btn-install-app").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        triggerInstall();
+        // close mobile menu if open
+        const menu = document.getElementById("mobileMenu");
+        if (menu) menu.classList.remove("open");
+      });
+    });
+  }
+
+  // Capture native install prompt (Chrome / Edge / Android)
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    // slight delay so page feels settled
+    setTimeout(() => showBanner({ mode: "chrome" }), 1800);
   });
-}
+
+  // After successful install
+  window.addEventListener("appinstalled", () => {
+    deferredPrompt = null;
+    removeBanner();
+    hideNavInstallButtons();
+    try { localStorage.removeItem(DISMISS_KEY); } catch (_) {}
+  });
+
+  // iOS: no beforeinstallprompt — show instructions after a bit
+  window.addEventListener("load", () => {
+    wireNavInstallButtons();
+    if (isStandalone()) {
+      hideNavInstallButtons();
+      return;
+    }
+    if (isIOS() && !wasDismissedRecently()) {
+      setTimeout(() => showBanner({ mode: "ios" }), 2500);
+    }
+  });
+
+  // Register service worker + force clients onto the latest version
+  if ("serviceWorker" in navigator) {
+    let refreshing = false;
+
+    // When a new SW takes control, reload once so the page uses fresh assets
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (refreshing) return;
+      refreshing = true;
+      window.location.reload();
+    });
+
+    // Message from SW after activate (backup path)
+    navigator.serviceWorker.addEventListener("message", (event) => {
+      if (event.data && event.data.type === "BOVA_SW_ACTIVATED") {
+        if (refreshing) return;
+        refreshing = true;
+        window.location.reload();
+      }
+    });
+
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("./sw.js?v=3")
+        .then((reg) => {
+          // Always ask the browser to check for a newer SW
+          try { reg.update(); } catch (_) {}
+
+          // Periodic check while the tab stays open (every 5 min)
+          setInterval(() => {
+            try { reg.update(); } catch (_) {}
+          }, 5 * 60 * 1000);
+
+          reg.addEventListener("updatefound", () => {
+            const worker = reg.installing;
+            if (!worker) return;
+            worker.addEventListener("statechange", () => {
+              // New worker installed while an older one still controls the page
+              if (worker.state === "installed" && navigator.serviceWorker.controller) {
+                worker.postMessage({ type: "SKIP_WAITING" });
+              }
+            });
+          });
+
+          // If a waiting worker is already sitting there, activate it now
+          if (reg.waiting) {
+            reg.waiting.postMessage({ type: "SKIP_WAITING" });
+          }
+        })
+        .catch(() => {});
+    });
+  }
+})();
 
 // ===== SUPABASE + PHOTO REACTIONS =====
 const SUPABASE_URL = "https://couewlfavidsxtbiwqdw.supabase.co";
@@ -1131,10 +1401,8 @@ const SUPABASE_ANON_KEY = "sb_publishable_VYWo7U9FJT9zxUGoo9PLsQ_ioaaTiTI";
 const REACTION_LIST = [
   { id: "heart",    emoji: "❤️", label: "Heart" },
   { id: "thumbsup", emoji: "👍", label: "Like" },
-  { id: "joy",      emoji: "😂", label: "Joy" },
   { id: "hug",      emoji: "🤗", label: "Hug" },
   { id: "teary",    emoji: "🥹", label: "Teary" },
-  { id: "fear",     emoji: "😨", label: "Fear" },
 ];
 
 /** localStorage key for reactions already given by this browser */
