@@ -899,7 +899,7 @@ function initMusicPlayer() {
 }
 
 
-// ===== LIGHTBOX GALLERY VIEWER =====
+// ===== LIGHTBOX GALLERY VIEWER (+ REACTIONS) =====
 function initLightbox() {
   const selectors = "a.g-item, a.meeting-card, a.meetup-pic-card";
   const links = Array.from(document.querySelectorAll(selectors)).filter((a) => {
@@ -928,6 +928,7 @@ function initLightbox() {
     </div>
     <button type="button" class="bova-lightbox-next" id="lbNext" aria-label="Next">›</button>
     <div class="bova-lightbox-counter" id="lbCounter"></div>
+    <div class="bova-lightbox-reactions" id="lbReactions" aria-label="Reactions"></div>
     <div class="bova-lightbox-filmstrip" id="lbStrip" role="list"></div>
   `;
   document.body.appendChild(overlay);
@@ -935,7 +936,48 @@ function initLightbox() {
   const imgEl = document.getElementById("lbImg");
   const counterEl = document.getElementById("lbCounter");
   const stripEl = document.getElementById("lbStrip");
+  const reactionsEl = document.getElementById("lbReactions");
   let current = 0;
+  let loadingReactions = false;
+
+  // Build reaction buttons once
+  REACTION_LIST.forEach((r) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "bova-reaction-btn";
+    btn.dataset.reaction = r.id;
+    btn.setAttribute("aria-label", r.label);
+    btn.innerHTML = `<span class="bova-reaction-emoji">${r.emoji}</span><span class="bova-reaction-count" data-count-for="${r.id}">0</span>`;
+    btn.addEventListener("click", async (e) => {
+      e.stopPropagation();
+      if (loadingReactions) return;
+      const item = items[current];
+      if (!item) return;
+      const photoId = photoIdFromUrl(item.src);
+
+      // Já reagiu neste navegador → não deixa acumular
+      if (hasReacted(photoId, r.id)) {
+        btn.classList.add("is-already-reacted");
+        setTimeout(() => btn.classList.remove("is-already-reacted"), 400);
+        return;
+      }
+
+      btn.classList.add("is-pending");
+      const newCount = await incrementReaction(photoId, r.id);
+      btn.classList.remove("is-pending");
+      if (newCount != null) {
+        markReacted(photoId, r.id);
+        const countEl = btn.querySelector(`[data-count-for="${r.id}"]`);
+        if (countEl) countEl.textContent = String(newCount);
+        btn.classList.add("is-reacted", "has-user-reacted");
+        setTimeout(() => btn.classList.remove("is-reacted"), 600);
+      }
+    });
+    reactionsEl.appendChild(btn);
+  });
+
+  // Prevent clicks on the bar from closing the lightbox
+  reactionsEl.addEventListener("click", (e) => e.stopPropagation());
 
   // Build filmstrip thumbnails once
   items.forEach((item, i) => {
@@ -952,6 +994,25 @@ function initLightbox() {
     stripEl.appendChild(btn);
   });
 
+  async function refreshReactionsForCurrent() {
+    const item = items[current];
+    if (!item) return;
+    const photoId = photoIdFromUrl(item.src);
+    loadingReactions = true;
+    reactionsEl.classList.add("is-loading");
+    const counts = await loadReactions(photoId);
+    REACTION_LIST.forEach((r) => {
+      const el = reactionsEl.querySelector(`[data-count-for="${r.id}"]`);
+      if (el) el.textContent = String(counts[r.id] || 0);
+      const btn = reactionsEl.querySelector(`[data-reaction="${r.id}"]`);
+      if (btn) {
+        btn.classList.toggle("has-user-reacted", hasReacted(photoId, r.id));
+      }
+    });
+    reactionsEl.classList.remove("is-loading");
+    loadingReactions = false;
+  }
+
   function show(i) {
     current = ((i % items.length) + items.length) % items.length;
     const item = items[current];
@@ -967,6 +1028,9 @@ function initLightbox() {
     if (active && typeof active.scrollIntoView === "function") {
       active.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
     }
+
+    // Load reaction counts for this photo
+    refreshReactionsForCurrent();
   }
 
   function open(i) {
@@ -1058,4 +1122,113 @@ if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./sw.js").catch(() => {});
   });
+}
+
+// ===== SUPABASE + PHOTO REACTIONS =====
+const SUPABASE_URL = "https://couewlfavidsxtbiwqdw.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_VYWo7U9FJT9zxUGoo9PLsQ_ioaaTiTI";
+
+const REACTION_LIST = [
+  { id: "heart",    emoji: "❤️", label: "Heart" },
+  { id: "thumbsup", emoji: "👍", label: "Like" },
+  { id: "joy",      emoji: "😂", label: "Joy" },
+  { id: "hug",      emoji: "🤗", label: "Hug" },
+  { id: "teary",    emoji: "🥹", label: "Teary" },
+  { id: "fear",     emoji: "😨", label: "Fear" },
+];
+
+/** localStorage key for reactions already given by this browser */
+const REACTED_STORAGE_KEY = "bova_reacted_photos";
+
+function getReactedMap() {
+  try {
+    const raw = localStorage.getItem(REACTED_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+function hasReacted(photoId, reactionId) {
+  const map = getReactedMap();
+  return !!(map[photoId] && map[photoId][reactionId]);
+}
+
+function markReacted(photoId, reactionId) {
+  try {
+    const map = getReactedMap();
+    if (!map[photoId]) map[photoId] = {};
+    map[photoId][reactionId] = true;
+    localStorage.setItem(REACTED_STORAGE_KEY, JSON.stringify(map));
+  } catch (e) {
+    console.warn("[Bova] could not save reacted state", e);
+  }
+}
+
+let supabaseClient = null;
+
+function getSupabase() {
+  if (supabaseClient) return supabaseClient;
+  if (typeof supabase === "undefined" || !supabase.createClient) {
+    console.warn("[Bova] Supabase SDK not loaded");
+    return null;
+  }
+  supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  return supabaseClient;
+}
+
+/** Stable photo_id from image URL (path without domain/query, max 500 chars) */
+function photoIdFromUrl(url) {
+  try {
+    const u = new URL(url);
+    // Use full pathname so different folders don't collide (e.g. /setembro/1.png vs /fenrir/1.png)
+    let path = decodeURIComponent(u.pathname).replace(/^\/+/, "");
+    path = path.split("?")[0];
+    if (!path) path = url;
+    return path.slice(0, 500);
+  } catch {
+    return String(url).slice(0, 500);
+  }
+}
+
+async function loadReactions(photoId) {
+  const sb = getSupabase();
+  if (!sb) return {};
+  try {
+    const { data, error } = await sb
+      .from("photo_reactions")
+      .select("reaction, count")
+      .eq("photo_id", photoId);
+    if (error) {
+      console.warn("[Bova] loadReactions error", error);
+      return {};
+    }
+    const map = {};
+    (data || []).forEach((row) => {
+      map[row.reaction] = Number(row.count) || 0;
+    });
+    return map;
+  } catch (e) {
+    console.warn("[Bova] loadReactions exception", e);
+    return {};
+  }
+}
+
+async function incrementReaction(photoId, reactionId) {
+  const sb = getSupabase();
+  if (!sb) return null;
+  try {
+    const { data, error } = await sb.rpc("increment_photo_reaction", {
+      p_id: photoId,
+      p_reaction: reactionId,
+    });
+    if (error) {
+      console.warn("[Bova] increment error", error);
+      return null;
+    }
+    return data; // new count
+  } catch (e) {
+    console.warn("[Bova] increment exception", e);
+    return null;
+  }
 }
