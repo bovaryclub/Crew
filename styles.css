@@ -193,6 +193,7 @@ img {
   background: linear-gradient(135deg, #c4b5fd 0%, #22d3ee 100%);
   box-shadow: 0 0 14px rgba(34, 211, 238, 0.22);
   cursor: pointer;
+  text-decoration: none;
   transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.2s ease;
   white-space: nowrap;
   flex-shrink: 0;
@@ -7285,6 +7286,7 @@ body.lightbox-open .cursor-trail {
   appearance: none;
   border: none;
   cursor: pointer;
+  text-decoration: none;
   font-family: var(--font-display), Orbitron, sans-serif;
   font-size: 11px;
   font-weight: 700;
