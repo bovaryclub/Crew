@@ -180,14 +180,14 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 8px 12px;
+  gap: 5px;
+  padding: 8px 10px;
   border: 1px solid rgba(34, 211, 238, 0.35);
   border-radius: 999px;
   font-family: var(--font-display), Orbitron, sans-serif;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   color: #05050a;
   background: linear-gradient(135deg, #c4b5fd 0%, #22d3ee 100%);

@@ -1181,7 +1181,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <span>App verified by MediaFire®.</span>
           </div>
           <div class="pwa-banner-actions">
-            <a href="https://www.mediafire.com/file/4sqyks1rwk904x7/BovaryNow.apk/file" target="_blank" rel="noopener noreferrer" class="pwa-btn-install">Download App</a>
+            <a href="https://www.mediafire.com/file/lvv4tvhmq5j8cvl/BovaryNow.apk/file" target="_blank" rel="noopener noreferrer" class="pwa-btn-install">Download App</a>
             <button type="button" class="pwa-btn-dismiss" id="pwaDismissBtn" aria-label="Close">×</button>
           </div>
         </div>
@@ -1197,7 +1197,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <span>App verified by MediaFire®.</span>
           </div>
           <div class="pwa-banner-actions">
-            <a href="https://www.mediafire.com/file/4sqyks1rwk904x7/BovaryNow.apk/file" target="_blank" rel="noopener noreferrer" class="pwa-btn-install">Download App</a>
+            <a href="https://www.mediafire.com/file/lvv4tvhmq5j8cvl/BovaryNow.apk/file" target="_blank" rel="noopener noreferrer" class="pwa-btn-install">Download App</a>
             <button type="button" class="pwa-btn-dismiss" id="pwaDismissBtn" aria-label="Close">×</button>
           </div>
         </div>
@@ -1262,7 +1262,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <span>App verified by MediaFire®.</span>
         </div>
         <div class="pwa-banner-actions">
-          <a href="https://www.mediafire.com/file/4sqyks1rwk904x7/BovaryNow.apk/file" target="_blank" rel="noopener noreferrer" class="pwa-btn-install">Download App</a>
+          <a href="https://www.mediafire.com/file/lvv4tvhmq5j8cvl/BovaryNow.apk/file" target="_blank" rel="noopener noreferrer" class="pwa-btn-install">Download App</a>
           <button type="button" class="pwa-btn-dismiss" id="pwaDismissBtn" aria-label="Close">×</button>
         </div>
       </div>
