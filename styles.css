@@ -1096,13 +1096,15 @@ img {
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 1280px) {
-  /* Keep header links tidy: icon-only install button */
-  .nav-actions .btn-install-app span {
-    display: none;
-  }
+  /* Keep install button text visible, slightly tighter */
   .nav-actions .btn-install-app {
-    padding: 8px 10px;
-    gap: 0;
+    padding: 7px 9px;
+    gap: 4px;
+    font-size: 8px;
+  }
+  .nav-actions .btn-install-app svg {
+    width: 12px;
+    height: 12px;
   }
 }
 
@@ -1227,13 +1229,15 @@ img {
     font-size: 0;
   }
 
-  /* Compact install button in top bar on small screens */
-  .nav-actions .btn-install-app span {
-    display: none;
-  }
+  /* Keep install button text visible on small screens */
   .nav-actions .btn-install-app {
-    padding: 9px 12px;
-    gap: 0;
+    padding: 8px 10px;
+    gap: 4px;
+    font-size: 8px;
+  }
+  .nav-actions .btn-install-app svg {
+    width: 12px;
+    height: 12px;
   }
 
 

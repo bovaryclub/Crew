@@ -1177,11 +1177,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/teste.png?tr=w-72,h-72" alt="" width="40" height="40" />
           </div>
           <div class="pwa-banner-text">
-            <strong>Install BovaryNow App</strong>
-            <span>App verified by MediaFire®.</span>
+            <strong>Bovary App Mobile</strong>
+            <span>Download the official APK (MediaFire®)</span>
           </div>
           <div class="pwa-banner-actions">
-            <a href="https://www.mediafire.com/file/lvv4tvhmq5j8cvl/BovaryNow.apk/file" target="_blank" rel="noopener noreferrer" class="pwa-btn-install">Download App</a>
+            <a href="https://www.mediafire.com/file/lvv4tvhmq5j8cvl/BovaryNow.apk/file" target="_blank" rel="noopener noreferrer" class="pwa-btn-install">Download APK</a>
             <button type="button" class="pwa-btn-dismiss" id="pwaDismissBtn" aria-label="Close">×</button>
           </div>
         </div>
@@ -1193,11 +1193,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/teste.png?tr=w-72,h-72" alt="" width="40" height="40" />
           </div>
           <div class="pwa-banner-text">
-            <strong>Install BovaryNow App</strong>
-            <span>App verified by MediaFire®.</span>
+            <strong>Bovary App Mobile</strong>
+            <span>Download the official APK (MediaFire®)</span>
           </div>
           <div class="pwa-banner-actions">
-            <a href="https://www.mediafire.com/file/lvv4tvhmq5j8cvl/BovaryNow.apk/file" target="_blank" rel="noopener noreferrer" class="pwa-btn-install">Download App</a>
+            <a href="https://www.mediafire.com/file/lvv4tvhmq5j8cvl/BovaryNow.apk/file" target="_blank" rel="noopener noreferrer" class="pwa-btn-install">Download APK</a>
             <button type="button" class="pwa-btn-dismiss" id="pwaDismissBtn" aria-label="Close">×</button>
           </div>
         </div>
@@ -1223,53 +1223,9 @@ document.addEventListener('DOMContentLoaded', () => {
   async function triggerInstall() {
     if (isStandalone()) return;
 
-    // Chrome / Android / Edge: native prompt if available
-    if (deferredPrompt) {
-      try {
-        deferredPrompt.prompt();
-        const choice = await deferredPrompt.userChoice;
-        deferredPrompt = null;
-        if (choice && choice.outcome === "accepted") {
-          removeBanner();
-          hideNavInstallButtons();
-        }
-      } catch (_) {}
-      return;
-    }
-
-    // iOS: show instructions banner (always allow when user taps the button)
-    if (isIOS()) {
-      removeBanner();
-      // temporarily clear dismiss so the banner shows when user asks
-      try { localStorage.removeItem(DISMISS_KEY); } catch (_) {}
-      showBanner({ mode: "ios" });
-      return;
-    }
-
-    // Desktop / other browsers: show the BovaryNow APK link.
-    removeBanner();
-    const tip = document.createElement("div");
-    tip.id = "pwa-install-banner";
-    tip.className = "pwa-banner pwa-banner-visible";
-    tip.setAttribute("role", "dialog");
-    tip.innerHTML = `
-      <div class="pwa-banner-inner">
-        <div class="pwa-banner-icon" aria-hidden="true">
-          <img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/teste.png?tr=w-72,h-72" alt="" width="40" height="40" />
-        </div>
-        <div class="pwa-banner-text">
-          <strong>Install BovaryNow App</strong>
-          <span>App verified by MediaFire®.</span>
-        </div>
-        <div class="pwa-banner-actions">
-          <a href="https://www.mediafire.com/file/lvv4tvhmq5j8cvl/BovaryNow.apk/file" target="_blank" rel="noopener noreferrer" class="pwa-btn-install">Download App</a>
-          <button type="button" class="pwa-btn-dismiss" id="pwaDismissBtn" aria-label="Close">×</button>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(tip);
-    const d = document.getElementById("pwaDismissBtn");
-    if (d) d.addEventListener("click", () => { tip.remove(); markDismissed(); });
+    // Always open the real APK download — never the browser "Add to Home Screen" shortcut.
+    const APK_URL = "https://www.mediafire.com/file/lvv4tvhmq5j8cvl/BovaryNow.apk/file";
+    window.open(APK_URL, "_blank", "noopener,noreferrer");
   }
 
   function hideNavInstallButtons() {
@@ -1284,15 +1240,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Keep them as regular links so the MediaFire page opens normally.
   }
 
-  // Capture native install prompt (Chrome / Edge / Android)
+  // Capture & block native "Add to Home Screen" prompt (Chrome / Edge / Android).
+  // We only want the real APK download, never a site shortcut.
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
-    deferredPrompt = e;
+    deferredPrompt = null; // never use native install
     // slight delay so page feels settled
     setTimeout(() => showBanner({ mode: "chrome" }), 1800);
   });
 
-  // After successful install
+  // After successful install (if user still somehow installs PWA)
   window.addEventListener("appinstalled", () => {
     deferredPrompt = null;
     removeBanner();
