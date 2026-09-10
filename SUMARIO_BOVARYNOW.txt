@@ -83,3 +83,15 @@ UPDATE v11 — HOME PHONE MATCH
 - Added the same session-active layout, current-session banner, meet image gallery, COMMUNITY NETWORK panel, GTA Legacy emblem and FiveM/community emblem.
 - Added responsive sizing so the richer phone content remains readable on tablet/mobile layouts.
 - Existing v10 SEE THE APP image correction and all previous BovaryNow changes are preserved.
+
+
+==================== UPDATE v12 ====================
+BovaryNow mobile responsive rebuild.
+- Reworked bovarynow.html mobile flow to prevent elements escaping the viewport.
+- Hero phone, letreiro, hero copy and Android visual now use normal mobile flow.
+- Phone/community content scales down safely at 900/520/380px.
+- APP INTERFACE mockups no longer rely on a fixed clipped height on mobile.
+- COUNTDOWN phone no longer uses transform scaling that caused layout misalignment.
+- REAL-TIME SYSTEM changes to a readable one-column flow on mobile.
+- History, Beta and CTA sections receive mobile-safe widths and typography.
+- Desktop layout is intentionally preserved; changes are inside mobile media queries.

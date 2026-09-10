@@ -8159,3 +8159,239 @@ body{font-size:16px}
   .bovarynow-home-phone.bn-home-full-phone .bn-phone-emblem img{width:26px;height:26px}
   .bovarynow-home-phone.bn-home-full-phone .bn-phone-emblem b{font-size:5.5px}
 }
+
+/* ============================================================
+   BOVARYNOW v12 — MOBILE REBUILD / RESPONSIVE CLEANUP
+   The desktop composition is preserved. Mobile gets its own flow:
+   phone -> sign -> hero copy -> Android visual -> sections.
+   ============================================================ */
+@media (max-width:900px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden}
+  .bovarynow-page{overflow-x:hidden}
+
+  /* HERO: remove desktop sizing assumptions that caused elements to escape the viewport. */
+  .bovarynow-page .bovarynow-hero-v2{
+    min-height:0;
+    height:auto;
+    padding:86px 14px 54px;
+    overflow:hidden;
+  }
+  .bovarynow-page .bovarynow-hero-v2 .bn-hero-device-first{
+    width:100%;
+    max-width:100%;
+    margin:0;
+    display:block;
+  }
+  .bovarynow-page .bovarynow-hero-v2 .bn-device-wrap{
+    width:100%;
+    min-height:0;
+    height:auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    gap:0;
+    padding:0;
+    margin:0;
+  }
+  .bovarynow-page .bovarynow-hero-v2 .bn-device-wrap .bn-phone{
+    width:min(230px,72vw);
+    height:auto;
+    aspect-ratio:1 / 2;
+    min-height:0;
+    margin:0 auto;
+    padding:8px;
+    border-radius:34px;
+    flex:none;
+  }
+  .bovarynow-page .bovarynow-hero-v2 .bn-phone .phone-screen{
+    width:100%;
+    height:100%;
+    min-height:0;
+    overflow:hidden;
+    border-radius:27px;
+    padding:20px 11px 11px;
+  }
+  .bovarynow-page .bovarynow-hero-v2 .bn-phone .phone-speaker{top:11px;width:52px;height:5px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-app-top{font-size:11px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-app-top small{font-size:8px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-app-status{margin:15px 0 9px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-status-live{font-size:9px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-status-pill{font-size:8px;padding:4px 6px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-ui-banner{height:104px;margin:-1px -1px 8px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-ui-banner-label{left:8px;bottom:8px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-ui-banner-label small{font-size:7px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-ui-banner-label strong{font-size:12px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-ui-count{font-size:19px;margin:7px 0}
+  .bovarynow-page .bovarynow-hero-v2 .bn-ui-grid{gap:5px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-ui-meta{padding:7px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-ui-meta small{font-size:6.5px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-ui-meta b{font-size:8px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-ui-gallery{gap:5px;margin-top:8px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-ui-gallery img{height:40px;border-radius:7px}
+
+  /* Community block stays inside the phone and scales with it. */
+  .bovarynow-page .bn-phone-extra{
+    margin-top:8px;
+    padding:6px 6px 5px;
+    border-radius:9px;
+  }
+  .bovarynow-page .bn-phone-extra-head{font-size:6px;margin-bottom:5px;letter-spacing:.7px}
+  .bovarynow-page .bn-phone-extra-head small{font-size:5px}
+  .bovarynow-page .bn-phone-emblems{gap:4px}
+  .bovarynow-page .bn-phone-emblem{gap:3px;padding:3px;border-radius:6px}
+  .bovarynow-page .bn-phone-emblem img{width:25px;height:25px;border-radius:4px}
+  .bovarynow-page .bn-phone-emblem div{gap:2px}
+  .bovarynow-page .bn-phone-emblem small{font-size:4.5px}
+  .bovarynow-page .bn-phone-emblem b{font-size:5.5px}
+  .bovarynow-page .bn-phone-info{gap:2px;margin-top:4px;padding-top:4px;font-size:4.5px;letter-spacing:.15px}
+
+  /* Letreiro: part of the normal mobile flow, never absolute or clipped. */
+  .bovarynow-page .bn-wall-sign{
+    position:relative;
+    inset:auto;
+    width:min(470px,88vw);
+    max-width:100%;
+    height:auto;
+    margin:18px auto 10px;
+    transform:none;
+    z-index:2;
+  }
+  .bovarynow-page .bn-wall-sign img{width:100%;height:auto;display:block}
+
+  /* Hero copy is a normal mobile block. */
+  .bovarynow-page .bovarynow-hero-v2 .bn-hero-lower{
+    width:100%;
+    max-width:620px;
+    margin:20px auto 0;
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+    align-items:stretch;
+    text-align:center;
+  }
+  .bovarynow-page .bovarynow-hero-v2 .bn-hero-copy{width:100%;max-width:none}
+  .bovarynow-page .bovarynow-hero-v2 .bn-overline{font-size:9px;padding:7px 10px;max-width:100%;white-space:normal;justify-content:center}
+  .bovarynow-page .bovarynow-hero-v2 .bn-hero-copy h1{
+    font-size:clamp(42px,13vw,66px);
+    line-height:.95;
+    letter-spacing:-1px;
+    margin:16px 0 14px;
+  }
+  .bovarynow-page .bovarynow-hero-v2 .bn-hero-copy>p{
+    font-size:15px;
+    line-height:1.65;
+    margin:0 auto 20px;
+    max-width:560px;
+  }
+  .bovarynow-page .bovarynow-hero-v2 .bn-hero-actions{justify-content:center;width:100%}
+  .bovarynow-page .bovarynow-hero-v2 .bn-note{font-size:9px;line-height:1.5}
+  .bovarynow-page .bn-android-visual{width:100%;min-height:145px;overflow:visible}
+  .bovarynow-page .bn-android-visual img{width:min(180px,55vw);max-height:185px}
+
+  /* Feature and interface sections become true single-column mobile layouts. */
+  .bovarynow-page .bn-section{padding:58px 14px}
+  .bovarynow-page .bn-section-head{width:100%;max-width:620px;margin:0 auto 30px}
+  .bovarynow-page .bn-section-head h2{font-size:clamp(28px,9vw,42px);line-height:1.08;overflow-wrap:anywhere}
+  .bovarynow-page .bn-section-head p{font-size:15px;line-height:1.7}
+  .bovarynow-page .bn-feature-grid,
+  .bovarynow-page .bn-interface-grid,
+  .bovarynow-page .bn-history,
+  .bovarynow-page .bn-visual-strip{grid-template-columns:1fr;max-width:620px;gap:14px}
+  .bovarynow-page .bn-feature{padding:20px;border-radius:16px}
+
+  /* Interface mockups: no fixed 350px crop on small screens. */
+  .bovarynow-page .bn-screen-card{width:100%;padding:8px;border-radius:16px;transform:none !important}
+  .bovarynow-page .bn-screen{
+    width:100%;
+    height:auto;
+    min-height:370px;
+    border-radius:12px;
+    padding:13px;
+    overflow:hidden;
+  }
+  .bovarynow-page .bn-screen .bn-ui-banner{height:105px}
+  .bovarynow-page .bn-screen .bn-ui-gallery img{height:44px}
+  .bovarynow-page .bn-screen-title{font-size:11px;margin:12px 3px 5px}
+  .bovarynow-page .bn-screen-desc{font-size:14px;line-height:1.65;margin:0 3px}
+
+  /* Countdown: remove transform-scaling from layout and use a real-sized device. */
+  .bovarynow-page .bn-countdown-stage{
+    width:100%;
+    max-width:620px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+    align-items:center;
+  }
+  .bovarynow-page .bn-count-copy{width:100%;text-align:center;order:2}
+  .bovarynow-page .bn-count-copy h3{font-size:28px;line-height:1.1}
+  .bovarynow-page .bn-count-copy p{font-size:15px;line-height:1.7}
+  .bovarynow-page .bn-count-phone{width:100%;order:1;display:flex;justify-content:center}
+  .bovarynow-page .bn-count-phone .bn-phone{
+    width:min(230px,72vw);
+    height:auto;
+    aspect-ratio:1 / 2;
+    transform:none !important;
+    margin:0;
+  }
+  .bovarynow-page .bn-count-phone .phone-screen{padding:20px 11px 11px}
+
+  /* System flow: one node per row is much easier to read than squeezed columns. */
+  .bovarynow-page .bn-architecture{
+    width:100%;
+    max-width:520px;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  .bovarynow-page .bn-arch-node{padding:16px 14px;border-radius:10px}
+  .bovarynow-page .bn-arch-node:not(:last-child):after{display:block;content:"↓";right:auto;top:auto;bottom:-16px;left:50%;transform:translateX(-50%);padding:0 5px;background:#07070e}
+  .bovarynow-page .bn-architecture-note{font-size:14px;line-height:1.7}
+
+  /* History and beta stay within the viewport. */
+  .bovarynow-page .bn-history-card{width:100%}
+  .bovarynow-page .bn-history-img{height:180px}
+  .bovarynow-page .bn-history-body{padding:15px}
+  .bovarynow-page .bn-history-body h3{font-size:15px}
+  .bovarynow-page .bn-history-body p{font-size:14px;line-height:1.65}
+  .bovarynow-page .bn-beta{width:100%;padding:20px;border-radius:16px}
+  .bovarynow-page .bn-beta-top{gap:10px}
+  .bovarynow-page .bn-beta h2{font-size:22px;line-height:1.2}
+  .bovarynow-page .bn-beta p,.bovarynow-page .bn-beta li{font-size:14px;line-height:1.65}
+  .bovarynow-page .bn-beta ul{grid-template-columns:1fr}
+  .bovarynow-page .bn-cta{padding-bottom:70px}
+  .bovarynow-page .bn-cta h2{font-size:clamp(27px,9vw,40px)}
+  .bovarynow-page .bn-cta p{font-size:14px;line-height:1.6}
+}
+
+@media (max-width:520px){
+  .bovarynow-page .bovarynow-hero-v2{padding:78px 10px 46px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-device-wrap .bn-phone,
+  .bovarynow-page .bn-count-phone .bn-phone{width:min(210px,76vw)}
+  .bovarynow-page .bovarynow-hero-v2 .bn-phone .phone-screen,
+  .bovarynow-page .bn-count-phone .phone-screen{padding:18px 9px 9px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-ui-banner{height:96px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-ui-gallery img{height:37px}
+  .bovarynow-page .bn-phone-extra{margin-top:7px}
+  .bovarynow-page .bn-wall-sign{width:92vw;margin:16px auto 8px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-hero-lower{margin-top:18px;gap:20px}
+  .bovarynow-page .bovarynow-hero-v2 .bn-hero-copy h1{font-size:clamp(38px,13vw,56px)}
+  .bovarynow-page .bovarynow-hero-v2 .bn-hero-copy>p{font-size:14px}
+  .bovarynow-page .bn-section{padding:52px 12px}
+  .bovarynow-page .bn-screen{min-height:350px;padding:11px}
+  .bovarynow-page .bn-screen .bn-ui-banner{height:96px}
+  .bovarynow-page .bn-screen .bn-ui-gallery img{height:40px}
+  .bovarynow-page .bn-screen-desc{font-size:13px}
+  .bovarynow-page .bn-history-img{height:155px}
+}
+
+@media (max-width:380px){
+  .bovarynow-page .bovarynow-hero-v2 .bn-device-wrap .bn-phone,
+  .bovarynow-page .bn-count-phone .bn-phone{width:195px}
+  .bovarynow-page .bn-phone-extra-head{font-size:5.5px}
+  .bovarynow-page .bn-phone-emblem img{width:22px;height:22px}
+  .bovarynow-page .bn-phone-emblem b{font-size:5px}
+  .bovarynow-page .bn-phone-info{font-size:4px}
+}
