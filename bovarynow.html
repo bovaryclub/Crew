@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; media-src 'self' https://ik.imagekit.io https://*.imagekit.io; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://i.imgur.com https://ik.imagekit.io https://*.imagekit.io; connect-src 'self' https://*.supabase.co wss://*.supabase.co;">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BovaryNow | Official Community App</title>
+<meta name="description" content="BovaryNow — the official mobile companion for Bovary Club Society. See current sessions, upcoming meets, countdowns and event history.">
+<meta name="theme-color" content="#05050a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=9">
+</head>
+<body class="bovarynow-page">
+<div class="bg-grid"></div><div class="bg-glow"></div><div class="bn-page-wallpaper" aria-hidden="true"></div>
+<header class="navbar">
+ <div class="nav-inner">
+  <a href="index.html" class="logo"><div class="logo-icon logo-icon-img"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/Image_12_de_ago._de_2026__22_15_27-removebg-preview.png" alt="Bovary" width="36" height="36"></div><span>BOVARY</span></a>
+  <nav class="nav-links">
+   <a href="index.html">HOME</a><a href="#interface">APP INTERFACE</a><a href="#countdown">COUNTDOWN</a><a href="#system">SYSTEM</a><a href="#history">HISTORY</a><a href="#beta">BETA</a>
+  </nav>
+  <div class="nav-actions"><a href="https://www.mediafire.com/file/lvv4tvhmq5j8cvl/BovaryNow.apk/file" target="_blank" rel="noopener noreferrer" class="btn-install-app">DOWNLOAD APP</a><a href="discord.html" class="btn-discord">DISCORD</a></div>
+  <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+ </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+ <a href="index.html">HOME</a><a href="#interface">APP INTERFACE</a><a href="#countdown">COUNTDOWN</a><a href="#system">REAL-TIME SYSTEM</a><a href="#history">EVENT HISTORY</a><a href="#beta">BETA</a>
+ <a href="https://www.mediafire.com/file/lvv4tvhmq5j8cvl/BovaryNow.apk/file" target="_blank" rel="noopener noreferrer" class="btn-install-app">DOWNLOAD BOVARYNOW APK</a>
+</div>
+
+<section class="bovarynow-hero bovarynow-hero-v2">
+ <div class="bn-hero-device-first">
+  <div class="bn-device-wrap">
+   <div class="bovarynow-phone bn-phone">
+    <div class="phone-speaker"></div>
+    <div class="phone-screen">
+     <div class="bn-app-top"><span>BOVARY NOW</span><small>ONLINE</small></div>
+     <div class="bn-app-status"><span class="bn-status-live">● SESSION ACTIVE</span><span class="bn-status-pill">LEGACY</span></div>
+     <div class="bn-ui-banner"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%207%20de%20set.%20de%202026,%2023_30_11.png?updatedAt=1788837359779" alt="BovaryNow current session" loading="eager"><div class="bn-ui-banner-label"><small>CURRENT SESSION</small><strong>LEGACY MEET</strong></div></div>
+     <div class="bn-ui-count active">SESSION ACTIVE</div>
+     <div class="bn-ui-grid"><div class="bn-ui-meta"><small>DATE / TIME</small><b>EVENT TIME</b></div><div class="bn-ui-meta"><small>HOST</small><b>BOVARY</b></div></div>
+     <div class="bn-ui-gallery"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%203%20de%20set.%20de%202026,%2023_23_31.png?updatedAt=1788579035652" alt="Upcoming Bovary meet"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%204%20de%20set.%20de%202026,%2023_15_46.png?updatedAt=1788579035483" alt="Bovary meet showcase"></div>
+     <div class="bn-phone-extra">
+      <div class="bn-phone-extra-head"><span>COMMUNITY NETWORK</span><small>2 SERVERS</small></div>
+      <div class="bn-phone-emblems">
+       <div class="bn-phone-emblem"><img src="https://ik.imagekit.io/BassaniStudios/images-removebg-preview.png" alt="GTA Legacy emblem"><div><small>LEGACY</small><b>GTA LEGACY</b></div></div>
+       <div class="bn-phone-emblem"><img src="https://ik.imagekit.io/BassaniStudios/images%20(12).jpg?updatedAt=1789080843462" alt="Community server emblem"><div><small>FIVEM</small><b>COMMUNITY</b></div></div>
+      </div>
+      <div class="bn-phone-info"><span>● LIVE STATUS</span><b>SESSION · ACTIVE</b><span>NEXT · SCHEDULED</span></div>
+     </div>
+    </div>
+   </div>
+
+  </div>
+ </div>
+ <div class="bn-wall-sign" aria-label="Bovary Club Society"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/qweweqwewqewqeqweqweqwe.png?updatedAt=1789053097262" alt="Bovary Club Society" loading="eager"></div>
+ <div class="bn-hero-lower">
+  <div class="bn-hero-copy">
+   <span class="bn-overline"><i></i> OFFICIAL BOVARY CLUB SOCIETY APP</span>
+   <h1>BOVARY<span class="bn-gradient">NOW</span></h1>
+   <p><strong>Open the app. See what's happening.</strong><br>A mobile-first companion built exclusively for the Bovary Club Society community — focused on the current session, what's starting next, and the history of the meets.</p>
+   <div class="bn-hero-actions"><a href="https://www.mediafire.com/file/lvv4tvhmq5j8cvl/BovaryNow.apk/file" target="_blank" rel="noopener noreferrer" class="btn-primary">DOWNLOAD BOVARYNOW APK →</a><a href="#interface" class="btn-secondary">EXPLORE THE APP</a></div>
+   <div class="bn-note">ANDROID · COMMUNITY BETA · DIRECT APK DISTRIBUTION</div>
+  </div>
+  <div class="bn-android-visual" aria-label="Android mobile platform visual">
+   <img src="https://ik.imagekit.io/BassaniStudios/cb68d74eea0586e85a785358bc75ecea.png" alt="Android system visual" loading="eager">
+  </div>
+ </div>
+ <div class="bn-scroll-cue">SCROLL TO EXPLORE</div>
+</section>
+
+<section class="bn-section" id="overview">
+ <div class="bn-section-head"><span class="label">WHY BOVARYNOW</span><h2>BUILT TO ANSWER ONE <span>QUESTION</span></h2><p>What's happening in Bovary right now?</p></div>
+ <div class="bn-feature-grid">
+  <article class="bn-feature"><div class="bn-feature-icon">📱</div><h3>MOBILE-FIRST</h3><p>Designed for quick use on a phone. The most important information is placed first, with a clean interface that keeps the session status easy to understand.</p></article>
+  <article class="bn-feature"><div class="bn-feature-icon">🟢</div><h3>CURRENT SESSION</h3><p>Immediately identify <strong>SESSION ACTIVE</strong>, <strong>STARTING SOON</strong>, a scheduled session, or when nothing is active.</p></article>
+  <article class="bn-feature"><div class="bn-feature-icon">⏱️</div><h3>COUNTDOWN</h3><p>Upcoming sessions can show a live countdown so members know exactly how long remains before the next meet begins.</p></article>
+  <article class="bn-feature"><div class="bn-feature-icon">🔔</div><h3>PUSH NOTIFICATIONS</h3><p>The architecture supports event/session notifications. <strong>Push is not active yet during the current development Beta.</strong></p></article>
+  <article class="bn-feature"><div class="bn-feature-icon">⚙️</div><h3>REAL-TIME MANAGEMENT</h3><p>Session information is intended to come from a central backend/database so an admin update can become the new source of truth for the app.</p></article>
+  <article class="bn-feature"><div class="bn-feature-icon">📅</div><h3>EVENT HISTORY</h3><p>Past gatherings can remain available as a record of Bovary sessions, with banners, names, dates and host information.</p></article>
+ </div>
+</section>
+
+<section class="bn-section alt" id="interface">
+ <div class="bn-section-head"><span class="label">APP INTERFACE</span><h2>SEE THE <span>APP</span></h2><p>A visual guide to the core screens already represented in the Android build.</p></div>
+ <div class="bn-interface-grid">
+  <article class="bn-screen-card"><div class="bn-screen"><div class="bn-app-top"><span>BOVARY NOW</span><small>ONLINE</small></div><div class="bn-app-status"><span class="bn-status-live">● SESSION ACTIVE</span><span class="bn-status-pill">LEGACY</span></div><div class="bn-ui-banner"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%207%20de%20set.%20de%202026,%2023_30_11.png?updatedAt=1788837359779" alt="" loading="lazy"><div class="bn-ui-banner-label"><small>CURRENT SESSION</small><strong>LEGACY MEET</strong></div></div><div class="bn-ui-count active" style="font:800 18px Orbitron;color:#34d399;margin:12px 0">SESSION ACTIVE</div><div class="bn-ui-grid"><div class="bn-ui-meta"><small>DATE / TIME</small><b>EVENT TIME</b></div><div class="bn-ui-meta"><small>HOST</small><b>BOVARY</b></div></div><div class="bn-ui-gallery"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%203%20de%20set.%20de%202026,%2023_23_31.png?updatedAt=1788579035652" alt="Upcoming meet"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%204%20de%20set.%20de%202026,%2023_20_04.png?updatedAt=1788579034950" alt="Bovary Automotive Sound meet"></div></div><div class="bn-screen-title">01 · CURRENT SESSION</div><p class="bn-screen-desc">The home screen prioritizes the live session and its banner, status, host, time and description.</p></article>
+  <article class="bn-screen-card"><div class="bn-screen"><div class="bn-app-top"><span>BOVARY NOW</span><small>MEMBER CORE</small></div><div class="bn-app-status"><span style="color:#fbbf24;font-size:8px;font-weight:800">● STARTING SOON</span><span class="bn-status-pill">NEXT</span></div><div class="bn-ui-banner"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%203%20de%20set.%20de%202026,%2023_23_31.png?updatedAt=1788579035652" alt="" loading="lazy"><div class="bn-ui-banner-label"><small>NEXT SESSION</small><strong>UPCOMING MEET</strong></div></div><div class="bn-ui-count" style="font:800 18px Orbitron;color:#fbbf24;margin:12px 0">01:42:18</div><div class="bn-ui-grid"><div class="bn-ui-meta"><small>HOST</small><b>HOST NAME</b></div><div class="bn-ui-meta"><small>STATUS</small><b>SOON</b></div></div><div class="bn-ui-gallery"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%207%20de%20set.%20de%202026,%2023_30_11.png?updatedAt=1788837359779" alt="Current session"><img src="https://ik.imagekit.io/BassaniStudios/Q7rxX.jpg" alt="Fenrir meet"></div></div><div class="bn-screen-title">02 · STARTING SOON</div><p class="bn-screen-desc">The same session board can become a countdown view when the next scheduled event approaches.</p></article>
+  <article class="bn-screen-card"><div class="bn-screen"><div class="bn-app-top"><span>BOVARY NOW</span><small>HISTORY</small></div><div class="bn-app-status"><span style="color:#a78bfa;font-size:8px;font-weight:800">● EVENT HISTORY</span><span class="bn-status-pill">PAST</span></div><div class="bn-ui-banner"><img src="https://ik.imagekit.io/BassaniStudios/Q7rxX.jpg" alt="" loading="lazy"><div class="bn-ui-banner-label"><small>PREVIOUS MEET</small><strong>FENRIR / BOVARY</strong></div></div><div class="bn-ui-card" style="margin-top:9px"><div class="bn-ui-title">PREVIOUS SESSION</div><p class="bn-ui-ann" style="margin-top:6px">Past events can retain their banner, date, host and description.</p></div><div class="bn-screen-tag">ARCHIVED EVENT</div><div class="bn-ui-gallery"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%204%20de%20set.%20de%202026,%2023_30_11.png?updatedAt=1788837359779" alt="Bovary event"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%204%20de%20set.%20de%202026,%2023_15_46.png?updatedAt=1788579035483" alt="Bovary showcase"></div></div><div class="bn-screen-title">03 · EVENT HISTORY</div><p class="bn-screen-desc">Past gatherings form a simple chronological record instead of a social feed.</p></article>
+  <article class="bn-screen-card"><div class="bn-screen"><div class="bn-app-top"><span>BOVARY NOW</span><small>SETTINGS</small></div><div class="bn-app-status"><span style="color:#22d3ee;font-size:8px;font-weight:800">● NOTIFICATIONS</span><span class="bn-status-pill">BETA</span></div><div class="bn-ui-card"><div class="bn-ui-title">PUSH PREFERENCES</div><p class="bn-ui-ann" style="margin-top:8px">The Android build includes notification preference/token infrastructure for future push delivery.</p><div class="bn-ui-grid" style="margin-top:9px"><div class="bn-ui-meta"><small>LEGACY</small><b>ON</b></div><div class="bn-ui-meta"><small>FIVEM</small><b>ON</b></div></div></div><div class="bn-ui-card"><div class="bn-ui-title">APP STATUS</div><p class="bn-ui-ann" style="margin-top:7px">Community Beta · features may change while development continues.</p></div><div class="bn-ui-gallery"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%203%20de%20set.%20de%202026,%2023_23_31.png?updatedAt=1788579035652" alt="Upcoming meet"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%207%20de%20set.%20de%202026,%2023_30_11.png?updatedAt=1788837359779" alt="Current session"></div></div><div class="bn-screen-title">04 · SETTINGS / BETA</div><p class="bn-screen-desc">The current Android project already contains notification preference and Firebase messaging components, while delivery remains under development.</p></article>
+ </div>
+</section>
+
+<section class="bn-section" id="countdown">
+ <div class="bn-section-head"><span class="label">COUNTDOWN SYSTEM</span><h2>KNOW WHEN THE NEXT <span>MEET</span> STARTS</h2><p>The visual countdown follows the same event concept used by the Android app.</p></div>
+ <div class="bn-countdown-stage">
+  <div class="bn-count-copy"><span class="bn-live-label">NEXT SESSION</span><h3 id="bnCountTitle">BOVARY SESSION</h3><p>The Android build calculates event start time using the event date, time and timezone, then updates the countdown every second. The website can use the same database in a future step.</p></div>
+  <div class="bn-count-phone"><div class="bovarynow-phone bn-phone"><div class="phone-speaker"></div><div class="phone-screen"><div class="bn-app-top"><span>BOVARY NOW</span><small>COUNTDOWN</small></div><div class="bn-app-status"><span class="bn-status-live" style="color:#fbbf24">● STARTING SOON</span><span class="bn-status-pill">NEXT</span></div><div class="bn-ui-banner"><img id="bnCountImage" src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%202%20de%20set.%20de%202026,%2021_41_45.png" alt="" loading="lazy"><div class="bn-ui-banner-label"><small>NEXT SESSION</small><strong id="bnCountHost">BOVARY</strong></div></div><div id="bnCountBig" class="bn-count-big">NEXT MEET</div><div class="bn-ui-grid"><div class="bn-ui-meta"><small>STATUS</small><b>STARTING SOON</b></div><div class="bn-ui-meta"><small>TIMEZONE</small><b>BRT / UTC−3</b></div></div><div class="bn-ui-gallery"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%203%20de%20set.%20de%202026,%2023_23_31.png?updatedAt=1788579035652" alt="Upcoming meet"><img src="https://ik.imagekit.io/BassaniStudios/Q7rxX.jpg" alt="Previous meet"></div></div></div></div>
+ </div>
+</section>
+
+<section class="bn-section alt" id="system">
+ <div class="bn-section-head"><span class="label">⚙️ REAL-TIME SYSTEM</span><h2>FROM ADMIN UPDATE TO <span>MEMBER PHONE</span></h2><p>The app is designed around a central Database and a real-time data flow. When event information changes, the latest session state can be delivered to the member experience without turning the app into a social network.</p></div>
+ <div class="bn-architecture">
+  <div class="bn-arch-node"><div class="bn-arch-icon">🛠️</div><b>ADMIN</b><span>Creates or updates event information.</span></div>
+  <div class="bn-arch-node"><div class="bn-arch-icon">🗄️</div><b>DATABASE</b><span>Stores events, announcements and session data.</span></div>
+  <div class="bn-arch-node"><div class="bn-arch-icon">⚡</div><b>APP / API</b><span>Android retrieves the current state.</span></div>
+  <div class="bn-arch-node"><div class="bn-arch-icon">📱</div><b>BOVARYNOW</b><span>Members see the current session.</span></div>
+ </div>
+ <p class="bn-architecture-note">No admin editing is required on this website right now. The next technical step is connecting the website preview to the same public event data used by the app, so the countdown and session preview can mirror the live state automatically.</p>
+</section>
+
+<section class="bn-section" id="history">
+ <div class="bn-section-head"><span class="label">📅 EVENT HISTORY</span><h2>THE MEETS <span>STAY</span></h2><p>BovaryNow is not a social network. It can simply keep a visual record of previous gatherings.</p></div>
+ <div class="bn-history">
+  <article class="bn-history-card"><div class="bn-history-img"><img src="https://i.imgur.com/LvJBIKY.png" alt="Bovary meet" loading="lazy"></div><div class="bn-history-body"><small>PREVIOUS MEET</small><h3>GTA LEGACY MEET</h3><p>Event banner, date/time, host and description can remain attached to a completed session.</p></div></article>
+  <article class="bn-history-card"><div class="bn-history-img"><img src="https://i.imgur.com/wDnCXqy.png" alt="Fenrir FiveM meet" loading="lazy"></div><div class="bn-history-body"><small>FIVEM SESSION</small><h3>FENRIR / BOVARY</h3><p>The Android project also has a separate Fenrir event data path for FiveM sessions.</p></div></article>
+  <article class="bn-history-card"><div class="bn-history-img"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%202%20de%20set.%20de%202026,%2021_41_45.png" alt="Bovary event" loading="lazy"></div><div class="bn-history-body"><small>ARCHIVE CONCEPT</small><h3>PAST GATHERINGS</h3><p>A simple chronological history keeps the app useful without turning it into another community feed.</p></div></article>
+ </div>
+</section>
+
+<section class="bn-section alt" id="beta">
+ <div class="bn-beta">
+  <div class="bn-beta-top"><h2>🧪 BOVARYNOW BETA</h2><span class="bn-beta-badge">IN DEVELOPMENT</span></div>
+  <p>BovaryNow is being developed as an exclusive companion for the Bovary Club Society community. The purpose is intentionally simple: quickly understand what is happening, when it starts, and what comes next.</p>
+  <ul><li>Some features may still be disabled.</li><li>Interface and data behavior may change.</li><li>Push notification delivery is not active yet.</li><li>Real-time/admin improvements are still planned.</li><li>The app is distributed directly as an Android APK.</li><li>This is a community tool, not a public social network.</li></ul>
+ </div>
+</section>
+
+<section class="bn-section bn-cta">
+ <h2>OPEN. CHECK. DRIVE.</h2><p>BovaryNow keeps the important information close to the member.</p>
+ <a href="https://www.mediafire.com/file/lvv4tvhmq5j8cvl/BovaryNow.apk/file" target="_blank" rel="noopener noreferrer" class="btn-primary">DOWNLOAD BOVARYNOW APK →</a>
+ <div class="bn-footer-note">BOVARY CLUB SOCIETY · BOVARYNOW · COMMUNITY COMPANION APP</div>
+</section>
+
+<script src="script.js?v=8"></script>
+</body>
+</html>

@@ -2,20 +2,24 @@
 // ===== MOTION FX (tilt + parallax) =====
 function initTiltCards() {
   if (window.matchMedia('(hover: none), (pointer: coarse), (max-width: 900px)').matches) return;
-  const cards = document.querySelectorAll('.member-card, .crew-link-card, .tz-card');
+  const cards = document.querySelectorAll('.member-card, .crew-link-card, .tz-card, .bovarynow-page .bn-phone');
   cards.forEach((card) => {
     card.addEventListener('mousemove', (e) => {
       const r = card.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width;
       const y = (e.clientY - r.top) / r.height;
-      const rx = (0.5 - y) * 10;
-      const ry = (x - 0.5) * 12;
+      const isPhone = card.matches('.bn-phone');
+      const rx = (0.5 - y) * (isPhone ? 6 : 10);
+      const ry = (x - 0.5) * (isPhone ? 8 : 12);
       card.classList.add('is-tilting');
-      card.style.transform = `perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+      const transform = `perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+      if (isPhone) card.style.setProperty('transform', transform, 'important');
+      else card.style.transform = transform;
     });
     card.addEventListener('mouseleave', () => {
       card.classList.remove('is-tilting');
-      card.style.transform = '';
+      if (card.matches('.bn-phone')) card.style.removeProperty('transform');
+      else card.style.transform = '';
     });
   });
 }
@@ -537,8 +541,9 @@ function initMusicPlayer() {
   const playlistId = onGallery ? "gallery" : "main";
   const switchedPlaylist = state.playlistId && state.playlistId !== playlistId;
   let index = 0;
-  // Always shuffle: build random order, start at a random track
-  let order = shuffleIndices(playlist.length);
+  // Keep the current track stable on page changes. Randomization is only used when the user
+  // completes the playlist and the cycle starts again.
+  let order = Array.from({ length: playlist.length }, (_, i) => i);
   let orderPos = 0;
   // Only resume track if SAME playlist — never carry main track into gallery (or vice-versa)
   if (!switchedPlaylist && state.playlistId === playlistId && typeof state.index === "number") {
@@ -546,8 +551,8 @@ function initMusicPlayer() {
     const pos = order.indexOf(index);
     orderPos = pos >= 0 ? pos : 0;
   } else {
-    orderPos = Math.floor(Math.random() * order.length);
-    index = order[orderPos];
+    index = 0;
+    orderPos = 0;
   }
 
   const audio = new Audio();
@@ -560,8 +565,6 @@ function initMusicPlayer() {
   //   that tab sends a "takeover" and the others pause so only the new music plays.
   const myOpenTs = Date.now();
   let musicChannel = null;
-  let isSecondary = false;
-  let hasTakenOver = false; // true after this tab explicitly took control via Play
 
   function pauseAudioUI() {
     if (!audio.paused) {
@@ -572,40 +575,12 @@ function initMusicPlayer() {
     }
   }
 
-  function pauseAsSecondary() {
-    isSecondary = true;
-    pauseAudioUI();
-  }
-
   try {
     musicChannel = new BroadcastChannel("bova-music");
-    musicChannel.postMessage({ type: "claim", playlistId: playlistId, ts: myOpenTs });
     musicChannel.onmessage = (ev) => {
       const msg = ev && ev.data;
-      if (!msg || !msg.type) return;
-
-      if (msg.type === "takeover") {
-        // Another tab (e.g. gallery) explicitly started playing → pause here
-        if (msg.playlistId !== playlistId || msg.ts !== myOpenTs) {
-          hasTakenOver = false;
-          isSecondary = true;
-          pauseAudioUI();
-        }
-        return;
-      }
-
-      if (msg.type !== "claim" || typeof msg.ts !== "number") return;
-
-      if (msg.ts < myOpenTs) {
-        // Older (initial) window exists → this is secondary, stay silent
-        // (unless we already took over via explicit Play)
-        if (!hasTakenOver) pauseAsSecondary();
-      } else if (msg.ts > myOpenTs) {
-        // Newer window opened → re-assert our claim so it can hear us and pause
-        try {
-          musicChannel.postMessage({ type: "claim", playlistId: playlistId, ts: myOpenTs });
-        } catch (_) {}
-      }
+      if (!msg || msg.type !== "takeover") return;
+      if (msg.ts !== myOpenTs) pauseAudioUI();
     };
   } catch (_) {}
 
@@ -685,13 +660,8 @@ function initMusicPlayer() {
 
     if (audio.paused) {
       // Explicit Play: take over audio from any other open tab (e.g. main → gallery)
-      hasTakenOver = true;
-      isSecondary = false;
       try {
-        if (musicChannel) {
-          musicChannel.postMessage({ type: "takeover", playlistId: playlistId, ts: myOpenTs });
-          musicChannel.postMessage({ type: "claim", playlistId: playlistId, ts: myOpenTs });
-        }
+        if (musicChannel) musicChannel.postMessage({ type: "takeover", playlistId: playlistId, ts: myOpenTs });
       } catch (_) {}
       audio.play().then(() => {
         playBtn.textContent = "⏸";
@@ -711,7 +681,6 @@ function initMusicPlayer() {
   });
   document.getElementById("bovaNextBtn").addEventListener("click", () => {
     orderPos = (orderPos + 1) % order.length;
-    if (orderPos === 0) order = shuffleIndices(playlist.length); // reshuffle when cycle completes
     setTrack(order[orderPos], { autoplay: true });
   });
   muteBtn.addEventListener("click", () => {
@@ -748,16 +717,17 @@ function initMusicPlayer() {
     }
   });
   audio.addEventListener("ended", () => {
-    orderPos = (orderPos + 1) % order.length;
-    if (orderPos === 0) order = shuffleIndices(playlist.length);
-    setTrack(order[orderPos], { autoplay: true });
+    playBtn.textContent = "▶";
+    savePlayerState({ wasPlaying: false, currentTime: 0, index, playlistId, volume: audio.volume });
   });
-  // Skip broken / non-audio files automatically
+  // Do not silently jump through the playlist when a CDN track fails.
+  // A broken URL used to look like random song changes and made debugging impossible.
   audio.addEventListener("error", () => {
-    console.warn("[Bova Player] Track failed, skipping:", playlist[index] && playlist[index].title);
-    orderPos = (orderPos + 1) % order.length;
-    if (orderPos === 0) order = shuffleIndices(playlist.length);
-    setTrack(order[orderPos], { autoplay: !audio.paused || playBtn.textContent === "⏸" });
+    console.warn("[Bova Player] Track failed:", playlist[index] && playlist[index].title, audio.error);
+    playBtn.textContent = "▶";
+    root.classList.add("is-active");
+    titleEl.textContent = (playlist[index]?.title || "Track") + " · unavailable";
+    savePlayerState({ wasPlaying: false, playlistId, index, currentTime: 0, volume: audio.volume });
   });
 
   // Prompt after boot (home) or show player on other pages
@@ -798,24 +768,6 @@ function initMusicPlayer() {
   // Persist that we are now on this playlist (clears "main" context when entering gallery)
   savePlayerState({ playlistId, index, currentTime: resumeTime, volume: audio.volume });
 
-  function tryAutoplay(showFallbackPrompt) {
-    if (isSecondary) {
-      // Secondary window: never autoplay — only the initial window plays
-      if (showFallbackPrompt) showPrompt();
-      return;
-    }
-    audio.play().then(() => {
-      playBtn.textContent = "⏸";
-      root.classList.add("is-active");
-      userActivated = true;
-      hidePrompt();
-      const notice = document.getElementById("bovaPlayerNotice");
-      if (notice) notice.classList.remove("is-visible");
-      savePlayerState({ wasPlaying: true, userActivated: true, playlistId, index, currentTime: audio.currentTime, volume: audio.volume });
-    }).catch(() => {
-      if (showFallbackPrompt) showPrompt();
-    });
-  }
 
   const noticeBtn = document.getElementById("bovaNoticeDismiss");
   if (noticeBtn) {
@@ -839,12 +791,8 @@ function initMusicPlayer() {
       return;
     }
 
-    // Same playlist + was playing → try resume
-    if (!switchedPlaylist && state.wasPlaying && state.playlistId === playlistId) {
-      tryAutoplay(true);
-      return;
-    }
-
+    // Never force playback on page load. Browsers can block it and the old
+    // auto-resume logic could make the playlist appear to change by itself.
     showPrompt();
   }
 
@@ -1427,3 +1375,57 @@ async function incrementReaction(photoId, reactionId) {
     return null;
   }
 }
+
+/* ============================================================
+   BOVARYNOW PAGE — countdown + Home phone motion
+   ============================================================ */
+(function(){
+  const SUPABASE_URL = "https://wmnzewxtameguxvvvojs.supabase.co";
+  const SUPABASE_ANON_KEY = "";
+
+  const pad=n=>String(n).padStart(2,"0");
+  function countdown(target, el){
+    if(!el) return;
+    const tick=()=>{
+      const diff=target-Date.now();
+      if(diff<=0){el.textContent="STARTING SOON";el.classList.add("soon");return}
+      const total=Math.floor(diff/1000);
+      const d=Math.floor(total/86400), h=Math.floor(total%86400/3600), m=Math.floor(total%3600/60), sec=total%60;
+      el.textContent=(d?d+"D ":"")+pad(h)+":"+pad(m)+":"+pad(sec);
+    };
+    tick(); setInterval(tick,1000);
+  }
+
+  const homeCount=document.getElementById("homeAppCount");
+  if(homeCount) homeCount.textContent="LIVE";
+
+  // Home BovaryNow preview is intentionally static.
+
+  if(!document.body.classList.contains("bovarynow-page")) return;
+
+  const big=document.getElementById("bnCountBig");
+  const title=document.getElementById("bnCountTitle");
+  const host=document.getElementById("bnCountHost");
+  const img=document.getElementById("bnCountImage");
+
+  async function loadEvents(){
+    if(!SUPABASE_ANON_KEY) return;
+    try{
+      const r=await fetch(SUPABASE_URL+"/rest/v1/events?select=*&order=event_date.asc,event_time.asc",{headers:{apikey:SUPABASE_ANON_KEY,Authorization:"Bearer "+SUPABASE_ANON_KEY}});
+      if(!r.ok) throw new Error("HTTP "+r.status);
+      const events=await r.json();
+      const now=Date.now();
+      const upcoming=events.map(e=>{ const t=Date.parse((e.event_date||"")+"T"+(e.event_time||"00:00:00")); return {...e,_t:t}; })
+        .filter(e=>Number.isFinite(e._t)&&e._t>now&&["scheduled","starting_soon"].includes(e.status)).sort((a,b)=>a._t-b._t)[0];
+      const active=events.find(e=>e.status==="active");
+      const current=active||upcoming;
+      if(!current) return;
+      if(title) title.textContent=(current.name||"NEXT SESSION").toUpperCase();
+      if(host) host.textContent=(current.host||"BOVARY").toUpperCase();
+      if(img&&current.image_url) img.src=current.image_url;
+      if(current.status==="active"){ big.textContent="SESSION ACTIVE"; big.className="bn-count-big active"; }
+      else { big.className="bn-count-big"; countdown(current._t,big); }
+    }catch(e){ console.warn("[BovaryNow] Event data unavailable",e); }
+  }
+  loadEvents();
+})();

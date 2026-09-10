@@ -1,0 +1,85 @@
+BOVARY CLUB SOCIETY — BOVARYNOW WEB INTEGRATION
+UPDATE: V4 / 10 SEP 2026
+
+ALTERAÇÕES DESTA VERSÃO
+
+1. HOME — BOVARYNOW APP
+- O celular ilustrativo da Home foi deixado PARADO.
+- Ele não acompanha mais o scroll e não interfere nas outras abas/seções.
+- O celular fica associado visualmente à primeira seção "BOVARY NOW APP", ao lado do conteúdo dessa seção.
+- No mobile o bloco permanece leve e entra no fluxo normal da página.
+- Links do BovaryNow na Home foram configurados para abrir a página em uma NOVA ABA.
+
+2. BOVARYNOW.HTML — HERO
+- O layout do Hero foi reorganizado.
+- O celular ilustrativo agora ocupa a posição principal no topo.
+- O texto principal foi movido para BAIXO do celular.
+- O logo customizado do BovaryNow continua sendo usado como elemento de fundo/wallpaper do Hero.
+- A imagem Android fornecida pelo usuário foi adicionada ao lado do bloco textual inferior.
+- O layout foi pensado para manter leitura e identidade visual sem esconder o logo atrás do celular.
+
+3. LEITURA / TIPOGRAFIA
+- Fontes gerais foram ampliadas.
+- Títulos e pontos principais receberam maior peso visual.
+- Interfaces dos celulares tiveram aumento de fonte.
+- Mockups ficaram retos, sem rotação, para evitar pixels serrilhados e dificuldade de leitura.
+- Neon/glow foi reforçado em títulos e pontos de destaque.
+
+4. REAL-TIME SYSTEM
+- A página pública continua usando somente linguagem genérica: ADMIN → DATABASE → APP/API → BOVARYNOW.
+- Nenhum nome específico de provedor/backend é exposto na página.
+- Nenhuma edição técnica é necessária neste momento.
+- Próximo passo opcional: conectar a prévia/countdown do site à mesma fonte pública de eventos usada pelo app.
+
+5. PENDÊNCIAS EVITADAS
+- Não exibir "SYNC PENDING".
+- Não exibir mensagens de sincronização fictícias.
+- Não prometer sincronização ao vivo enquanto a conexão do site com os dados reais não estiver implementada.
+- Push Notifications continuam descritas como em desenvolvimento/inativas.
+
+6. DOWNLOAD
+- O botão "Bovary App Mobile" leva para bovarynow.html em nova aba.
+- Os botões de download continuam usando o link direto do APK fornecido anteriormente.
+
+7. PRÓXIMOS PASSOS RECOMENDADOS
+- Testar a Home em desktop e celular.
+- Testar bovarynow.html em desktop e celular.
+- Se desejado, conectar o COUNTDOWN do site ao banco de eventos real, sem expor o provedor na interface pública.
+- Depois, revisar imagens/ordem das telas do App Interface com screenshots reais do Android.
+
+UPDATE v6 — 10/09/2026
+- Página bovarynow.html: adicionado showcase no Hero com Emblema 1 e Emblema 2 grandes lado a lado; abaixo, Server 1 e Server 2 em escala menor.
+- O showcase usa as URLs ImageKit fornecidas pelo usuário e possui brilho neon, hover/scale e glow.
+- Todos os celulares/mockups da página BovaryNow agora têm tilt controlado pelo mouse, no mesmo conceito dos cards de Hosts/Commissioners, com brilho neon adicional.
+- O telefone permanece reto quando não está em hover.
+- Mantido o telefone da Home estático, sem tilt/animação de scroll.
+- Cache busting da página BovaryNow atualizado para styles.css?v=6 e script.js?v=6.
+- Novo pacote: Bovary-Club-Society-BovaryNow-Update-v6.zip.
+
+VERSAO V8 — LIMPEZA DO HERO E MAIS VISUAIS
+- Removidos completamente da bovarynow.html os 4 emblemas temporários adicionados nas versões V6/V7 (Bovary, Fenrir e os dois servidores).
+- O wallpaper grande BOVARYNOW voltou a ficar livre, sem os emblemas cobrindo a arte principal.
+- Adicionado o letreiro Bovary Club Society fornecido pelo usuário acima da área da tipografia BOVARYNOW, usando composição visual screen para preservar o aspecto sem fundo.
+- Adicionada uma galeria de duas imagens pequenas dentro dos mockups de celular para representar melhor current session, upcoming meet, history e outras funções do aplicativo.
+- A mesma ideia foi aplicada ao telefone principal, aos 4 cards de interface e ao telefone do countdown.
+- CSS cache-busting atualizado para styles.css?v=8 e script.js?v=8.
+- Versão entregue: Bovary-Club-Society-BovaryNow-Update-v8.zip.
+
+
+UPDATE V9 — LETREIRO BOVARY CLUB SOCIETY
+- Ajustado o letreiro no hero do BovaryNow: maior e reposicionado horizontalmente para ficar alinhado acima da lettering BOVARYNOW do wallpaper.
+- Desktop: largura máxima 620px, centralizado aproximadamente em 64% da largura do hero e descido para top 98px.
+- Mobile: mantém posicionamento natural/centralizado e tamanho responsivo.
+- Mantido mix-blend-mode: screen para preservar o visual neon e eliminar visualmente o fundo escuro.
+
+
+UPDATE v10 — SEE THE APP + richer phone
+- Corrigida a imagem quebrada da primeira tela em SEE THE APP com a arte Automotive Sound fornecida pelo usuário.
+- Hero phone recebeu uma área COMMUNITY NETWORK com dois emblemas (GTA Legacy e Community/FiveM), além de status resumido LIVE/NEXT.
+- Cache CSS atualizado para styles.css?v=9.
+
+UPDATE v11 — HOME PHONE MATCH
+- A Home page phone preview now mirrors the richer BovaryNow hero phone introduced in v10.
+- Added the same session-active layout, current-session banner, meet image gallery, COMMUNITY NETWORK panel, GTA Legacy emblem and FiveM/community emblem.
+- Added responsive sizing so the richer phone content remains readable on tablet/mobile layouts.
+- Existing v10 SEE THE APP image correction and all previous BovaryNow changes are preserved.
