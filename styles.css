@@ -7533,15 +7533,15 @@ body.lightbox-open .cursor-trail {
   border-top:1px solid rgba(124,58,237,.12);
   border-bottom:1px solid rgba(124,58,237,.12);
 }
-.bovarynow-home-section-head{max-width:820px;margin:0 300px 26px 0;text-align:left}.bovarynow-home-section-head p{max-width:760px}
+.bovarynow-home-section-head{max-width:820px;margin:0 300px 8px 0;text-align:left}.bovarynow-home-section-head p{max-width:760px;margin-bottom:0}
 .bovarynow-section-label{font:800 12px Orbitron,sans-serif;letter-spacing:.18em;color:#67e8f9;text-shadow:0 0 16px rgba(34,211,238,.35);margin-bottom:10px}
 .bovarynow-section-label i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 14px #34d399;margin-right:8px}
 .bovarynow-home-section-head h2{font-size:clamp(34px,5vw,58px) !important;text-shadow:0 0 35px rgba(124,58,237,.25)}
-.bovarynow-home-section-grid{max-width:1180px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,320px);gap:35px;align-items:center;min-height:250px}.bovarynow-home-section-grid .bovarynow-phone-dock{grid-column:2;grid-row:1;margin-top:-205px;pointer-events:none}
-.bovarynow-home-section-copy{max-width:690px;padding:25px 0;grid-column:1}
-.bovarynow-home-section-copy>strong{display:block;font:800 17px Orbitron;color:#f8fafc;letter-spacing:.08em;text-shadow:0 0 18px rgba(244,114,182,.2);margin-bottom:12px}
+.bovarynow-home-section-grid{max-width:1280px;margin:auto;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(160px,240px) minmax(220px,300px);gap:18px 12px;align-items:center;min-height:250px}.bovarynow-home-section-grid .bovarynow-phone-dock{grid-column:3;grid-row:1;margin-top:-205px;pointer-events:none}
+.bovarynow-home-section-copy{max-width:690px;padding:6px 0 25px;grid-column:1}
+.bovarynow-home-section-copy>strong{display:block;font:800 17px Orbitron;color:#f8fafc;letter-spacing:.08em;text-shadow:0 0 18px rgba(244,114,182,.2);margin-bottom:8px}
 .bovarynow-home-section-copy>p{font-size:1.12rem;line-height:1.8;color:#cbd5e1;max-width:680px}
-.bovarynow-home-points{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 25px}
+.bovarynow-home-points{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 10px}
 .bovarynow-home-points span{font:700 11px Orbitron;color:#dbeafe;border:1px solid rgba(167,139,250,.25);background:rgba(124,58,237,.08);padding:10px 12px;border-radius:999px;box-shadow:0 0 18px rgba(124,58,237,.08)}
 .bovarynow-phone-dock{min-height:290px;display:flex;align-items:center;justify-content:center;position:relative}
 .bovarynow-phone-dock:before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(34,211,238,.13),transparent 68%);filter:blur(4px);pointer-events:none}
@@ -7592,8 +7592,9 @@ body{font-size:17px}
 @media (max-width:900px){
   body,.bovarynow-page{font-size:16px}
   .bovarynow-home-section{min-height:auto;overflow:hidden !important}
-  .bovarynow-home-section-head{margin:0 0 18px;text-align:center;max-width:100%}
+  .bovarynow-home-section-head{margin:0 0 6px;text-align:center;max-width:100%}
   .bovarynow-home-section-grid{grid-template-columns:1fr;gap:10px}
+  .bovas-bot-inline{display:none!important;grid-column:auto;grid-row:auto;margin-top:0}
   .bovarynow-home-section-copy{padding-top:5px}
   .bovarynow-home-section-copy>p{font-size:1rem}
   .bovarynow-home-section-grid .bovarynow-phone-dock{grid-column:1;grid-row:2;margin-top:0;min-height:0;padding:10px 0 20px}
@@ -8394,4 +8395,294 @@ body{font-size:16px}
   .bovarynow-page .bn-phone-emblem img{width:22px;height:22px}
   .bovarynow-page .bn-phone-emblem b{font-size:5px}
   .bovarynow-page .bn-phone-info{font-size:4px}
+}
+
+/* ===== BOVAS BOT — desktop hero float + mobile end block ===== */
+.bovas-bot-hero {
+  position: absolute;
+  right: clamp(2%, 4vw, 6%);
+  bottom: clamp(12%, 18vh, 22%);
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #fff;
+  width: clamp(140px, 18vw, 240px);
+  pointer-events: auto;
+  transition: transform 0.35s ease, filter 0.35s ease;
+  animation: bovas-bot-float 4.5s ease-in-out infinite;
+}
+.bovas-bot-hero .bovas-bot-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  border: none;
+  outline: none;
+  pointer-events: none;
+  filter:
+    drop-shadow(0 0 6px #38bdf8)
+    drop-shadow(0 0 18px #22d3ee)
+    drop-shadow(0 0 36px rgba(56, 189, 248, 0.85))
+    drop-shadow(0 0 64px rgba(168, 85, 247, 0.55))
+    drop-shadow(0 12px 28px rgba(0, 0, 0, 0.55));
+  transition: filter 0.35s ease, transform 0.35s ease;
+}
+.bovas-bot-glow {
+  position: absolute;
+  inset: -18% -12% -8% -12%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255, 43, 214, 0.55) 0%, transparent 55%),
+    radial-gradient(circle at 50% 55%, rgba(56, 189, 248, 0.4) 0%, transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.35) 0%, transparent 70%);
+  filter: blur(18px);
+  z-index: 1;
+  pointer-events: none;
+  animation: bovas-bot-pulse 3.2s ease-in-out infinite;
+}
+.bovas-bot-label {
+  position: relative;
+  z-index: 2;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow:
+    0 0 8px #ff2bd6,
+    0 0 18px #a855f7,
+    0 0 28px rgba(56, 189, 248, 0.8);
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(10, 6, 20, 0.55);
+  border: 1px solid rgba(255, 43, 214, 0.45);
+  box-shadow:
+    0 0 12px rgba(255, 43, 214, 0.4),
+    0 0 24px rgba(168, 85, 247, 0.3),
+    inset 0 0 12px rgba(255, 43, 214, 0.15);
+}
+.bovas-bot-hero:hover {
+  transform: translateY(-8px) scale(1.06);
+}
+.bovas-bot-hero:hover .bovas-bot-video {
+  filter:
+    drop-shadow(0 0 10px #22d3ee)
+    drop-shadow(0 0 28px #38bdf8)
+    drop-shadow(0 0 52px rgba(56, 189, 248, 0.95))
+    drop-shadow(0 0 80px rgba(168, 85, 247, 0.7))
+    drop-shadow(0 16px 36px rgba(0, 0, 0, 0.5));
+}
+.bovas-bot-hero:hover .bovas-bot-label {
+  border-color: rgba(255, 43, 214, 0.85);
+  box-shadow:
+    0 0 16px rgba(255, 43, 214, 0.65),
+    0 0 32px rgba(168, 85, 247, 0.5),
+    inset 0 0 14px rgba(255, 43, 214, 0.25);
+}
+
+@keyframes bovas-bot-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes bovas-bot-pulse {
+  0%, 100% { opacity: 0.75; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+/* Mobile section — hidden on desktop */
+.bovas-bot-mobile-section {
+  display: none;
+  padding: 48px 20px 56px;
+  text-align: center;
+}
+.bovas-bot-mobile-inner {
+  max-width: 420px;
+  margin: 0 auto;
+}
+.bovas-bot-mobile-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: #fff;
+  position: relative;
+  padding: 24px 16px;
+  border-radius: 24px;
+  background: linear-gradient(160deg, rgba(40, 12, 60, 0.65), rgba(10, 8, 24, 0.8));
+  border: 1px solid rgba(255, 43, 214, 0.35);
+  box-shadow:
+    0 0 24px rgba(168, 85, 247, 0.35),
+    0 0 48px rgba(255, 43, 214, 0.2),
+    inset 0 0 30px rgba(56, 189, 248, 0.08);
+}
+.bovas-bot-mobile-link .bovas-bot-video {
+  width: min(180px, 48vw);
+  height: auto;
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  border: none;
+  outline: none;
+  pointer-events: none;
+  filter:
+    drop-shadow(0 0 8px #22d3ee)
+    drop-shadow(0 0 22px #38bdf8)
+    drop-shadow(0 0 40px rgba(168, 85, 247, 0.55));
+}
+.bovas-bot-mobile-link .bovas-bot-glow {
+  inset: 5% 10% 25% 10%;
+}
+.bovas-bot-mobile-copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.bovas-bot-mobile-copy p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 260px;
+}
+.bovas-bot-cta {
+  margin-top: 6px;
+  pointer-events: none;
+}
+
+/* Desktop: only the inline bot under EXPLORE BOVARYNOW (hide hero float) */
+.bovas-bot-hero {
+  display: none !important;
+}
+
+/* Mobile end-of-page bot: show only on small screens */
+@media (max-width: 960px) {
+  .bovas-bot-mobile-section {
+    display: block;
+  }
+  /* avoid double robot on mobile: hide inline under button, keep end-of-page */
+  .bovas-bot-inline {
+    display: none !important;
+  }
+}
+
+/* Extra small screens: slightly smaller float if ever shown */
+@media (min-width: 961px) and (max-width: 1100px) {
+  .bovas-bot-hero {
+    width: clamp(120px, 16vw, 180px);
+    bottom: clamp(10%, 14vh, 18%);
+  }
+}
+
+
+/* Bovas Bot — larger, beside the phone */
+.bovas-bot-inline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #fff;
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 4;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  justify-self: center;
+  margin-top: -90px;
+  transition: transform 0.35s ease;
+  animation: bovas-bot-float 4.5s ease-in-out infinite;
+}
+.bovas-bot-inline .bovas-bot-video {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  border: none;
+  outline: none;
+  pointer-events: none;
+  filter:
+    drop-shadow(0 0 8px #22d3ee)
+    drop-shadow(0 0 22px #38bdf8)
+    drop-shadow(0 0 40px rgba(56, 189, 248, 0.85))
+    drop-shadow(0 0 60px rgba(168, 85, 247, 0.5));
+  transition: filter 0.35s ease;
+}
+.bovas-bot-inline .bovas-bot-glow {
+  position: absolute;
+  inset: -14% -10% 8% -10%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(34, 211, 238, 0.5) 0%, transparent 55%),
+    radial-gradient(circle at 50% 55%, rgba(168, 85, 247, 0.35) 0%, transparent 60%);
+  filter: blur(16px);
+  z-index: 1;
+  pointer-events: none;
+  animation: bovas-bot-pulse 3.2s ease-in-out infinite;
+}
+.bovas-bot-inline .bovas-bot-label {
+  position: relative;
+  z-index: 2;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 0 8px #22d3ee, 0 0 16px #a855f7;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(10, 6, 20, 0.55);
+  border: 1px solid rgba(34, 211, 238, 0.45);
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.4);
+}
+.bovas-bot-inline:hover {
+  transform: translateY(-8px) scale(1.06);
+}
+.bovas-bot-inline:hover .bovas-bot-video {
+  filter:
+    drop-shadow(0 0 12px #22d3ee)
+    drop-shadow(0 0 28px #38bdf8)
+    drop-shadow(0 0 50px rgba(56, 189, 248, 0.95))
+    drop-shadow(0 0 70px rgba(168, 85, 247, 0.65));
+}
+.bovarynow-explore-btn {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 1100px) and (min-width: 961px) {
+  .bovas-bot-inline {
+    max-width: 180px;
+    margin-top: -60px;
+  }
+  .bovas-bot-inline .bovas-bot-video {
+    max-width: 170px;
+  }
+}
+
+@media (max-width: 960px) {
+  .bovarynow-home-section-head {
+    margin-bottom: 6px !important;
+  }
+  .bovarynow-home-section-copy {
+    padding-top: 4px !important;
+  }
+  .bovas-bot-inline {
+    display: none !important;
+  }
 }
