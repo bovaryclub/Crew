@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; media-src 'self' https://ik.imagekit.io https://*.imagekit.io; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://i.imgur.com https://ik.imagekit.io https://*.imagekit.io; connect-src 'self' https://*.supabase.co wss://*.supabase.co;">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BovaryNow Desktop | Windows Companion App</title>
+<meta name="description" content="BovaryNow Desktop — the official Windows companion for Bovary Club Society. Live countdown, today's events, tray notifications and auto-updates.">
+<meta name="theme-color" content="#05050a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=14">
+</head>
+<body class="bovarynow-page bovarynow-desktop-page">
+<div class="bg-grid"></div><div class="bg-glow"></div><div class="bn-page-wallpaper" aria-hidden="true"></div>
+<header class="navbar">
+ <div class="nav-inner">
+  <a href="index.html" class="logo"><div class="logo-icon logo-icon-img"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/Image_12_de_ago._de_2026__22_15_27-removebg-preview.png" alt="Bovary" width="36" height="36"></div><span>BOVARY</span></a>
+  <nav class="nav-links">
+   <a href="index.html">HOME</a>
+   <a href="bovarynow.html">MOBILE APP</a>
+   <a href="#features">FEATURES</a>
+   <a href="#modes">VIEW MODES</a>
+   <a href="#howto">HOW TO USE</a>
+   <a href="#prefs">PREFERENCES</a>
+  </nav>
+  <div class="nav-actions">
+   <a href="https://www.mediafire.com/file/wsroxkwo8ebt9bu/BovaryNowDesktop.exe/file" target="_blank" rel="noopener noreferrer" class="btn-install-app btn-desktop-app">DOWNLOAD DESKTOP</a>
+   <a href="https://discord.gg/4RJHKCpkfa" target="_blank" rel="noopener" class="btn-discord">DISCORD</a>
+  </div>
+  <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+ </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+ <a href="index.html">HOME</a>
+ <a href="bovarynow.html">MOBILE APP</a>
+ <a href="#features">FEATURES</a>
+ <a href="#modes">VIEW MODES</a>
+ <a href="#howto">HOW TO USE</a>
+ <a href="#prefs">PREFERENCES</a>
+ <a href="https://www.mediafire.com/file/wsroxkwo8ebt9bu/BovaryNowDesktop.exe/file" target="_blank" rel="noopener noreferrer" class="btn-install-app">DOWNLOAD DESKTOP EXE</a>
+ <a href="https://discord.gg/4RJHKCpkfa" target="_blank" rel="noopener" class="btn-discord">DISCORD</a>
+</div>
+
+<section class="bovarynow-hero bovarynow-hero-v2 bn-desktop-hero">
+ <div class="bn-hero-device-first">
+  <div class="bn-device-wrap bn-win-wrap">
+   <div class="bn-win-window" aria-label="BovaryNow Desktop window mockup">
+    <div class="bn-win-titlebar">
+     <div class="bn-win-title">
+      <span class="bn-win-app-icon" aria-hidden="true"></span>
+      <span>BovaryNow Desktop</span>
+     </div>
+     <div class="bn-win-controls" aria-hidden="true">
+      <span class="bn-win-btn bn-win-min"></span>
+      <span class="bn-win-btn bn-win-max"></span>
+      <span class="bn-win-btn bn-win-close"></span>
+     </div>
+    </div>
+    <div class="bn-win-body">
+     <div class="bn-app-top"><span>BOVARY NOW</span><small>DESKTOP · MINI</small></div>
+     <div class="bn-app-status"><span class="bn-status-live">● SESSION ACTIVE</span><span class="bn-status-pill">LEGACY</span></div>
+     <div class="bn-ui-banner"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%207%20de%20set.%20de%202026,%2023_30_11.png?updatedAt=1788837359779" alt="BovaryNow current session" loading="eager"><div class="bn-ui-banner-label"><small>CURRENT SESSION</small><strong>LEGACY MEET</strong></div></div>
+     <div class="bn-ui-count active">SESSION ACTIVE</div>
+     <div class="bn-ui-grid"><div class="bn-ui-meta"><small>DATE / TIME</small><b>EVENT TIME</b></div><div class="bn-ui-meta"><small>HOST</small><b>BOVARY</b></div></div>
+     <div class="bn-ui-gallery"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%203%20de%20set.%20de%202026,%2023_23_31.png?updatedAt=1788579035652" alt="Upcoming Bovary meet"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%204%20de%20set.%20de%202026,%2023_15_46.png?updatedAt=1788579035483" alt="Bovary meet showcase"></div>
+     <div class="bn-phone-extra">
+      <div class="bn-phone-extra-head"><span>COMMUNITY NETWORK</span><small>2 SERVERS</small></div>
+      <div class="bn-phone-emblems">
+       <div class="bn-phone-emblem"><img src="https://ik.imagekit.io/BassaniStudios/images-removebg-preview.png" alt="GTA Legacy emblem"><div><small>LEGACY</small><b>GTA LEGACY</b></div></div>
+       <div class="bn-phone-emblem"><img src="https://ik.imagekit.io/BassaniStudios/images%20(12).jpg?updatedAt=1789080843462" alt="Community server emblem"><div><small>FIVEM</small><b>COMMUNITY</b></div></div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+
+ <div class="bn-wall-sign" aria-label="Bovary Club Society"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/qweweqwewqewqeqweqweqwe.png?updatedAt=1789053097262" alt="Bovary Club Society" loading="eager"></div>
+
+ <div class="bn-version-cta bn-desktop-hero-cta" aria-label="Download desktop app">
+  <a href="https://www.mediafire.com/file/wsroxkwo8ebt9bu/BovaryNowDesktop.exe/file" target="_blank" rel="noopener noreferrer" class="bn-version-btn bn-version-desktop">
+   <span class="bn-version-icon" aria-hidden="true">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+   </span>
+   <span class="bn-version-label">download desktop</span>
+   <span class="bn-version-sub">Windows EXE · No install required</span>
+  </a>
+  <a href="bovarynow.html" class="bn-version-btn bn-version-mobile">
+   <span class="bn-version-icon" aria-hidden="true">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+   </span>
+   <span class="bn-version-label">mobile app version</span>
+   <span class="bn-version-sub">Android APK · Switch</span>
+  </a>
+ </div>
+
+ <div class="bn-hero-lower">
+  <div class="bn-hero-copy">
+   <span class="bn-overline"><i></i> WINDOWS COMPANION · SYSTEM TRAY</span>
+   <h1>BOVARY<span class="bn-gradient">NOW</span> <span class="bn-desktop-tag">DESKTOP</span></h1>
+   <p><strong>The Bovary Now desktop version is now available.</strong><br>
+   Live countdown, today's events, tray notifications and auto-updates — always visible on your Windows desktop without needing Discord open.</p>
+   <div class="bn-hero-actions">
+    <a href="https://www.mediafire.com/file/wsroxkwo8ebt9bu/BovaryNowDesktop.exe/file" target="_blank" rel="noopener noreferrer" class="btn-primary">DOWNLOAD BOVARYNOW DESKTOP →</a>
+    <a href="#features" class="btn-secondary">EXPLORE FEATURES</a>
+   </div>
+   <div class="bn-note">WINDOWS · NO LOGIN · NO INSTALL · SYSTEM TRAY</div>
+  </div>
+  <div class="bn-android-visual bn-desktop-visual" aria-label="Windows desktop platform visual">
+   <img src="https://ik.imagekit.io/BassaniStudios/cb68d74eea0586e85a785358bc75ecea.png" alt="Desktop system visual" loading="eager">
+  </div>
+ </div>
+ <div class="bn-scroll-cue">SCROLL TO EXPLORE</div>
+</section>
+
+<!-- FEATURES -->
+<section class="bn-section" id="features">
+ <div class="bn-section-head">
+  <span class="label">WHAT IT DOES</span>
+  <h2>BUILT FOR THE <span>DESKTOP</span></h2>
+  <p>Everything you need about Bovary sessions, always one click away on Windows.</p>
+ </div>
+ <div class="bn-feature-grid bn-desktop-features">
+  <article class="bn-feature">
+   <div class="bn-feature-icon">⏱️</div>
+   <h3>LIVE COUNTDOWN</h3>
+   <p>Shows the <strong>next event</strong> with a live countdown so you always know when the session starts.</p>
+  </article>
+  <article class="bn-feature">
+   <div class="bn-feature-icon">📋</div>
+   <h3>TODAY'S EVENTS</h3>
+   <p>Lists <strong>today's events</strong> in one clean panel — no need to open Discord or the website.</p>
+  </article>
+  <article class="bn-feature">
+   <div class="bn-feature-icon">🔔</div>
+   <h3>SMART NOTIFICATIONS</h3>
+   <p>Notifies you <strong>30 minutes beforehand</strong> and again when the session goes <strong>LIVE</strong>.</p>
+  </article>
+  <article class="bn-feature">
+   <div class="bn-feature-icon">🖼️</div>
+   <h3>EVENT DETAILS</h3>
+   <p>Opens event details (description + image) with a <strong>single click</strong> from the panel.</p>
+  </article>
+  <article class="bn-feature">
+   <div class="bn-feature-icon">🔄</div>
+   <h3>AUTO-UPDATES</h3>
+   <p>The app keeps itself up to date so you always run the latest version without extra steps.</p>
+  </article>
+  <article class="bn-feature">
+   <div class="bn-feature-icon">🛡️</div>
+   <h3>NO LOGIN NEEDED</h3>
+   <p>Does <strong>not</strong> require login, passwords, access permissions or Discord synchronization.</p>
+  </article>
+ </div>
+</section>
+
+<!-- VIEW MODES -->
+<section class="bn-section alt" id="modes">
+ <div class="bn-section-head">
+  <span class="label">VIEW MODES</span>
+  <h2>THREE WAYS TO <span>SEE</span></h2>
+  <p>Pick the layout that fits your desktop — from minimal clock to full dashboard.</p>
+ </div>
+ <div class="bn-modes-grid">
+  <article class="bn-mode-card">
+   <div class="bn-mode-icon">◆</div>
+   <h3>COMPACT</h3>
+   <p class="bn-mode-tag">Minimal space</p>
+   <p>Clock + next event + countdown. Takes up the least screen space while staying useful.</p>
+  </article>
+  <article class="bn-mode-card bn-mode-featured">
+   <div class="bn-mode-icon">▣</div>
+   <h3>MINI</h3>
+   <p class="bn-mode-tag">Standard view</p>
+   <p>Next event, banner and today's list — the balanced default for most members.</p>
+  </article>
+  <article class="bn-mode-card">
+   <div class="bn-mode-icon">▦</div>
+   <h3>FULL</h3>
+   <p class="bn-mode-tag">Complete dashboard</p>
+   <p>Full dashboard: <strong>Legacy</strong> · <strong>FiveM</strong> · <strong>Events</strong> in one place.</p>
+  </article>
+ </div>
+</section>
+
+<!-- HOW TO USE -->
+<section class="bn-section" id="howto">
+ <div class="bn-section-head">
+  <span class="label">HOW TO USE</span>
+  <h2>SIMPLE. <span>ALWAYS READY.</span></h2>
+  <p>No installer. Run once and it stays in your system tray.</p>
+ </div>
+ <div class="bn-howto-steps">
+  <div class="bn-howto-step">
+   <span class="bn-howto-num">01</span>
+   <div>
+    <h4>Run the shortcut</h4>
+    <p>Run the <strong>BovaryNow.exe</strong> shortcut once. The panel appears on screen; the icon stays in the system tray.</p>
+   </div>
+  </div>
+  <div class="bn-howto-step">
+   <span class="bn-howto-num">02</span>
+   <div>
+    <h4>Close without quitting</h4>
+    <p>Click the <strong>X</strong> → hides to the tray (does not close the app). Click the tray icon → reopens the app.</p>
+   </div>
+  </div>
+  <div class="bn-howto-step">
+   <span class="bn-howto-num">03</span>
+   <div>
+    <h4>No installation</h4>
+    <p>No install required. The app creates a desktop shortcut after the first run and runs in the background via the system tray.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- PREFERENCES -->
+<section class="bn-section alt" id="prefs">
+ <div class="bn-section-head">
+  <span class="label">PREFERENCES</span>
+  <h2>MAKE IT <span>YOURS</span></h2>
+  <p>Always save settings to apply changes in the app.</p>
+ </div>
+ <div class="bn-prefs-grid">
+  <div class="bn-pref-chip">Accent color</div>
+  <div class="bn-pref-chip">Font</div>
+  <div class="bn-pref-chip">Theme (dark / light)</div>
+  <div class="bn-pref-chip">Start with Windows</div>
+  <div class="bn-pref-chip">Always on top</div>
+  <div class="bn-pref-chip">Sync interval</div>
+  <div class="bn-pref-chip">Notifications · 30 min before</div>
+  <div class="bn-pref-chip">Notifications · when LIVE</div>
+ </div>
+ <div class="bn-important-box">
+  <span class="bn-important-icon">✦</span>
+  <div>
+   <strong>Important</strong>
+   <p>Does not require login/passwords, access permissions, or Discord synchronization. If you find any bugs or have ideas, send them on Discord.</p>
+  </div>
+ </div>
+</section>
+
+<!-- CTA -->
+<section class="bn-section bn-cta">
+ <h2>OPEN. CHECK. DRIVE.</h2>
+ <p>BovaryNow Desktop keeps the important information on your screen — even when Discord is closed.</p>
+ <a href="https://www.mediafire.com/file/wsroxkwo8ebt9bu/BovaryNowDesktop.exe/file" target="_blank" rel="noopener noreferrer" class="btn-primary">DOWNLOAD BOVARYNOW DESKTOP →</a>
+ <p style="margin-top:18px"><a href="bovarynow.html" class="btn-secondary">← VIEW MOBILE VERSION</a></p>
+ <div class="bn-footer-note">BOVARY CLUB SOCIETY · BOVARYNOW DESKTOP · WINDOWS COMPANION</div>
+</section>
+
+<script src="script.js?v=8"></script>
+</body>
+</html>
