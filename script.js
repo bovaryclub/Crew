@@ -1429,3 +1429,66 @@ async function incrementReaction(photoId, reactionId) {
   }
   loadEvents();
 })();
+
+/* ===== BASSANI STUDIOS BANNER — 3D tilt + magnetic button ===== */
+(function () {
+  const banner = document.querySelector('.bassani-banner');
+  const btn = document.querySelector('.bassani-banner-btn');
+  if (!banner) return;
+
+  // Skip 3D tilt on touch devices (no fine pointer)
+  const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+  if (isTouch) return;
+
+  const maxTilt = 2; // degrees — very soft depth effect
+
+  banner.addEventListener('mousemove', (e) => {
+    const rect = banner.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    const rotateY = (x - 0.5) * maxTilt * 2;
+    const rotateX = (0.5 - y) * maxTilt * 2;
+
+    banner.classList.add('is-tilting');
+    banner.style.transform =
+      `perspective(1600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+    // Very soft parallax on image frame
+    const imgFrame = banner.querySelector('.bassani-img-frame');
+    if (imgFrame) {
+      const imgX = (x - 0.5) * 3;
+      const imgY = (y - 0.5) * 2.5;
+      imgFrame.style.transform = `translateZ(16px) translate(${imgX}px, ${imgY}px)`;
+    }
+
+    const content = banner.querySelector('.bassani-banner-content');
+    if (content) {
+      const cX = (x - 0.5) * -1.5;
+      const cY = (y - 0.5) * -1.2;
+      content.style.transform = `translateZ(12px) translate(${cX}px, ${cY}px)`;
+    }
+  });
+
+  banner.addEventListener('mouseleave', () => {
+    banner.classList.remove('is-tilting');
+    banner.style.transform = '';
+    const imgFrame = banner.querySelector('.bassani-img-frame');
+    if (imgFrame) imgFrame.style.transform = 'translateZ(16px)';
+    const content = banner.querySelector('.bassani-banner-content');
+    if (content) content.style.transform = 'translateZ(12px)';
+  });
+
+  // Soft magnetic button
+  if (btn) {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.08}px, ${y * 0.08}px) scale(1.03)`;
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+  }
+})();
