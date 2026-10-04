@@ -21,7 +21,7 @@
   <meta name="twitter:title" content="Videos · Bovary Club Society" />
   <meta name="twitter:description" content="Videos of the meetings — Bovary Club Society on YouTube." />
   <meta name="twitter:image" content="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/Image_12_de_ago._de_2026__22_15_27-removebg-preview.png?tr=w-1200,h-630,fo-auto" />
-  <meta name="theme-color" content="#05050a" />
+  <meta name="theme-color" content="#120a14" />
   <!-- PWA / Add to Home Screen -->
   <link rel="manifest" href="manifest.webmanifest" />
   <meta name="mobile-web-app-capable" content="yes" />
@@ -100,7 +100,7 @@
       font-family: var(--font-display);
       font-size: 12px;
       letter-spacing: 0.14em;
-      color: var(--purple-bright);
+      color: var(--cyan);
     }
     .video-playlist-list {
       overflow-y: auto;
@@ -122,11 +122,11 @@
       transition: all 0.2s;
     }
     .video-item:hover {
-      background: rgba(124, 58, 237, 0.1);
+      background: rgba(0, 245, 255, 0.1);
       border-color: var(--border);
     }
     .video-item.active {
-      background: rgba(124, 58, 237, 0.16);
+      background: rgba(0, 245, 255, 0.16);
       border-color: var(--border-hover);
     }
     .video-thumb {
@@ -172,7 +172,7 @@
       text-align: center;
     }
     .videos-channel a {
-      color: var(--purple-bright);
+      color: var(--cyan);
       font-family: var(--font-display);
       font-size: 12px;
       letter-spacing: 0.1em;
@@ -233,7 +233,7 @@
       <div class="video-player-wrap">
         <div class="video-frame">
           <iframe id="ytPlayer"
-            src="https://www.youtube-nocookie.com/embed/WjZX0OFtQJQ?rel=0"
+            src="https://www.youtube-nocookie.com/embed/sJHeHWb1FG8?rel=0"
             title="Bovary Club Society Video Player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
@@ -282,33 +282,43 @@
 
     const VIDEOS = [
       {
-        id: 'WjZX0OFtQJQ',
-        title: 'Bovary Club Society — Meeting Highlight',
-        description: 'Featured video from BassaniStudio'
-      },
-      {
         id: 'sJHeHWb1FG8',
-        title: 'Meeting clip',
-        description: 'BassaniStudio'
-      },
-      {
-        id: 'TrIW2pfB5jw',
-        title: 'Meeting clip',
-        description: 'BassaniStudio'
+        title: 'Party & Chill Meet',
+        description: 'Featured meeting · BassaniStudio'
       },
       {
         id: 'WRmNSql61ck',
-        title: 'Meeting clip',
+        title: 'San Andreas Meet',
         description: 'BassaniStudio'
       },
       {
         id: 'buznXndQ8S0',
-        title: 'Meeting clip',
+        title: 'Project Cars Meet',
         description: 'BassaniStudio'
       },
       {
-        id: 'DNLhp1ksOUQ',
-        title: 'Meeting clip',
+        id: 'TrIW2pfB5jw',
+        title: "Lost MC Biker's",
+        description: 'BassaniStudio'
+      },
+      {
+        id: 'obUqrlOs4_o',
+        title: 'Crew Meeting Bova',
+        description: 'BassaniStudio'
+      },
+      {
+        id: 'dmn52BzSpIE',
+        title: 'Crew Bovary Club Society',
+        description: 'BassaniStudio'
+      },
+      {
+        id: 'ZuBgfLrqKXA',
+        title: 'Bova Drift Session',
+        description: 'BassaniStudio'
+      },
+      {
+        id: '5NQiD3wLVDA',
+        title: 'Midnight Haunt Session',
         description: 'BassaniStudio'
       },
     ];
@@ -364,7 +374,7 @@
       VIDEOS.forEach((video, index) => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = 'video-item' + (index === 0 ? ' active' : '');
+        btn.className = 'video-item';
 
         const img = document.createElement('img');
         img.className = 'video-thumb';
