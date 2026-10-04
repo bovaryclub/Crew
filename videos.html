@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://i.imgur.com https://imgur.com https://i.ytimg.com https://flagcdn.com https://*.ytimg.com https://ik.imagekit.io https://*.imagekit.io; media-src 'self' https://ik.imagekit.io https://*.imagekit.io blob: data:; connect-src 'self' https://ik.imagekit.io https://*.imagekit.io https://*.supabase.co wss://*.supabase.co; frame-src https://www.youtube.com https://youtube.com; upgrade-insecure-requests" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://i.imgur.com https://imgur.com https://i.ytimg.com https://flagcdn.com https://*.ytimg.com https://ik.imagekit.io https://*.imagekit.io; media-src 'self' https://ik.imagekit.io https://*.imagekit.io blob: data:; connect-src 'self' https://ik.imagekit.io https://*.imagekit.io https://*.supabase.co wss://*.supabase.co; frame-src https://www.youtube.com https://youtube.com https://www.youtube-nocookie.com; upgrade-insecure-requests" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -231,19 +231,14 @@
 
     <div class="videos-layout">
       <div class="video-player-wrap">
-        <a class="fake-player" id="ytPlayerLink" href="https://www.youtube.com/watch?v=WjZX0OFtQJQ" target="_blank" rel="noopener">
-          <img class="fake-player-thumb" id="ytPlayerThumb" src="https://i.ytimg.com/vi/WjZX0OFtQJQ/maxresdefault.jpg" alt=""
-            />
-          <div class="fake-player-overlay">
-            <span class="fake-play-btn" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            </span>
-          </div>
-          <div class="fake-player-bar">
-            <span class="fake-player-yt">YouTube</span>
-            <span class="fake-player-title" id="ytBarTitle">Featured meeting video</span>
-          </div>
-        </a>
+        <div class="video-frame">
+          <iframe id="ytPlayer"
+            src="https://www.youtube-nocookie.com/embed/WjZX0OFtQJQ?rel=0"
+            title="Bovary Club Society Video Player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
+        </div>
         <div class="video-now">
           <h3 id="videoTitle">Select a video</h3>
           <p id="videoDesc">Choose a meeting video from the list to play it here.</p>
@@ -329,26 +324,30 @@
       channelLink.hidden = false;
     }
 
-    function embedUrl(id) {
-      return 'https://www.youtube.com/watch?v=' + encodeURIComponent(id)
+    function embedUrl(id, autoplay) {
+      // youtube-nocookie + referrerpolicy helps avoid Error 153 (same as Bassani Studios)
+      const q = autoplay ? '?autoplay=1&rel=0' : '?rel=0';
+      return 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + q;
     }
 
     function thumbUrl(id) {
       return 'https://i.ytimg.com/vi/' + encodeURIComponent(id) + '/hqdefault.jpg';
     }
 
-    function playVideo(video, btn) {
-      const link = document.getElementById('ytPlayerLink');
-      const thumb = document.getElementById('ytPlayerThumb');
-      const barTitle = document.getElementById('ytBarTitle');
-      const safeId = encodeURIComponent(video.id);
-      link.href = 'https://www.youtube.com/watch?v=' + safeId;
-      thumb.src = 'https://i.ytimg.com/vi/' + safeId + '/maxresdefault.jpg';
+    function playVideo(video, btn, autoplay) {
+      if (player) {
+        player.src = embedUrl(video.id, !!autoplay);
+      }
       titleEl.textContent = video.title || 'Meeting video';
       descEl.textContent = video.description || '';
-      if (barTitle) barTitle.textContent = video.title || 'Meeting video';
       listEl.querySelectorAll('.video-item').forEach((el) => el.classList.remove('active'));
       if (btn) btn.classList.add('active');
+      // Keep URL in sync (optional deep-link)
+      try {
+        const url = new URL(window.location);
+        url.searchParams.set('v', video.id);
+        history.replaceState(null, '', url);
+      } catch (e) {}
     }
 
     function renderList() {
@@ -386,11 +385,20 @@
         meta.appendChild(span);
         btn.appendChild(img);
         btn.appendChild(meta);
-        btn.addEventListener('click', () => playVideo(video, btn));
+        btn.addEventListener('click', () => playVideo(video, btn, true));
         listEl.appendChild(btn);
       });
 
-      playVideo(VIDEOS[0], listEl.querySelector('.video-item'));
+      // Prefer video from URL ?v= if present
+      const params = new URLSearchParams(window.location.search);
+      const startId = params.get('v');
+      let startIdx = 0;
+      if (startId) {
+        const found = VIDEOS.findIndex(v => v.id === startId);
+        if (found >= 0) startIdx = found;
+      }
+      const items = listEl.querySelectorAll('.video-item');
+      playVideo(VIDEOS[startIdx], items[startIdx] || null, false);
     }
 
     renderList();
