@@ -46,17 +46,13 @@ function initParallax() {
 // ===== BOOT SCREEN =====
 const bootScreen = document.getElementById('boot-screen');
 const bootStatus = document.getElementById('bootStatus');
-const bootBar = document.getElementById('bootBar');
 
 const bootMessages = [
-  'INITIALIZING SYSTEM...',
-  'CAR MEETS LOADING...',
-  'LEGACY SERVER LOADING...',
-  'FIVEM LINK ESTABLISHING...',
+  'ENGINES STARTING...',
   'STREET CIRCUIT ONLINE...',
   'NEON GRID SYNC...',
   'CREW MODULES ACTIVE...',
-  'ENGINES ONLINE'
+  'SYSTEM READY'
 ];
 
 let bootFinished = false;
@@ -97,16 +93,20 @@ function spawnBootParticles() {
   } catch (_) {}
 }
 
-function setMeter(id, pctId, value) {
-  const bar = document.getElementById(id);
-  const label = document.getElementById(pctId);
-  if (bar) bar.style.width = value + '%';
-  if (label) label.textContent = value + '%';
+function setBootCarProgress(pct) {
+  const car = document.getElementById('bootCar');
+  const glow = document.getElementById('bootTrackGlow');
+  const pctEl = document.getElementById('bootPercent');
+  const clamped = Math.max(0, Math.min(100, pct));
+  // Car travels from ~0% to ~92% so the front reaches the end of the track
+  if (car) car.style.left = (clamped * 0.92) + '%';
+  if (glow) glow.style.width = clamped + '%';
+  if (pctEl) pctEl.textContent = Math.round(clamped) + '%';
 }
 
 function runBoot() {
   // Absolute safety: never stay locked on boot
-  setTimeout(finishBoot, 3500);
+  setTimeout(finishBoot, 4000);
 
   if (!bootScreen) {
     finishBoot();
@@ -114,8 +114,8 @@ function runBoot() {
   }
 
   const isMobile = window.matchMedia('(max-width: 900px), (hover: none), (pointer: coarse)').matches;
-  const stepMs = isMobile ? 220 : 320;
-  const endDelay = isMobile ? 180 : 320;
+  const duration = isMobile ? 2200 : 2800;
+  const endDelay = isMobile ? 220 : 350;
 
   bootScreen.classList.remove('done');
   bootScreen.style.removeProperty('display');
@@ -124,38 +124,33 @@ function runBoot() {
 
   document.body.classList.add('booting');
   spawnBootParticles();
+  setBootCarProgress(0);
 
-  const pctEl = document.getElementById('bootPercent');
-  const logLines = document.querySelectorAll('.boot-log-line[data-log]');
-  let i = 0;
+  const start = performance.now();
+  let msgIndex = 0;
 
-  const step = () => {
+  const tick = (now) => {
     if (bootFinished) return;
     try {
-      if (i < bootMessages.length) {
-        if (bootStatus) bootStatus.textContent = bootMessages[i];
-        const pct = Math.round(((i + 1) / bootMessages.length) * 100);
-        if (bootBar) bootBar.style.width = pct + '%';
-        if (pctEl) pctEl.textContent = pct + '%';
+      const t = Math.min(1, (now - start) / duration);
+      // Ease-out so the car feels like it accelerates then settles
+      const eased = 1 - Math.pow(1 - t, 2.2);
+      const pct = eased * 100;
+      setBootCarProgress(pct);
 
-        setMeter('m1', 'mp1', Math.min(100, Math.round(pct * 1.05)));
-        setMeter('m2', 'mp2', Math.min(100, Math.round(pct * 0.92)));
-        setMeter('m3', 'mp3', Math.min(100, Math.round(pct * 0.85)));
-        setMeter('m4', 'mp4', Math.min(100, Math.round(pct * 0.78)));
+      const nextMsg = Math.min(
+        bootMessages.length - 1,
+        Math.floor(t * bootMessages.length)
+      );
+      if (nextMsg !== msgIndex) {
+        msgIndex = nextMsg;
+        if (bootStatus) bootStatus.textContent = bootMessages[msgIndex];
+      }
 
-        logLines.forEach((line) => {
-          const n = parseInt(line.getAttribute('data-log'), 10);
-          if (i >= n) line.classList.add('on');
-        });
-
-        i++;
-        setTimeout(step, stepMs);
+      if (t < 1) {
+        requestAnimationFrame(tick);
       } else {
-        setMeter('m1', 'mp1', 100);
-        setMeter('m2', 'mp2', 100);
-        setMeter('m3', 'mp3', 100);
-        setMeter('m4', 'mp4', 100);
-        if (pctEl) pctEl.textContent = '100%';
+        setBootCarProgress(100);
         if (bootStatus) bootStatus.textContent = 'SYSTEM READY · ENGINES ONLINE';
         setTimeout(finishBoot, endDelay);
       }
@@ -165,7 +160,7 @@ function runBoot() {
     }
   };
 
-  setTimeout(step, 100);
+  requestAnimationFrame(tick);
 }
 
 // ===== CUSTOM CURSOR =====

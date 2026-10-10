@@ -5959,9 +5959,9 @@ body:not(.booting) .join-main {
 
 .boot-core {
   position: relative;
-  width: min(280px, 70vw);
-  height: min(280px, 70vw);
-  margin: 0 auto 18px;
+  width: min(360px, 78vw);
+  height: min(360px, 78vw);
+  margin: 0 auto 22px;
 }
 
 .boot-radar {
@@ -5975,10 +5975,10 @@ body:not(.booting) .join-main {
   border: 1px solid rgba(34, 211, 238, 0.25);
   box-shadow: inset 0 0 20px rgba(0, 245, 255, 0.12);
 }
-.boot-radar-ring.r1 { inset: 8%; border-color: rgba(0, 245, 255, 0.35); }
-.boot-radar-ring.r2 { inset: 20%; border-color: rgba(34, 211, 238, 0.3); animation: bootRingPulse 3s ease-in-out infinite; }
-.boot-radar-ring.r3 { inset: 32%; border-color: rgba(244, 114, 182, 0.28); }
-.boot-radar-ring.r4 { inset: 44%; border-color: rgba(103, 232, 249, 0.4); }
+.boot-radar-ring.r1 { inset: 6%; border-color: rgba(0, 245, 255, 0.35); }
+.boot-radar-ring.r2 { inset: 16%; border-color: rgba(34, 211, 238, 0.3); animation: bootRingPulse 3s ease-in-out infinite; }
+.boot-radar-ring.r3 { inset: 28%; border-color: rgba(244, 114, 182, 0.28); }
+.boot-radar-ring.r4 { inset: 40%; border-color: rgba(103, 232, 249, 0.4); }
 
 @keyframes bootRingPulse {
   0%, 100% { opacity: 0.55; transform: scale(1); }
@@ -5987,7 +5987,7 @@ body:not(.booting) .join-main {
 
 .boot-radar-sweep {
   position: absolute;
-  inset: 12%;
+  inset: 10%;
   border-radius: 50%;
   background: conic-gradient(from 0deg, transparent 0deg, rgba(34, 211, 238, 0.28) 40deg, transparent 70deg);
   animation: bootSweep 3.5s linear infinite;
@@ -6004,12 +6004,12 @@ body:not(.booting) .join-main {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 42%;
-  height: 42%;
+  width: 58%;
+  height: 58%;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid rgba(103, 232, 249, 0.55);
-  box-shadow: 0 0 28px rgba(0, 245, 255, 0.45), 0 0 50px rgba(34, 211, 238, 0.25);
+  border: 3px solid rgba(103, 232, 249, 0.65);
+  box-shadow: 0 0 36px rgba(0, 245, 255, 0.55), 0 0 70px rgba(34, 211, 238, 0.3), inset 0 0 20px rgba(0, 245, 255, 0.15);
   z-index: 3;
   animation: bootOrbPulse 2.4s ease-in-out infinite;
 }
@@ -6025,112 +6025,181 @@ body:not(.booting) .join-main {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 2;
+  z-index: 4;
 }
 .boot-tag {
   position: absolute;
   font-family: var(--font-display);
-  font-size: 9px;
-  letter-spacing: 0.14em;
-  padding: 5px 10px;
-  border: 1px solid rgba(103, 232, 249, 0.35);
-  background: rgba(5, 5, 16, 0.75);
-  color: rgba(224, 231, 255, 0.85);
-  border-radius: 4px;
-  box-shadow: 0 0 12px rgba(0, 245, 255, 0.18);
-}
-.boot-tag.t1 { left: -6%; top: 38%; }
-.boot-tag.t2 { right: -4%; top: 28%; }
-.boot-tag.t3 { left: 8%; bottom: 18%; }
-.boot-tag.t4 { right: 6%; bottom: 28%; }
-
-.boot-panels {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px 28px;
-  max-width: 720px;
-  margin: 0 auto 14px;
-  text-align: left;
-}
-
-.boot-log {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 12px;
-  line-height: 1.7;
-  color: rgba(167, 139, 250, 0.75);
-}
-.boot-log-line.active {
+  font-weight: 700;
+  font-size: clamp(0.72rem, 2.2vw, 0.95rem);
+  letter-spacing: 0.18em;
+  padding: 10px 18px;
+  border: 1px solid rgba(103, 232, 249, 0.55);
+  background: linear-gradient(135deg, rgba(5, 12, 28, 0.92), rgba(12, 8, 28, 0.88));
   color: #e0e7ff;
-  text-shadow: 0 0 10px rgba(196, 181, 253, 0.35);
+  border-radius: 8px;
+  box-shadow:
+    0 0 18px rgba(0, 245, 255, 0.28),
+    0 4px 16px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  text-shadow: 0 0 12px rgba(103, 232, 249, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  white-space: nowrap;
 }
-.boot-log-line[data-log] {
-  opacity: 0.25;
-  transition: opacity 0.35s ease, color 0.35s ease;
+.boot-tag.t1 {
+  left: 50%;
+  top: -4%;
+  transform: translateX(-50%);
+  border-color: rgba(0, 245, 255, 0.6);
 }
-.boot-log-line[data-log].on {
-  opacity: 1;
-  color: #a5f3fc;
+.boot-tag.t2 {
+  right: -8%;
+  top: 42%;
+  transform: translateY(-50%);
+  border-color: rgba(255, 122, 154, 0.55);
+  box-shadow: 0 0 18px rgba(255, 122, 154, 0.25), 0 4px 16px rgba(0, 0, 0, 0.45);
+}
+.boot-tag.t3 {
+  left: 50%;
+  bottom: -4%;
+  transform: translateX(-50%);
+  border-color: rgba(167, 139, 250, 0.55);
+  box-shadow: 0 0 18px rgba(167, 139, 250, 0.25), 0 4px 16px rgba(0, 0, 0, 0.45);
+}
+.boot-tag.t4 {
+  left: -8%;
+  top: 42%;
+  transform: translateY(-50%);
+  border-color: rgba(103, 232, 249, 0.55);
 }
 
-.boot-meters {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+/* ===== CAR LOADING TRACK ===== */
+.boot-car-load {
+  width: min(640px, 92vw);
+  margin: 8px auto 0;
+  text-align: center;
 }
-.boot-meter {
-  display: grid;
-  grid-template-columns: 110px 1fr 40px;
-  gap: 8px;
-  align-items: center;
+.boot-status-line {
   font-family: var(--font-display);
-  font-size: 9px;
-  letter-spacing: 0.1em;
-  color: rgba(196, 181, 253, 0.7);
+  font-size: clamp(0.7rem, 2vw, 0.85rem);
+  letter-spacing: 0.2em;
+  color: #a5f3fc;
+  text-shadow: 0 0 14px rgba(34, 211, 238, 0.45);
+  margin: 0 0 18px;
+  min-height: 1.2em;
 }
-.boot-meter-bar {
-  height: 4px;
-  border-radius: 999px;
-  background: rgba(0, 245, 255, 0.16);
-  border: 1px solid rgba(0, 245, 255, 0.25);
-  overflow: hidden;
-}
-.boot-meter-bar i {
-  display: block;
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, #00F5FF, #67e8f9, #FF7A9A);
-  box-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
-  transition: width 0.35s ease;
-}
-.boot-meter-pct {
-  text-align: right;
-  color: #67e8f9;
-}
-
-.boot-bottom {
-  margin-top: 4px;
-}
-.boot-bottom .boot-bar {
-  width: min(420px, 80vw);
+.boot-track {
+  position: relative;
+  width: 100%;
+  height: 72px;
   margin: 0 auto;
 }
-.boot-bottom .boot-percent {
-  margin-top: 8px;
+.boot-track-road {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 10px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: rgba(0, 245, 255, 0.1);
+  border: 1px solid rgba(0, 245, 255, 0.28);
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.12), inset 0 0 12px rgba(0, 0, 0, 0.35);
+}
+.boot-track-line {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 14px,
+    rgba(103, 232, 249, 0.35) 14px,
+    rgba(103, 232, 249, 0.35) 22px
+  );
+  opacity: 0.55;
+  animation: bootTrackDash 0.6s linear infinite;
+}
+@keyframes bootTrackDash {
+  from { background-position: 0 0; }
+  to { background-position: -36px 0; }
+}
+.boot-track-glow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0%;
+  background: linear-gradient(90deg, rgba(0, 245, 255, 0.15), rgba(0, 245, 255, 0.55), rgba(255, 122, 154, 0.65));
+  box-shadow: 0 0 16px rgba(0, 245, 255, 0.45);
+  border-radius: 999px;
+  transition: width 0.12s linear;
+}
+.boot-car {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 96px;
+  height: 40px;
+  transform: translate(-8%, -58%);
+  transition: left 0.12s linear;
+  z-index: 2;
+  filter: drop-shadow(0 0 10px rgba(0, 245, 255, 0.55));
+}
+.boot-car svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+.boot-car-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+}
+.boot-car-meta .boot-percent {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 3.5vw, 1.55rem);
+  letter-spacing: 0.14em;
+  color: #67e8f9;
+  text-shadow: 0 0 18px rgba(0, 245, 255, 0.55);
+  margin: 0;
+}
+.boot-car-meta .boot-hint {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(196, 181, 253, 0.55);
+  margin: 0;
 }
 
 @media (max-width: 720px) {
-  .boot-panels {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  .boot-tag { display: none; }
   .boot-hud-meta { display: none; }
   .boot-core {
-    width: min(220px, 72vw);
-    height: min(220px, 72vw);
+    width: min(280px, 78vw);
+    height: min(280px, 78vw);
   }
-  .boot-meter {
-    grid-template-columns: 90px 1fr 36px;
+  .boot-core-logo {
+    width: 56%;
+    height: 56%;
+  }
+  .boot-tag {
+    font-size: 0.65rem;
+    padding: 8px 12px;
+    letter-spacing: 0.14em;
+  }
+  .boot-tag.t2 { right: -4%; }
+  .boot-tag.t4 { left: -4%; }
+  .boot-car {
+    width: 72px;
+    height: 30px;
+  }
+  .boot-track {
+    height: 56px;
   }
 }
 

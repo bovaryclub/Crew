@@ -68,7 +68,7 @@
             <span class="boot-radar-sweep"></span>
           </div>
           <div class="boot-core-logo">
-            <img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%2012%20de%20ago.%20de%202026,%2022_15_27.png" alt="Bovary" width="110" height="110" />
+            <img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/ChatGPT%20Image%2012%20de%20ago.%20de%202026,%2022_15_27.png" alt="Bovary" width="180" height="180" />
           </div>
           <div class="boot-tags" aria-hidden="true">
             <span class="boot-tag t1">LEGACY</span>
@@ -78,25 +78,42 @@
           </div>
         </div>
 
-        <div class="boot-panels">
-          <div class="boot-log" id="bootLog">
-            <p class="boot-log-line active" id="bootStatus">INITIALIZING SYSTEM...</p>
-            <p class="boot-log-line" data-log="1">&gt; CAR MEETS MODULE: READY</p>
-            <p class="boot-log-line" data-log="2">&gt; LEGACY SERVER: LOADING</p>
-            <p class="boot-log-line" data-log="3">&gt; FIVEM LINK: SYNC_</p>
+        <div class="boot-car-load">
+          <p class="boot-status-line" id="bootStatus">ENGINES STARTING...</p>
+          <div class="boot-track" aria-hidden="true">
+            <div class="boot-track-road">
+              <div class="boot-track-line"></div>
+              <div class="boot-track-glow" id="bootTrackGlow"></div>
+            </div>
+            <div class="boot-car" id="bootCar">
+              <svg viewBox="0 0 120 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                  <linearGradient id="bootCarBody" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#00F5FF"/>
+                    <stop offset="55%" stop-color="#67e8f9"/>
+                    <stop offset="100%" stop-color="#FF7A9A"/>
+                  </linearGradient>
+                  <filter id="bootCarGlow" x="-40%" y="-40%" width="180%" height="180%">
+                    <feGaussianBlur stdDeviation="1.8" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                </defs>
+                <ellipse class="boot-car-shadow" cx="60" cy="42" rx="38" ry="3.5" fill="rgba(0,245,255,0.25)"/>
+                <path filter="url(#bootCarGlow)" fill="url(#bootCarBody)" d="M14 30 L22 18 H38 L46 10 H78 L92 18 H104 L110 26 V34 H100 C98 38 94 40 90 40 C86 40 82 38 80 34 H40 C38 38 34 40 30 40 C26 40 22 38 20 34 H14 Z"/>
+                <path fill="rgba(2,8,20,0.55)" d="M48 12 H74 L84 18 H42 Z"/>
+                <circle cx="30" cy="34" r="7.5" fill="#0a0a14" stroke="#67e8f9" stroke-width="1.5"/>
+                <circle cx="30" cy="34" r="3" fill="#00F5FF"/>
+                <circle cx="90" cy="34" r="7.5" fill="#0a0a14" stroke="#FF7A9A" stroke-width="1.5"/>
+                <circle cx="90" cy="34" r="3" fill="#FF7A9A"/>
+                <rect x="106" y="24" width="6" height="3" rx="1" fill="#FF7A9A" opacity="0.9"/>
+                <rect x="12" y="24" width="5" height="3" rx="1" fill="#00F5FF" opacity="0.85"/>
+              </svg>
+            </div>
           </div>
-          <div class="boot-meters">
-            <div class="boot-meter"><span class="boot-meter-label">CAR MEETS</span><div class="boot-meter-bar"><i id="m1"></i></div><span class="boot-meter-pct" id="mp1">0%</span></div>
-            <div class="boot-meter"><span class="boot-meter-label">LEGACY SERVER</span><div class="boot-meter-bar"><i id="m2"></i></div><span class="boot-meter-pct" id="mp2">0%</span></div>
-            <div class="boot-meter"><span class="boot-meter-label">FIVEM LINK</span><div class="boot-meter-bar"><i id="m3"></i></div><span class="boot-meter-pct" id="mp3">0%</span></div>
-            <div class="boot-meter"><span class="boot-meter-label">CREW CORE</span><div class="boot-meter-bar"><i id="m4"></i></div><span class="boot-meter-pct" id="mp4">0%</span></div>
+          <div class="boot-car-meta">
+            <span class="boot-percent" id="bootPercent">0%</span>
+            <span class="boot-hint">STREET CIRCUIT · NEON GRID · ENGINES ONLINE</span>
           </div>
-        </div>
-
-        <div class="boot-bottom">
-          <div class="boot-bar"><div class="boot-bar-fill" id="bootBar"></div></div>
-          <p class="boot-percent" id="bootPercent">0%</p>
-          <p class="boot-hint">STREET CIRCUIT · NEON GRID · ENGINES ONLINE</p>
         </div>
       </div>
 
