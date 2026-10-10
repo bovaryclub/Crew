@@ -3170,8 +3170,8 @@ h1, h2, h3, h4, .logo, .stat-num, .btn-primary, .btn-secondary,
 }
 
 .commissioners-grid {
-  grid-template-columns: repeat(4, 1fr);
-  max-width: 1100px;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 960px;
 }
 @media (max-width: 960px) {
   .commissioners-grid {
