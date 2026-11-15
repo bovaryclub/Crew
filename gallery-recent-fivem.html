@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://i.imgur.com https://imgur.com https://i.ytimg.com https://flagcdn.com https://*.ytimg.com https://ik.imagekit.io https://*.imagekit.io; media-src 'self' https://ik.imagekit.io https://*.imagekit.io blob: data:; connect-src 'self' https://ik.imagekit.io https://*.imagekit.io https://*.supabase.co wss://*.supabase.co; frame-src https://www.youtube.com https://youtube.com https://www.youtube-nocookie.com; upgrade-insecure-requests" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://i.imgur.com https://imgur.com https://i.ytimg.com https://flagcdn.com https://*.ytimg.com https://ik.imagekit.io https://*.imagekit.io; media-src 'self' https://ik.imagekit.io https://*.imagekit.io blob: data:; connect-src 'self' https://ik.imagekit.io https://*.imagekit.io; frame-src https://www.youtube.com https://youtube.com https://www.youtube-nocookie.com; upgrade-insecure-requests" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Recent FiveM Meets · Bovary Club Society</title>
-  <meta name="description" content="September 2026 — fresh moments from FiveM sessions. Latest gatherings of Bovary Club Society." />
+  <meta name="description" content="Recent FiveM meets — a growing collection of Homebound photos from Bovary Club Society." />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Bovary Club Society" />
   <meta property="og:title" content="Recent FiveM Meets · Bovary Club Society" />
-  <meta property="og:description" content="16 photos from recent FiveM meets." />
+  <meta property="og:description" content="Recent FiveM meets gallery — Homebound photo collection." />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:image" content="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/1.png?tr=w-1200,h-630,fo-auto" />
+  <meta property="og:image" content="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/setembro/Image_12_de_ago._de_2026__22_15_27-removebg-preview.png?tr=w-1200,h-630,fo-auto" />
   <meta name="theme-color" content="#120a14" />
   <link rel="manifest" href="manifest.webmanifest" />
   <meta name="mobile-web-app-capable" content="yes" />
@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=14" />
+  <link rel="stylesheet" href="styles.css?v=15" />
 </head>
 <body class="gallery-page gallery-meetings-page">
   <div class="bg-grid"></div>
@@ -67,15 +67,15 @@
   </div>
 
   <section class="hero hero-page page-hero-wallpaper gallery-hero" style="min-height: 40vh; padding-top: 120px;">
-    <div class="page-hero-bg" aria-hidden="true" style="background-image:url('https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/1.png?tr=w-1920,q-80')"></div>
+    <div class="page-hero-bg" aria-hidden="true"></div>
     <div class="page-hero-overlay" aria-hidden="true"></div>
     <div class="hero-content">
-      <div class="hero-badge"><span class="pulse"></span> SEPTEMBER 2026</div>
+      <div class="hero-badge"><span class="pulse"></span> HOMEBOUND PHOTO COLLECTION</div>
       <h1>
         <span class="line1">RECENT</span>
         <span class="line2">FIVEM MEETS</span>
       </h1>
-      <p class="hero-tagline">FiveM sessions — fresh moments from our latest gatherings</p>
+      <p class="hero-tagline">Fresh moments from Homebound FiveM sessions</p>
       <div class="hero-actions">
         <a href="index.html" class="btn-secondary">← BACK TO HOME</a>
         <a href="meets-fivem.html" class="btn-primary">FIVEM MEETS →</a>
@@ -85,28 +85,87 @@
 
   <section class="section gallery-full gallery-showcase">
     <div class="section-header">
-      <h2>FIVEM <span>GALLERY</span></h2>
-      <p>16 photos · Click any image to open full size</p>
+      <h2>RECENT <span>FIVEM MEETS</span></h2>
+      <p id="recentFivemStatus" aria-live="polite">Loading Homebound photo collection…</p>
     </div>
     <div class="gallery-masonry gallery-masonry-pro" id="galleryRecentFivem">
-      <a href="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/1.png?tr=w-1600,q-85" target="_blank" rel="noopener" class="g-item g-item-feature" style="--i:0"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/1.png?tr=w-900,q-80" alt="Recent FiveM meet 1" loading="lazy" /><span class="g-frame"></span></a>
-      <a href="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/2.png?tr=w-1600,q-85" target="_blank" rel="noopener" class="g-item" style="--i:1"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/2.png?tr=w-900,q-80" alt="Recent FiveM meet 2" loading="lazy" /><span class="g-frame"></span></a>
-      <a href="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/3.png?tr=w-1600,q-85" target="_blank" rel="noopener" class="g-item" style="--i:2"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/3.png?tr=w-900,q-80" alt="Recent FiveM meet 3" loading="lazy" /><span class="g-frame"></span></a>
-      <a href="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/4.png?tr=w-1600,q-85" target="_blank" rel="noopener" class="g-item" style="--i:3"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/4.png?tr=w-900,q-80" alt="Recent FiveM meet 4" loading="lazy" /><span class="g-frame"></span></a>
-      <a href="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/5.png?tr=w-1600,q-85" target="_blank" rel="noopener" class="g-item" style="--i:4"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/5.png?tr=w-900,q-80" alt="Recent FiveM meet 5" loading="lazy" /><span class="g-frame"></span></a>
-      <a href="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/6.png?tr=w-1600,q-85" target="_blank" rel="noopener" class="g-item" style="--i:5"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/6.png?tr=w-900,q-80" alt="Recent FiveM meet 6" loading="lazy" /><span class="g-frame"></span></a>
-      <a href="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/7.png?tr=w-1600,q-85" target="_blank" rel="noopener" class="g-item" style="--i:6"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/7.png?tr=w-900,q-80" alt="Recent FiveM meet 7" loading="lazy" /><span class="g-frame"></span></a>
-      <a href="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/8.png?tr=w-1600,q-85" target="_blank" rel="noopener" class="g-item" style="--i:7"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/8.png?tr=w-900,q-80" alt="Recent FiveM meet 8" loading="lazy" /><span class="g-frame"></span></a>
-      <a href="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/9.png?tr=w-1600,q-85" target="_blank" rel="noopener" class="g-item" style="--i:8"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/9.png?tr=w-900,q-80" alt="Recent FiveM meet 9" loading="lazy" /><span class="g-frame"></span></a>
-      <a href="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/10.png?tr=w-1600,q-85" target="_blank" rel="noopener" class="g-item" style="--i:9"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/10.png?tr=w-900,q-80" alt="Recent FiveM meet 10" loading="lazy" /><span class="g-frame"></span></a>
-      <a href="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/11.png?tr=w-1600,q-85" target="_blank" rel="noopener" class="g-item" style="--i:10"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/11.png?tr=w-900,q-80" alt="Recent FiveM meet 11" loading="lazy" /><span class="g-frame"></span></a>
-      <a href="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/12.png?tr=w-1600,q-85" target="_blank" rel="noopener" class="g-item" style="--i:11"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/12.png?tr=w-900,q-80" alt="Recent FiveM meet 12" loading="lazy" /><span class="g-frame"></span></a>
-      <a href="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/13.png?tr=w-1600,q-85" target="_blank" rel="noopener" class="g-item" style="--i:12"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/13.png?tr=w-900,q-80" alt="Recent FiveM meet 13" loading="lazy" /><span class="g-frame"></span></a>
-      <a href="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/14.png?tr=w-1600,q-85" target="_blank" rel="noopener" class="g-item" style="--i:13"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/14.png?tr=w-900,q-80" alt="Recent FiveM meet 14" loading="lazy" /><span class="g-frame"></span></a>
-      <a href="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/15.png?tr=w-1600,q-85" target="_blank" rel="noopener" class="g-item" style="--i:14"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/15.png?tr=w-900,q-80" alt="Recent FiveM meet 15" loading="lazy" /><span class="g-frame"></span></a>
-      <a href="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/16.png?tr=w-1600,q-85" target="_blank" rel="noopener" class="g-item" style="--i:15"><img src="https://ik.imagekit.io/BassaniStudios/bovary%20pic%20meet/new%20meets%20fivem/16.png?tr=w-900,q-80" alt="Recent FiveM meet 16" loading="lazy" /><span class="g-frame"></span></a>
     </div>
   </section>
+
+  <script>
+    // Homebound images are stored as "homebound (number).jpg/png".
+    // Both extensions are checked independently so same-number JPG and PNG
+    // files are both displayed when both versions exist.
+    (function () {
+      const gallery = document.getElementById("galleryRecentFivem");
+      const status = document.getElementById("recentFivemStatus");
+      if (!gallery || !status) return;
+
+      const cdnFolder = "https://ik.imagekit.io/bassanistudio/BOVARY%20WEBSITE/";
+      const variants = ["jpg", "png"];
+      let loadedCount = 0;
+      let checkedCount = 0;
+      const totalChecks = 334 * variants.length;
+      const fragment = document.createDocumentFragment();
+      const entries = [];
+
+      function updateStatus() {
+        if (checkedCount === totalChecks) {
+          status.textContent = loadedCount
+            ? loadedCount + (loadedCount === 1 ? " photo available" : " photos available") + " · JPG and PNG versions included when available"
+            : "No photos could be loaded. Please check the ImageKit folder and file permissions.";
+        } else if (loadedCount > 0) {
+          status.textContent = loadedCount + " photos found · Checking remaining files…";
+        }
+      }
+
+      for (let number = 1; number <= 334; number++) {
+        for (const extension of variants) {
+          const filename = "homebound%20(" + number + ")." + extension;
+          const originalUrl = cdnFolder + filename;
+          const previewUrl = originalUrl + "?tr=w-900,q-80";
+
+          const link = document.createElement("a");
+          link.className = "g-item";
+          link.href = originalUrl;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.style.setProperty("--i", String(entries.length));
+          link.setAttribute("aria-label", "Open Homebound meet " + number + " (" + extension.toUpperCase() + ")");
+
+          const image = document.createElement("img");
+          image.src = previewUrl;
+          image.alt = "Homebound FiveM meet " + number + " (" + extension.toUpperCase() + ")";
+          image.loading = "lazy";
+          image.decoding = "async";
+
+          const frame = document.createElement("span");
+          frame.className = "g-frame";
+          frame.setAttribute("aria-hidden", "true");
+
+          link.append(image, frame);
+          entries.push({ number, extension, link, image });
+          fragment.appendChild(link);
+
+          image.addEventListener("load", function () {
+            loadedCount++;
+            checkedCount++;
+            updateStatus();
+          }, { once: true });
+
+          image.addEventListener("error", function () {
+            link.remove();
+            checkedCount++;
+            updateStatus();
+          }, { once: true });
+        }
+      }
+
+      gallery.appendChild(fragment);
+      updateStatus();
+    })();
+  </script>
+
 
   <footer class="footer">
     <div class="footer-inner">
@@ -118,7 +177,6 @@
       <p class="footer-copy">© 2026 Bovary Club Society. All rights reserved.</p>
     </div>
   </footer>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="script.js?v=3"></script>
+<script src="script.js?v=4"></script>
 </body>
 </html>
